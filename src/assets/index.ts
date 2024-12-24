@@ -9,6 +9,9 @@ import VectorDirectionLeft from "./vector-direction-left.svg";
 import Ahlaa from "./أهْلاً وَسَهْلاً.svg";
 import AlArabia from "./al-arabia.svg";
 import CurricolumnLeft from './curricolumn-left-image.png'
+import PriceOnly from './price-only.png'
+import StudentStrugglingVectorDot from './student-stuggling-vector-dot.svg'
+import StudentStruggling from './stuggling-student.png'
 
 export {
   SiteLogo,
@@ -21,5 +24,8 @@ export {
   LearningKidsRound,
   Ahlaa,
   AlArabia,
-  CurricolumnLeft
+  CurricolumnLeft,
+  PriceOnly,
+  StudentStrugglingVectorDot,
+  StudentStruggling
 };
