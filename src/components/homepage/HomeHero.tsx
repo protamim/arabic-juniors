@@ -1,7 +1,11 @@
 import {
+  Ahlaa,
   AlArabia,
+  ArabicKhaap,
   BoyWithFolderStanding,
+  LearningKidsRound,
   UaeLineVector,
+  VectorDirectionLeft,
   VectorDirectionRight,
   YoungBoyAttendingSchool,
 } from "@/assets";
@@ -22,7 +26,7 @@ const HomeHero = () => {
         <div className="container">
           <div
             aria-label="home-hero-wrapper"
-            className="max-w-[910px] mx-auto flex flex-col items-center justify-center relative"
+            className="max-w-[910px] mx-auto flex flex-col items-center justify-center relative z-10"
           >
             <h1 className="text-7xl font-bold text-neutral-800 text-center flex items-center flex-wrap justify-center gap-x-5 mb-14">
               <span>Online</span>
@@ -85,7 +89,7 @@ const HomeHero = () => {
             {/* Floating elements */}
             <span
               aria-label="al-arabia"
-              className="absolute -right-[20%] top-0"
+              className="absolute -right-[20%] top-0 -z-10"
             >
               <Image
                 src={AlArabia}
@@ -96,14 +100,63 @@ const HomeHero = () => {
               />
             </span>
             <span
-              aria-label="al-arabia"
-              className="absolute -right-[8%] top-[30%]"
+              aria-label="vector-dir-right"
+              className="absolute -right-[8%] top-[30%] -z-10"
             >
               <Image
                 src={VectorDirectionRight}
                 alt="vector direction right"
                 width={124}
                 height={69}
+                priority
+              />
+            </span>
+
+            <span
+              aria-label="learning-round-sign"
+              className="absolute -right-[8%] bottom-0 -z-10"
+            >
+              <Image
+                src={LearningKidsRound}
+                alt="learning kids round sign"
+                width={109}
+                height={109}
+                priority
+              />
+            </span>
+
+            <span aria-label="arabic-letter-khaap" className="absolute -left-[5%] top-[32%] -z-10">
+              <Image
+                src={ArabicKhaap}
+                alt="khaap letter of arabic"
+                width={54}
+                height={54}
+                priority
+              />
+            </span>
+
+            <span
+              aria-label="vector-direction-left"
+              className="absolute -left-[17%] top-[18%] -z-10"
+            >
+              <Image
+                src={VectorDirectionLeft}
+                alt="vector direction left"
+                width={100}
+                height={93}
+                priority
+              />
+            </span>
+
+            <span
+              aria-label="arabic-lang"
+              className="absolute -left-[18%] bottom-[5%] -z-10"
+            >
+              <Image
+                src={Ahlaa}
+                alt="arabic language"
+                width={324}
+                height={182}
                 priority
               />
             </span>
