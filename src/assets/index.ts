@@ -16,6 +16,7 @@ import FirstTeacherHome from "./first-teacher.png";
 import SecondTeacherHome from "./second-teacher.png";
 import ThirdTeacherHome from "./third-teacher.png";
 import FourthTeacherHome from "./fourth-teacher.png";
+import DeliverLeftImage from './deliver-result-left.png'
 
 export {
   SiteLogo,
@@ -36,4 +37,5 @@ export {
   SecondTeacherHome,
   ThirdTeacherHome,
   FourthTeacherHome,
+  DeliverLeftImage
 };

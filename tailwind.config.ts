@@ -75,6 +75,9 @@ export default {
           900: "#181D24",
         },
       },
+      boxShadow: {
+        "3xl": "-8px 14px 56px 0px rgba(0, 0, 0, 0.10)",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
