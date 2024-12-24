@@ -14,7 +14,6 @@ import React from "react";
 import { Button } from "../ui/button";
 import { ArrowRightIcon } from "./svgIcons";
 import Link from "next/link";
-import s from "../../assets/uae-line-vector.svg";
 
 const HomeHero = () => {
   return (

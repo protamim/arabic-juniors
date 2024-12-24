@@ -1,3 +1,4 @@
 import HomeHero from "./HomeHero";
+import ArabicCurriculumn from "./ArabicCurriculumn";
 
-export {HomeHero}
+export { HomeHero, ArabicCurriculumn };

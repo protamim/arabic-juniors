@@ -8,6 +8,7 @@ import LearningKidsRound from "./learning-kids-round.svg";
 import VectorDirectionLeft from "./vector-direction-left.svg";
 import Ahlaa from "./أهْلاً وَسَهْلاً.svg";
 import AlArabia from "./al-arabia.svg";
+import CurricolumnLeft from './curricolumn-left-image.png'
 
 export {
   SiteLogo,
@@ -20,4 +21,5 @@ export {
   LearningKidsRound,
   Ahlaa,
   AlArabia,
+  CurricolumnLeft
 };
