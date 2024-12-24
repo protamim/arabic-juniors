@@ -1,11 +1,10 @@
+import { HomeHero } from '@/components/homepage';
 import React from 'react';
 
 const HomePage = () => {
   return (
     <React.Fragment>
-      <section>
-        <div>Welcome to homepage...</div>
-      </section>
+      <HomeHero />
     </React.Fragment>
   );
 };
