@@ -21,6 +21,7 @@ import LearningWithGameBlog from "./learn-with-game-blog-1.png";
 import BlogImage2 from "./home-blog-card-2.png";
 import BlogImage3 from "./blog-card-3-home.png";
 import BlogImage4 from "./blog-card-4-home.png";
+import ReviewAuthorImage from './review-author.png'
 
 export {
   SiteLogo,
@@ -46,4 +47,5 @@ export {
   BlogImage2,
   BlogImage3,
   BlogImage4,
+  ReviewAuthorImage
 };

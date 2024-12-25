@@ -4,6 +4,7 @@ import StudentStrugglingBanner from "./StudentStrugglingBanner";
 import TeachersSlider from "./TeachersSlider";
 import DeliverResult from "./DeliverResult";
 import BlogSection from "./BlogSection";
+import StudentReviews from "./StudentReviews";
 
 export {
   HomeHero,
@@ -11,5 +12,6 @@ export {
   StudentStrugglingBanner,
   TeachersSlider,
   DeliverResult,
-  BlogSection
+  BlogSection,
+  StudentReviews
 };
