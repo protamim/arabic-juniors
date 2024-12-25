@@ -5,6 +5,7 @@ import TeachersSlider from "./TeachersSlider";
 import DeliverResult from "./DeliverResult";
 import BlogSection from "./BlogSection";
 import StudentReviews from "./StudentReviews";
+import FaqSection from "./FaqSection";
 
 export {
   HomeHero,
@@ -13,5 +14,6 @@ export {
   TeachersSlider,
   DeliverResult,
   BlogSection,
-  StudentReviews
+  StudentReviews,
+  FaqSection,
 };
