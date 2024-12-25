@@ -16,7 +16,11 @@ import FirstTeacherHome from "./first-teacher.png";
 import SecondTeacherHome from "./second-teacher.png";
 import ThirdTeacherHome from "./third-teacher.png";
 import FourthTeacherHome from "./fourth-teacher.png";
-import DeliverLeftImage from './deliver-result-left.png'
+import DeliverLeftImage from "./deliver-result-left.png";
+import LearningWithGameBlog from "./learn-with-game-blog-1.png";
+import BlogImage2 from "./home-blog-card-2.png";
+import BlogImage3 from "./blog-card-3-home.png";
+import BlogImage4 from "./blog-card-4-home.png";
 
 export {
   SiteLogo,
@@ -37,5 +41,9 @@ export {
   SecondTeacherHome,
   ThirdTeacherHome,
   FourthTeacherHome,
-  DeliverLeftImage
+  DeliverLeftImage,
+  LearningWithGameBlog,
+  BlogImage2,
+  BlogImage3,
+  BlogImage4,
 };
