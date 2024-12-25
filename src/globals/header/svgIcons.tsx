@@ -1,16 +1,16 @@
 import React from "react";
 
-interface SvgProps extends React.HtmlHTMLAttributes<HTMLOrSVGElement> {}
-
-export const WhatsAppIcon: React.FC<SvgProps> = ({ ...props }) => {
+export const WhatsAppIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({
+  ...props
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width='1em'
-      height='1em'
+      width="1em"
+      height="1em"
       viewBox="0 0 20 20"
       fill="none"
-      { ...props }
+      {...props}
     >
       <g clipPath="url(#clip0_199_624)">
         <path

@@ -1,8 +1,6 @@
 import React from "react";
 
-interface SvgProps extends React.HTMLAttributes<HTMLOrSVGElement> {}
-
-export const ArrowRightIcon: React.FC<SvgProps> = ({ ...props }) => {
+export const ArrowRightIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +28,7 @@ export const ArrowRightIcon: React.FC<SvgProps> = ({ ...props }) => {
   );
 };
 
-export const NativeArabicUserIcon: React.FC<SvgProps> = ({ ...props }) => {
+export const NativeArabicUserIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +68,7 @@ export const NativeArabicUserIcon: React.FC<SvgProps> = ({ ...props }) => {
   );
 };
 
-export const NonArabUserIcon: React.FC<SvgProps> = ({ ...props }) => {
+export const NonArabUserIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +86,7 @@ export const NonArabUserIcon: React.FC<SvgProps> = ({ ...props }) => {
   );
 };
 
-export const KgClassStudentIcon: React.FC<SvgProps> = ({ ...props }) => {
+export const KgClassStudentIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +124,7 @@ export const KgClassStudentIcon: React.FC<SvgProps> = ({ ...props }) => {
   );
 };
 
-export const PersonalizeLearningIcon: React.FC<SvgProps> = ({ ...props }) => {
+export const PersonalizeLearningIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +170,7 @@ export const PersonalizeLearningIcon: React.FC<SvgProps> = ({ ...props }) => {
   );
 };
 
-export const PrivateTutoringIcon: React.FC<SvgProps> = ({ ...props }) => {
+export const PrivateTutoringIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -197,7 +195,7 @@ export const PrivateTutoringIcon: React.FC<SvgProps> = ({ ...props }) => {
   );
 };
 
-export const MultilingualTeachersIcon: React.FC<SvgProps> = ({ ...props }) => {
+export const MultilingualTeachersIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -226,7 +224,7 @@ export const MultilingualTeachersIcon: React.FC<SvgProps> = ({ ...props }) => {
   );
 };
 
-export const ConceptualClarityIcon: React.FC<SvgProps> = ({ ...props }) => {
+export const ConceptualClarityIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
