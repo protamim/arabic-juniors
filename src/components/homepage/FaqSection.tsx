@@ -20,7 +20,7 @@ const FaqSection = () => {
             className="grid grid-cols-1 lg:grid-cols-2 gap-x-24 place-items-center justify-between"
           >
             <div aria-label="faq-column-left" className="h-full">
-              <h3 className="text-neutral-900 text-6xl font-bold mb-16">
+              <h3 className="text-neutral-900 text-5xl font-bold mb-16">
                 We are often <span className="text-orange-500">Asked</span>
               </h3>
 
