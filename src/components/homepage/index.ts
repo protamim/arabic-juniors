@@ -6,6 +6,7 @@ import DeliverResult from "./DeliverResult";
 import BlogSection from "./BlogSection";
 import StudentReviews from "./StudentReviews";
 import FaqSection from "./FaqSection";
+import Newsletter from "./Newsletter";
 
 export {
   HomeHero,
@@ -16,4 +17,5 @@ export {
   BlogSection,
   StudentReviews,
   FaqSection,
+  Newsletter
 };
