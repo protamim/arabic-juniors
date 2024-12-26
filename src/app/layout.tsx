@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/globals";
+import { Header, Footer } from "@/globals";
 
 const interSans = Inter({
   variable: "--inter-sans",
@@ -24,6 +24,7 @@ export default function RootLayout({
       <body className={`${interSans.variable} antialiased`}>
         <Header />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

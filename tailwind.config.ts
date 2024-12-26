@@ -9,14 +9,20 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "992px",
+      xl: "1210px",
+    },
     container: {
       center: true,
       padding: "1.25rem",
       screens: {
-        sm: "640",
-        md: "768",
-        lg: "992",
-        xl: "1210",
+        sm: "640px",
+        md: "768px",
+        lg: "992px",
+        xl: "1210px",
       },
     },
     extend: {
