@@ -1,6 +1,8 @@
 import React from "react";
 
-export const ArrowRightIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
+export const ArrowRightIcon: React.FC<
+  React.HTMLAttributes<HTMLOrSVGElement>
+> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +30,9 @@ export const ArrowRightIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = 
   );
 };
 
-export const NativeArabicUserIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
+export const NativeArabicUserIcon: React.FC<
+  React.HTMLAttributes<HTMLOrSVGElement>
+> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +72,9 @@ export const NativeArabicUserIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElemen
   );
 };
 
-export const NonArabUserIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
+export const NonArabUserIcon: React.FC<
+  React.HTMLAttributes<HTMLOrSVGElement>
+> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +92,9 @@ export const NonArabUserIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> =
   );
 };
 
-export const KgClassStudentIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
+export const KgClassStudentIcon: React.FC<
+  React.HTMLAttributes<HTMLOrSVGElement>
+> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +132,9 @@ export const KgClassStudentIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>
   );
 };
 
-export const PersonalizeLearningIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
+export const PersonalizeLearningIcon: React.FC<
+  React.HTMLAttributes<HTMLOrSVGElement>
+> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +180,9 @@ export const PersonalizeLearningIcon: React.FC<React.HTMLAttributes<HTMLOrSVGEle
   );
 };
 
-export const PrivateTutoringIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
+export const PrivateTutoringIcon: React.FC<
+  React.HTMLAttributes<HTMLOrSVGElement>
+> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +207,9 @@ export const PrivateTutoringIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement
   );
 };
 
-export const MultilingualTeachersIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
+export const MultilingualTeachersIcon: React.FC<
+  React.HTMLAttributes<HTMLOrSVGElement>
+> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -224,15 +238,17 @@ export const MultilingualTeachersIcon: React.FC<React.HTMLAttributes<HTMLOrSVGEl
   );
 };
 
-export const ConceptualClarityIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({ ...props }) => {
+export const ConceptualClarityIcon: React.FC<
+  React.HTMLAttributes<HTMLOrSVGElement>
+> = ({ ...props }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width='1em'
-      height='1em'
+      width="1em"
+      height="1em"
       viewBox="0 0 30 30"
       fill="none"
-      { ...props }
+      {...props}
     >
       <g clipPath="url(#clip0_123_681)">
         <path
@@ -249,6 +265,50 @@ export const ConceptualClarityIcon: React.FC<React.HTMLAttributes<HTMLOrSVGEleme
           <rect width={30} height={30} fill="white" />
         </clipPath>
       </defs>
+    </svg>
+  );
+};
+
+export const UnionShapeBgIcon: React.FC<
+  React.HTMLAttributes<HTMLOrSVGElement>
+> = ({ ...props }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 197 152"
+      fill="none"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M77.4266 18.1221C78.1222 7.92011 86.6007 0 96.8265 0C107.566 0 116.271 8.70576 116.271 19.4449V60.1582L118.063 58.7817L160.796 32.5314C171.839 25.7483 186.285 29.1411 193.153 40.1306C200.776 52.3267 195.806 68.4466 182.64 74.234L126.122 99.0771L116.271 103.526V105.137L119.852 107.455L125.225 110.141L170.07 129.613C181.812 134.711 185.568 149.532 177.67 159.607C171.712 167.208 161.097 169.32 152.683 164.578L118.061 145.064L116.023 144.045L112.917 176.14C111.772 187.972 101.829 197 89.9413 197C76.5746 197 66.0021 185.682 66.9113 172.346L70.1729 124.51C69.6235 124.828 69.084 125.163 68.5554 125.516L27.4394 152.926C21.129 157.133 12.8364 156.837 6.84181 152.191C-4.24179 143.602 -1.36209 126.14 11.8927 121.564L48.7609 108.836L12.4561 82.0288C4.59144 76.2217 2.38469 65.4117 7.34399 56.9868C12.9463 47.4695 25.4313 44.677 34.5544 50.9007L72.8863 77.0506L73.3867 77.3746L77.4266 18.1221Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+};
+
+export const NewsletterBgVectorIcon: React.FC<
+  React.HTMLAttributes<HTMLOrSVGElement>
+> = ({ ...props }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width='1em'
+      height='1em'
+      viewBox="0 0 203 180"
+      fill="none"
+      {...props}
+    >
+      <path
+        d="M7 -19C40.8125 18.6986 129.96 93.3945 194.88 73.0548C206.347 69.5479 126.094 -33.4991 121.668 42.3699C118.14 102.863 162.832 154.297 189.588 173"
+        stroke="currentColor"
+        strokeWidth={14}
+        strokeLinecap="round"
+      />
     </svg>
   );
 };

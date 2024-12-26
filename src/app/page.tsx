@@ -1,4 +1,4 @@
-import { ArabicCurriculumn, BlogSection, DeliverResult, FaqSection, HomeHero, StudentReviews, StudentStrugglingBanner, TeachersSlider } from '@/components/homepage';
+import { ArabicCurriculumn, BlogSection, DeliverResult, FaqSection, HomeHero, Newsletter, StudentReviews, StudentStrugglingBanner, TeachersSlider } from '@/components/homepage';
 import React from 'react';
 
 const HomePage = () => {
@@ -12,6 +12,7 @@ const HomePage = () => {
       <BlogSection />
       <StudentReviews />
       <FaqSection />
+      <Newsletter />
     </React.Fragment>
   );
 };

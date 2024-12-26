@@ -23,6 +23,7 @@ import BlogImage3 from "./blog-card-3-home.png";
 import BlogImage4 from "./blog-card-4-home.png";
 import ReviewAuthorImage from "./review-author.png";
 import ShafiullahImage from "./shafiullah-teacher.png";
+import NewsletterImage from './newsletter-image.png'
 
 export {
   SiteLogo,
@@ -50,4 +51,5 @@ export {
   BlogImage4,
   ReviewAuthorImage,
   ShafiullahImage,
+  NewsletterImage
 };
