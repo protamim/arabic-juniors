@@ -1,78 +1,52 @@
-import { SiteLogo } from "@/assets";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
+"use client";
 import React from "react";
-import { WhatsAppIcon } from "./svgIcons";
+import HeaderLogo from "./HeaderLogo";
+import { Menu, X } from "lucide-react";
+import MobileHeader from "./MobileHeader";
+import LgScreenHeader from "./LgScreenHeader";
 
 const Header = () => {
+  const [isMenuOpen, setIsMenu] = React.useState(false);
+
+  const handleHeaderNav = () => {
+    setIsMenu((prev) => (prev ? false : true));
+  };
+
   return (
     <React.Fragment>
+      <style aria-label="react-style-component">
+        {isMenuOpen ? `body {overflow: hidden}` : `body {overflow: auto}`}
+      </style>
+
       <header>
         <div className="container">
           <nav
             aria-label="header-nav-wrapper"
-            className="flex items-center gap-x-6 justify-between h-24 py-2"
+            className="flex items-center gap-x-6 justify-between h-16 md:h-24 py-2 relative"
           >
-            <Link href="/" aria-label="juniors-logo-header" className="max-w-20 md:max-w-max">
-              <Image
-                src={SiteLogo}
-                alt="arabic juniors logo"
-                width={137}
-                height={53}
-                priority
+            <HeaderLogo />
+
+            {isMenuOpen ? (
+              <X aria-label="icon-close"
+                onClick={handleHeaderNav}
+                className="cursor-pointer md:hidden"
               />
-            </Link>
+            ) : (
+              <Menu aria-label="icon-humberger-menu"
+                onClick={handleHeaderNav}
+                className="cursor-pointer md:hidden"
+              />
+            )}
 
-            <ul
-              aria-label="header-nav-list"
-              className="hidden md:flex items-center gap-x-11"
-            >
-              <li aria-label="header-nav-item">
-                <Link
-                  href="#"
-                  className="text-neutral-600 text-base font-semibold transition-all ease-in-out duration-300 hover:text-orange-500"
-                >
-                  Pricing
-                </Link>
-              </li>
+            <MobileHeader
+              className={
+                isMenuOpen
+                  ? "h-full opacity-100 visible"
+                  : "invisible h-0 opacity-0"
+              }
+            />
 
-              <li aria-label="header-nav-item">
-                <Link
-                  href="#"
-                  className="text-neutral-600 text-base font-semibold transition-all ease-in-out duration-300 hover:text-orange-500"
-                >
-                  About Us
-                </Link>
-              </li>
-
-              <li aria-label="header-nav-item">
-                <Link
-                  href="#"
-                  className="text-neutral-600 text-base font-semibold transition-all ease-in-out duration-300 hover:text-orange-500"
-                >
-                  Blog
-                </Link>
-              </li>
-
-              <li aria-label="header-nav-item">
-                <Link
-                  href="#"
-                  className="text-neutral-600 text-base font-semibold transition-all ease-in-out duration-300 hover:text-orange-500"
-                >
-                  Contact us
-                </Link>
-              </li>
-            </ul>
-
-            <div aria-label="header-action-button">
-              <Button asChild>
-                <Link href={"tel:+971 55 1234 206"}>
-                  <WhatsAppIcon className="text-sm md:text-xl text-white" />
-                  +971 55 1234 206
-                </Link>
-              </Button>
-            </div>
+            <LgScreenHeader className="hidden md:flex" />
           </nav>
         </div>
       </header>
