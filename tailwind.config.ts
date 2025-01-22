@@ -90,11 +90,6 @@ export default {
       boxShadow: {
         "3xl": "-8px 14px 56px 0px rgba(0, 0, 0, 0.10)",
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
       keyframes: {
         "accordion-down": {
           from: {

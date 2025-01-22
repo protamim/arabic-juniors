@@ -30,12 +30,12 @@ const HomeHero = () => {
             <h1 className="text-7xl font-bold text-neutral-800 text-center flex items-center flex-wrap justify-center gap-x-5 mb-14">
               <span>Online</span>
               <Image
-                src={BoyWithFolderStanding}
-                width={196}
-                height={194}
+                src={'https://res.cloudinary.com/dromjx3rx/image/upload/v1737470053/Group_1_gwbqo5.png'}
+                width={408}
+                height={468}
                 priority
                 alt="boy with folder standing"
-                className="max-w-24"
+                className="max-w-24 object-cover w-full"
               />
               <span className="text-orange-500">Arabic Tuition</span>{" "}
               <span>for</span>{" "}

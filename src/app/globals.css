@@ -15,3 +15,23 @@ body {
     --radius: 0.5rem;
   }
 }
+
+/* phone input component start */
+.PhoneInputInput {
+  @apply border-none outline-none pl-2;
+}
+.PhoneInputCountry {
+  @apply relative before:absolute before:h-12 before:w-[1px] before:-right-2 before:top-1/2 before:-translate-y-1/2 before:bg-[#DCDCDC];
+}
+.PhoneInputCountrySelectArrow {
+  @apply text-2xl text-neutral-600;
+}
+/* phone input component end */
+
+/* radio button */
+.radio-item-wrapper:has([aria-checked="true"]) {
+  background-color: #a6cf4a;
+}
+.radio-item-wrapper:has([aria-checked="true"]) label {
+  color: #fff;
+}
