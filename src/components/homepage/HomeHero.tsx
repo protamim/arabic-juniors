@@ -2,7 +2,6 @@ import {
   Ahlaa,
   AlArabia,
   ArabicKhaap,
-  BoyWithFolderStanding,
   LearningKidsRound,
   UaeLineVector,
   VectorDirectionLeft,
@@ -30,7 +29,9 @@ const HomeHero = () => {
             <h1 className="text-7xl font-bold text-neutral-800 text-center flex items-center flex-wrap justify-center gap-x-5 mb-14">
               <span>Online</span>
               <Image
-                src={'https://res.cloudinary.com/dromjx3rx/image/upload/v1737470053/Group_1_gwbqo5.png'}
+                src={
+                  "https://res.cloudinary.com/dromjx3rx/image/upload/v1737470053/Group_1_gwbqo5.png"
+                }
                 width={408}
                 height={468}
                 priority
@@ -124,7 +125,10 @@ const HomeHero = () => {
               />
             </span>
 
-            <span aria-label="arabic-letter-khaap" className="absolute -left-[5%] top-[32%] -z-10">
+            <span
+              aria-label="arabic-letter-khaap"
+              className="absolute -left-[5%] top-[32%] -z-10"
+            >
               <Image
                 src={ArabicKhaap}
                 alt="khaap letter of arabic"

@@ -270,7 +270,7 @@ const MultiStepRegistrationForm = () => {
                         onValueChange={(value) => field.onChange(Number(value))}
                         className="grid grid-cols-5 gap-y-5 gap-x-10"
                       >
-                        {[1, 2, 3, 4, 5].map((option) => (
+                        {["1", "2", "3", "4", "5"].map((option) => (
                           <FormItem
                             key={option}
                             className="radio-item-wrapper w-20 h-20 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-full overflow-hidden"

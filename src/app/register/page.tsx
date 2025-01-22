@@ -16,7 +16,7 @@ const UserRegistrationPage = () => {
             className="bg-white rounded-2xl p-11 flex items-center justify-center flex-col"
           >
             <h1 className="text-neutral-800 font-bold text-5xl text-center mb-8">
-              Let's begin your journey together
+              Let&apos;s begin your journey together
             </h1>
 
             <div
