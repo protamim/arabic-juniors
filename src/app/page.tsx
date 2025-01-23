@@ -12,7 +12,6 @@ const HomePage = () => {
       <BlogSection />
       <StudentReviews />
       <FaqSection />
-      <Newsletter />
     </React.Fragment>
   );
 };
