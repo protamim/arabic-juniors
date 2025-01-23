@@ -143,13 +143,13 @@ const MultiStepRegistrationForm = () => {
             {/* FIRST STEP START */}
             <div
               aria-label="first-step"
-              className="grid grid-cols-2 gap-x-7 gap-y-5"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-x-7 gap-y-5"
             >
               {/* First Name */}
               <FormField
                 name="firstName"
                 render={({ field }) => (
-                  <FormItem aria-label="form-item">
+                  <FormItem aria-label="form-item" className="space-y-2 col-span-full sm:col-span-1">
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
                       <Input
@@ -167,7 +167,7 @@ const MultiStepRegistrationForm = () => {
               <FormField
                 name="lastName"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="space-y-2 col-span-full sm:col-span-1">
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
                       <Input
@@ -185,7 +185,7 @@ const MultiStepRegistrationForm = () => {
               <FormField
                 name="email"
                 render={({ field }) => (
-                  <FormItem className="col-span-2">
+                  <FormItem className="space-y-2 col-span-full">
                     <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input
@@ -204,7 +204,7 @@ const MultiStepRegistrationForm = () => {
               <FormField
                 name="phoneNumber"
                 render={({ field }) => (
-                  <FormItem className="col-span-2">
+                  <FormItem className="space-y-2 col-span-full">
                     <FormLabel>Phone Number</FormLabel>
                     <FormControl>
                       <PhoneInput
@@ -226,8 +226,8 @@ const MultiStepRegistrationForm = () => {
               <FormField
                 name="grade"
                 render={({ field }) => (
-                  <FormItem className="col-span-2">
-                    <FormLabel>Grade</FormLabel>
+                  <FormItem className="space-y-2 col-span-full">
+                    <FormLabel>Class Grade</FormLabel>
                     <FormControl>
                       <Select
                         onValueChange={(value) => field.onChange(Number(value))}
@@ -261,19 +261,19 @@ const MultiStepRegistrationForm = () => {
                 name="howManyJoin"
                 render={({ field }) => (
                   <FormItem className="col-span-full">
-                    <FormLabel className="text-neutral-800 font-semibold text-2xl">
+                    <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
                       How many students will join?
                     </FormLabel>
                     <FormControl>
                       <RadioGroup
                         value={field.value}
                         onValueChange={field.onChange}
-                        className="grid grid-cols-5 gap-y-5 gap-x-10"
+                        className="grid grid-cols-5 gap-y-5 gap-x-3 place-items-center sm:gap-x-10"
                       >
                         {["1", "2", "3", "4", "5"].map((option) => (
                           <FormItem
                             key={option}
-                            className="radio-item-wrapper w-20 h-20 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-full overflow-hidden"
+                            className="radio-item-wrapper w-10 h-10 sm:w-20 sm:h-20 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-full overflow-hidden"
                           >
                             <FormControl>
                               <RadioGroupItem
@@ -283,7 +283,7 @@ const MultiStepRegistrationForm = () => {
                             </FormControl>
                             <FormLabel
                               htmlFor={`join-${option}`}
-                              className="text-3xl font-semibold text-neutral-800"
+                              className="text-lg sm:text-3xl font-semibold text-neutral-800"
                             >
                               {option}
                             </FormLabel>
@@ -301,19 +301,19 @@ const MultiStepRegistrationForm = () => {
                 name="preferredTeacher"
                 render={({ field }) => (
                   <FormItem className="col-span-full">
-                    <FormLabel className="text-neutral-800 font-semibold text-2xl">
+                    <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
                       Preferred Teacher
                     </FormLabel>
                     <FormControl>
                       <RadioGroup
                         value={field.value}
                         onValueChange={field.onChange}
-                        className="flex items-center gap-y-5 gap-x-10"
+                        className="flex items-center gap-y-5 gap-x-4 sm:gap-x-10"
                       >
                         {["Male", "Female", "Others"].map((option) => (
                           <FormItem
                             key={option}
-                            className="radio-item-wrapper w-28 h-28 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
+                            className="radio-item-wrapper w-28 sm:h-28 py-2 px-3 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
                           >
                             <FormControl>
                               <RadioGroupItem
@@ -324,7 +324,7 @@ const MultiStepRegistrationForm = () => {
                             </FormControl>
                             <FormLabel
                               htmlFor={`teacher-${option}`}
-                              className="text-lg font-semibold text-neutral-800"
+                              className="text-base sm:text-lg font-normal sm:font-semibold text-neutral-800"
                             >
                               {option}
                             </FormLabel>
@@ -339,9 +339,9 @@ const MultiStepRegistrationForm = () => {
 
               <div
                 aria-label="class-date"
-                className="col-span-full grid grid-cols-2 gap-x-5 gap-y-6 items-center justify-center"
+                className="col-span-full grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-6 items-center justify-center"
               >
-                <h4 className="text-neutral-800 font-semibold text-2xl col-span-full">
+                <h4 className="text-neutral-800 font-semibold text-lg sm:text-2xl col-span-full">
                   When do you want to start the classes
                 </h4>
                 {/* class start date */}
@@ -357,7 +357,7 @@ const MultiStepRegistrationForm = () => {
                             <Button
                               variant={"outline"}
                               className={cn(
-                                "pl-3 md:h-12 text-left font-normal mt-0 flex w-full",
+                                "pl-3 h-12 text-left font-normal mt-0 flex w-full",
                                 !field.value && "text-muted-foreground"
                               )}
                             >
@@ -409,7 +409,7 @@ const MultiStepRegistrationForm = () => {
                 name="howFindUs"
                 render={({ field }) => (
                   <FormItem className="col-span-full">
-                    <FormLabel className="text-neutral-800 font-semibold text-2xl">
+                    <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
                       How did your find us?
                     </FormLabel>
                     <FormControl>
@@ -417,7 +417,7 @@ const MultiStepRegistrationForm = () => {
                         value={field.value}
                         defaultValue="Friends"
                         onValueChange={field.onChange}
-                        className="w-full grid grid-cols-5 gap-y-5 gap-x-9"
+                        className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-5 gap-x-4 sm:gap-x-9"
                       >
                         {[
                           "Friends",
@@ -432,7 +432,7 @@ const MultiStepRegistrationForm = () => {
                           return (
                             <FormItem
                               key={parseValue}
-                              className="radio-item-wrapper space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
+                              className="radio-item-wrapper space-y-0 flex px-4 py-2 items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
                             >
                               <FormControl>
                                 <RadioGroupItem

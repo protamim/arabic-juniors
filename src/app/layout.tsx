@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Footer, Header } from "@/globals";
 import { Toaster } from "@/components/ui/sonner";
+import { Newsletter } from "@/components/homepage";
 
 const interSans = Inter({
   variable: "--inter-sans",
@@ -26,6 +27,7 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Toaster />
+        <Newsletter />
         <Footer />
       </body>
     </html>
