@@ -19,14 +19,14 @@ const HomeHero = () => {
     <React.Fragment>
       <section
         aria-label="home-hero-section"
-        className="pt-10 pb-16 overflow-hidden"
+        className="pt-10 pb-10 sm:pb-16 overflow-hidden relative before:absolute before:h-full before:w-[378px] before:bg-[rgba(255,96,168,0.48)] before:blur-[350px] before:top-0 before:-left-32 after:absolute after:h-full after:w-72 after:bg-[rgba(245,174,20,0.48)] after:-right-44 after:top-0 after:blur-[400px]"
       >
         <div className="container">
           <div
             aria-label="home-hero-wrapper"
             className="max-w-[910px] mx-auto flex flex-col items-center justify-center relative z-10"
           >
-            <h1 className="text-7xl font-bold text-neutral-800 text-center flex items-center flex-wrap justify-center gap-x-5 mb-14">
+            <h1 className="text-4xl gap-y-1 sm:gap-y-2 sm:text-5xl md:text-7xl font-bold text-neutral-800 text-center flex items-center flex-wrap justify-center gap-x-5 mb-14">
               <span>Online</span>
               <Image
                 src={
@@ -36,7 +36,7 @@ const HomeHero = () => {
                 height={468}
                 priority
                 alt="boy with folder standing"
-                className="max-w-24 object-cover w-full"
+                className="w-9 sm:w-16 md:w-24 object-cover object-center"
               />
               <span className="text-orange-500">Arabic Tuition</span>{" "}
               <span>for</span>{" "}
@@ -58,29 +58,22 @@ const HomeHero = () => {
                 width={248}
                 height={205}
                 priority
-                className="max-w-32"
+                className="w-12 sm:w-20 md:w-32"
               />{" "}
             </h1>
 
-            <p className="text-neutral-700 text-2xl font-normal max-w-screen-md mx-auto text-center mb-12">
+            <p className="text-neutral-700 text-base sm:text-lg md:text-2xl font-normal max-w-screen-md mx-auto text-center mb-12">
               Discover thousands of fun and interactive learning activities to
               support your child’s growth and learning process.{" "}
             </p>
 
             <div
               aria-label="home-hero-button-wrapper"
-              className="flex items-center gap-x-5"
+              className="flex items-center justify-center gap-x-5 w-full"
             >
-              <Button asChild>
-                <Link href="#">
+              <Button asChild className="w-full sm:max-w-max">
+                <Link href="/register">
                   Get started
-                  <ArrowRightIcon className="text-xl text-white" />
-                </Link>
-              </Button>
-
-              <Button asChild variant={"secondary"}>
-                <Link href="#">
-                  Book Free sessions
                   <ArrowRightIcon className="text-xl text-white" />
                 </Link>
               </Button>
@@ -89,7 +82,7 @@ const HomeHero = () => {
             {/* Floating elements */}
             <span
               aria-label="al-arabia"
-              className="absolute -right-[20%] top-0 -z-10"
+              className="absolute -right-[20%] top-0 -z-10 hidden md:block"
             >
               <Image
                 src={AlArabia}
@@ -101,7 +94,7 @@ const HomeHero = () => {
             </span>
             <span
               aria-label="vector-dir-right"
-              className="absolute -right-[8%] top-[30%] -z-10"
+              className="absolute -right-[8%] top-[30%] -z-10 hidden md:block"
             >
               <Image
                 src={VectorDirectionRight}
@@ -114,7 +107,7 @@ const HomeHero = () => {
 
             <span
               aria-label="learning-round-sign"
-              className="absolute -right-[8%] bottom-0 -z-10"
+              className="absolute -right-[8%] bottom-0 -z-10 hidden md:block"
             >
               <Image
                 src={LearningKidsRound}
@@ -127,7 +120,7 @@ const HomeHero = () => {
 
             <span
               aria-label="arabic-letter-khaap"
-              className="absolute -left-[5%] top-[32%] -z-10"
+              className="absolute -left-[5%] top-[32%] -z-10 hidden md:block"
             >
               <Image
                 src={ArabicKhaap}
@@ -140,7 +133,7 @@ const HomeHero = () => {
 
             <span
               aria-label="vector-direction-left"
-              className="absolute -left-[17%] top-[18%] -z-10"
+              className="absolute -left-[17%] top-[18%] -z-10 hidden md:block"
             >
               <Image
                 src={VectorDirectionLeft}
@@ -153,7 +146,7 @@ const HomeHero = () => {
 
             <span
               aria-label="arabic-lang"
-              className="absolute -left-[18%] bottom-[5%] -z-10"
+              className="absolute -left-[18%] bottom-[5%] -z-10 hidden md:block"
             >
               <Image
                 src={Ahlaa}

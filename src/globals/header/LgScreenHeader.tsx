@@ -14,7 +14,7 @@ const LgScreenHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
         className={cn("flex items-center gap-x-5 md:justify-end lg:justify-between flex-1", className)}
         {...props}
       >
-        <HeaderNav className="flex-row gap-x-5 lg:mx-auto"/>
+        <HeaderNav className="flex-row gap-x-10 lg:mx-auto bg-[#F5F6F8] py-3 px-5 rounded-full"/>
         <HeaderActionButton />
       </div>
     </React.Fragment>

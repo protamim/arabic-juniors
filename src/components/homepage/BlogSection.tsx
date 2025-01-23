@@ -13,16 +13,19 @@ import Link from "next/link";
 const BlogSection = () => {
   return (
     <React.Fragment>
-      <section aria-label="blog-section-home" className="pt-16 pb-10 bg-white">
+      <section
+        aria-label="blog-section-home"
+        className="pt-10 sm:pt-16 pb-10 bg-white"
+      >
         <div className="container">
           <div>
-            <h3 className="text-5xl font-bold text-neutral-800 text-center mb-10">
+            <h3 className="text-4xl sm:text-5xl font-bold text-neutral-800 text-center mb-10">
               Read our <span className="text-orange-500">Blog</span>
             </h3>
 
             <div
               aria-label="blog-home-card-wrapper"
-              className="grid grid-cols-1 lg:grid-cols-4 gap-x-6 gap-y-3 mb-11"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-11"
             >
               <BlogCard />
             </div>
@@ -76,7 +79,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ CardData = BLOG_DATA }) => {
         <div
           key={cardItem.key}
           aria-label="blog-card"
-          className="h-full flex flex-col border border-transparent rounded-t-2xl transition-all ease-in-out duration-300 hover:border-neutral-100 hover:shadow-3xl"
+          className="h-full flex flex-col border border-transparent rounded-2xl bg-[#F5F5F5] transition-all ease-in-out duration-300 hover:border-neutral-100"
         >
           <div
             aria-label="blog-image-wrapper"

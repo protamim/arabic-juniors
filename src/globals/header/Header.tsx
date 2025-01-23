@@ -12,13 +12,48 @@ const Header = () => {
     setIsMenu((prev) => (prev ? false : true));
   };
 
+  const [headerHeight, setHeaderHeight] = React.useState("0px");
+  const headerRef = React.useRef<HTMLElement>(null);
+
+  React.useEffect(() => {
+    const handleHeaderHeight = () => {
+      if (headerRef.current) {
+        const getHeaderHeight = `${headerRef.current?.offsetHeight}px`;
+        setHeaderHeight(getHeaderHeight);
+        // set to body
+        document.body.style.setProperty(
+          "--juniors-header-height",
+          `${headerHeight}`
+        );
+      }
+    };
+
+    // create the element observer
+    const resizeObserver = new ResizeObserver(() => {
+      handleHeaderHeight();
+    });
+
+    // observe the header element
+    if (headerRef.current) {
+      resizeObserver.observe(headerRef.current);
+    }
+
+    // cleanup on unmount
+    return () => resizeObserver.disconnect();
+  }, [headerHeight]);
+
   return (
     <React.Fragment>
       <style aria-label="react-style-component">
         {isMenuOpen ? `body {overflow: hidden}` : `body {overflow: auto}`}
       </style>
 
-      <header>
+      <header
+        ref={headerRef}
+        style={
+          { "--juniors-header-height": headerHeight } as React.CSSProperties
+        }
+      >
         <div className="container">
           <nav
             aria-label="header-nav-wrapper"
@@ -27,14 +62,16 @@ const Header = () => {
             <HeaderLogo />
 
             {isMenuOpen ? (
-              <X aria-label="icon-close"
+              <X
+                aria-label="icon-close"
                 onClick={handleHeaderNav}
-                className="cursor-pointer md:hidden"
+                className="cursor-pointer lg:hidden"
               />
             ) : (
-              <Menu aria-label="icon-humberger-menu"
+              <Menu
+                aria-label="icon-humberger-menu"
                 onClick={handleHeaderNav}
-                className="cursor-pointer md:hidden"
+                className="cursor-pointer lg:hidden"
               />
             )}
 
@@ -46,7 +83,7 @@ const Header = () => {
               }
             />
 
-            <LgScreenHeader className="hidden md:flex" />
+            <LgScreenHeader className="hidden lg:flex" />
           </nav>
         </div>
       </header>

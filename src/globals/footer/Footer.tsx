@@ -36,13 +36,13 @@ const Footer = () => {
                   priority
                 />
               </Link>
-              <p className="text-neutral-700 font-normal text-base mb-16">
+              <p className="text-neutral-700 font-normal text-base lg:mb-16">
                 Learn Arabic online with expert UAE syllabus tutors, offering
                 affordable one-to-one and group classes in conversational and
                 Modern Standard Arabic.
               </p>
 
-              <div aria-label="social-connect-wrapper">
+              <div aria-label="social-connect-wrapper" className="hidden lg:block">
                 <h4 className="text-lg font-bold text-neutral-800 mb-4">
                   Connect with us
                 </h4>
@@ -68,7 +68,7 @@ const Footer = () => {
               aria-label="importand-links-column"
               className="flex items-center justify-start flex-col"
             >
-              <div aria-label="footer-links-wrapper" className="max-w-max">
+              <div aria-label="footer-links-wrapper" className="w-full lg:max-w-max">
                 <h4 className="text-neutral-800 text-3xl font-bold mb-6">
                   DISCOVER
                 </h4>
@@ -186,22 +186,41 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* social link for mobile */}
+          <div aria-label="social-connect-wrapper" className="lg:hidden mb-6">
+            <h4 className="text-lg font-bold text-neutral-800 mb-4">
+              Connect with us
+            </h4>
+
+            <ul aria-label="social-lists" className="flex items-center gap-x-2">
+              {SOCIAL_DATA?.map((social) => (
+                <li
+                  key={social.key}
+                  aria-label="social-item"
+                  className="text-2xl"
+                >
+                  <Link href={social.link}>{social.icon}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           <div
             aria-label="footer-copyright"
-            className="pt-4 pb-5 border-t border-t-neutral-200 flex items-center gap-x-7 justify-between"
+            className="pt-4 pb-5 border-t border-t-neutral-200 flex items-center gap-x-4 sm:gap-x-7 justify-between"
           >
-            <p className="text-neutral-700 text-base font-normal">
+            <p className="text-neutral-700 text-xs sm:text-base font-normal">
               2024 ©All rights reserved.
             </p>
 
             <ul
               aria-label="agreement-links"
-              className="flex items-center gap-x-10"
+              className="flex items-center gap-x-4 sm:gap-x-10"
             >
               <li>
                 <Link
                   href="#"
-                  className="text-neutral-700 text-base font-normal transition-colors ease-in-out duration-300 hover:text-orange-500"
+                  className="text-neutral-700 text-xs sm:text-base font-normal transition-colors ease-in-out duration-300 hover:text-orange-500"
                 >
                   Terms of service
                 </Link>
@@ -210,7 +229,7 @@ const Footer = () => {
               <li>
                 <Link
                   href="#"
-                  className="text-neutral-700 text-base font-normal transition-colors ease-in-out duration-300 hover:text-orange-500"
+                  className="text-neutral-700 text-xs sm:text-base font-normal transition-colors ease-in-out duration-300 hover:text-orange-500"
                 >
                   Privacy Policy
                 </Link>

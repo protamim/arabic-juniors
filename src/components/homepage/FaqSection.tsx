@@ -13,14 +13,14 @@ import Link from "next/link";
 const FaqSection = () => {
   return (
     <React.Fragment>
-      <section aria-label="faq-section-home" className="pt-28 pb-11">
+      <section aria-label="faq-section-home" className="pt-10 md:pt-28 pb-11">
         <div className="container">
           <div
             aria-label="faq-content-wrapper"
-            className="grid grid-cols-1 lg:grid-cols-2 gap-x-24 place-items-center justify-between"
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-6 place-items-center justify-between"
           >
             <div aria-label="faq-column-left" className="h-full">
-              <h3 className="text-neutral-900 text-5xl font-bold mb-16">
+              <h3 className="text-neutral-900 text-4xl sm:text-5xl leading-tight sm:leading-tight font-bold mb-16">
                 We are often <span className="text-orange-500">Asked</span>
               </h3>
 
@@ -66,8 +66,8 @@ const FaqSection = () => {
                 ))}
               </Accordion>
 
-              <Button asChild>
-                <Link href="#">Book your free session now</Link>
+              <Button asChild className="w-full">
+                <Link href="/register">Book your free session now</Link>
               </Button>
             </div>
           </div>

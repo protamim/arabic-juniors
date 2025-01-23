@@ -48,7 +48,7 @@ const formSchema = z.object({
     message: "Invalid phone number",
   }),
   grade: z.number().min(1),
-  howManyJoin: z.number().min(1).max(5),
+  howManyJoin: z.string(),
   preferredTeacher: z.string(),
   classStartDate: z.date().refine((date) => date > new Date(), {
     message: "Start date must be in the future",
@@ -75,7 +75,7 @@ const MultiStepRegistrationForm = () => {
       email: "",
       phoneNumber: "",
       grade: 0,
-      howManyJoin: 0,
+      howManyJoin: "0",
       preferredTeacher: "",
       classStartDate: undefined,
       classStartTime: undefined,
@@ -267,7 +267,7 @@ const MultiStepRegistrationForm = () => {
                     <FormControl>
                       <RadioGroup
                         value={field.value}
-                        onValueChange={(value) => field.onChange(Number(value))}
+                        onValueChange={field.onChange}
                         className="grid grid-cols-5 gap-y-5 gap-x-10"
                       >
                         {["1", "2", "3", "4", "5"].map((option) => (

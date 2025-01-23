@@ -1,7 +1,12 @@
 import { DeliverLeftImage } from "@/assets";
 import Image from "next/image";
 import React from "react";
-import { ConceptualClarityIcon, MultilingualTeachersIcon, PersonalizeLearningIcon, PrivateTutoringIcon } from "./svgIcons";
+import {
+  ConceptualClarityIcon,
+  MultilingualTeachersIcon,
+  PersonalizeLearningIcon,
+  PrivateTutoringIcon,
+} from "./svgIcons";
 
 const PROGRAMS_LIST = [
   {
@@ -18,7 +23,8 @@ const PROGRAMS_LIST = [
     title: "Multilingual Teachers",
     short_description: "Proven pedagogy, designed by experts",
     icon: <MultilingualTeachersIcon className="text-3xl text-yellow-500" />,
-  },  {
+  },
+  {
     title: "Complete Conceptual Clarity",
     short_description: "Expert teachers, engaging videos & interactive ",
     icon: <ConceptualClarityIcon className="text-3xl text-pink-500" />,
@@ -30,22 +36,22 @@ const DeliverResult = () => {
     <React.Fragment>
       <section
         aria-label="deliver-result-section-home"
-        className="pt-14 pb-16 bg-neutral-50"
+        className="py-10 sm:pt-14 sm:pb-16 bg-neutral-50"
       >
         <div className="container">
           <div aria-label="deliver-content">
-            <h3 className="text-5xl font-bold text-neutral-950 text-center mb-11">
+            <h3 className="text-3xl leading-tight sm:text-5xl sm:leading-tight font-bold text-neutral-950 text-center mb-11">
               Programs designed to{" "}
               <span className="text-orange-500">Deliver Results</span>
             </h3>
 
             <div
               aria-label="deliver-result-wrapper"
-              className="flex items-center gap-x-14"
+              className="flex items-center gap-x-14 flex-col gap-y-9 lg:flex-row"
             >
               <div
                 aria-label="deliver-left-column"
-                className="max-w-[34rem] mr-auto"
+                className="max-w-80 xl:max-w-[34rem] mx-auto lg:mr-auto"
               >
                 <Image
                   src={DeliverLeftImage}
@@ -62,14 +68,19 @@ const DeliverResult = () => {
                     <li
                       key={index}
                       aria-label="result-item"
-                      className="bg-white p-4 rounded-2xl border border-neutral-100 flex items-center gap-x-9 transition-shadow ease-in-out duration-300 hover:shadow-3xl"
+                      className="bg-white p-4 rounded-2xl border border-neutral-100 flex items-center gap-x-9 transition-shadow ease-in-out duration-300"
                     >
-                      {program.icon}
+                      <span
+                        aria-label="icon-wrapper"
+                        className="flex-grow-0 flex-shrink-0 basis-auto p-5 rounded-xl bg-[#F4F5F7]"
+                      >
+                        {program.icon}
+                      </span>
                       <div className="flex flex-col gap-y-3">
-                        <h5 className="text-2xl font-semibold text-neutral-900">
+                        <h5 className="text-lg sm:text-2xl font-semibold text-neutral-900">
                           {program.title}
                         </h5>
-                        <p className="text-xl font-normal text-neutral-600">
+                        <p className="text-base sm:text-xl font-normal text-neutral-600">
                           {program.short_description}
                         </p>
                       </div>

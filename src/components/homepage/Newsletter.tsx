@@ -7,13 +7,13 @@ import { NewsletterBgVectorIcon, UnionShapeBgIcon } from "./svgIcons";
 const Newsletter = () => {
   return (
     <React.Fragment>
-      <section aria-label="newsletter-home" className="py-16">
+      <section aria-label="newsletter-home" className="py-10 sm:py-16">
         <div className="container">
           <div
             aria-label="newsletter-wrapper"
-            className="py-20 px-28 w-full bg-[#FFA3CC] rounded-3xl flex items-center justify-between gap-x-20 relative overflow-hidden z-10"
+            className="py-10 px-7 sm:py-20 md:px-28 lg:px-20 xl:px-28 w-full bg-[#FFA3CC] rounded-3xl flex items-center justify-between gap-x-20 relative overflow-hidden z-10"
           >
-            <div aria-label="newsletter-column-left">
+            <div aria-label="newsletter-column-left" className="hidden lg:block">
               <div
                 aria-label="newsletter-imager-wrapper"
                 className="max-w-[21rem]"
@@ -28,12 +28,12 @@ const Newsletter = () => {
               </div>
             </div>
 
-            <div aria-label="newsletter-column-right">
+            <div aria-label="newsletter-column-right" className="flex-1 flex items-center justify-center flex-col">
               <div className="max-w-96">
-                <h3 className="text-neutral-900 text-5xl font-bold text-center mb-4">
+                <h3 className="text-neutral-900 text-4xl leading-tight sm:text-5xl sm:leading-tight font-bold text-center mb-4">
                   Sign up for the{" "}
                 </h3>
-                <p className="text-3xl font-bold text-neutral-900 text-center mb-6">
+                <p className="text-2xl sm:text-3xl font-bold text-neutral-900 text-center mb-6">
                   First rejection
                 </p>
 

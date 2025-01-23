@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 import {
   Carousel,
@@ -13,6 +14,7 @@ import {
   ThirdTeacherHome,
 } from "@/assets";
 import Image from "next/image";
+import Autoplay from "embla-carousel-autoplay";
 
 const TEACHERS_LIST = [
   {
@@ -76,21 +78,25 @@ const TeachersSlider = () => {
     <React.Fragment>
       <section
         aria-label="teacher-slider-section-home"
-        className="py-16 bg-gradient-to-r from-[#FF60A8] from-5% via-[#FB6238] via-50% to-[#F5AE14] to-100%"
+        className="py-10 sm:py-16 bg-gradient-to-r from-[#FF60A8] from-5% via-[#FB6238] via-50% to-[#F5AE14] to-100%"
       >
         <div className="container">
           <div aria-label="teachers-slider-wrapper">
-            <h3 className="text-white text-6xl font-bold text-center mb-14">
+            <h3 className="text-white text-4xl leading-tight sm:text-6xl sm:leading-tight font-bold text-center mb-14">
               UAE Experienced Teachers
             </h3>
 
             <Carousel
-              opts={{ align: "start" }}
+              opts={{ align: "start", loop: true }}
+              plugins={[Autoplay({ delay: 2000 })]}
               className="w-full max-w-[680px] mx-auto"
             >
               <CarouselContent>
                 {TEACHERS_LIST?.map((teacher, index) => (
-                  <CarouselItem key={index} className="basis-1/4">
+                  <CarouselItem
+                    key={index}
+                    className="basis-full md:basis-1/2 lg:basis-1/4"
+                  >
                     <div className="flex flex-col items-center justify-center">
                       <div
                         aria-label="teacher-image-wrapper"

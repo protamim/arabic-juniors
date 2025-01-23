@@ -3,7 +3,7 @@ import React from "react";
 const WelcomePage = () => {
   return (
     <React.Fragment>
-      <section aria-label="welcome-hero">
+      <section aria-label="welcome-hero" className="py-20">
         <div className="container">
           <div>welcome page</div>
         </div>

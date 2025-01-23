@@ -12,7 +12,7 @@ const MobileHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
       <div
         aria-label="header-for-mobile"
         className={cn(
-          "fixed left-0 top-16 right-0 bottom-0 w-full max-w-screen-sm mx-auto z-50 flex items-start flex-col gap-y-8 bg-white py-6 px-4 border-t border-gray-300 transition-all ease-in duration-300 md:hidden",
+          "fixed left-0 top-[var(--juniors-header-height)] right-0 bottom-0 w-full z-50 flex items-start flex-col gap-y-8 bg-white py-6 px-4 border-t border-gray-300 transition-all ease-in duration-300 lg:hidden",
           className
         )}
         {...props}

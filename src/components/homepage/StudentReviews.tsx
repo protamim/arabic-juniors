@@ -13,10 +13,10 @@ const StudentReviews = () => {
               aria-label="reviews-top-home"
               className="max-w-[44.875rem] mx-auto mb-14"
             >
-              <h3 className="text-5xl font-bold text-neutral-800 mb-6 text-center">
+              <h3 className="text-4xl leading-tight sm:text-5xl sm:leading-tight font-bold text-neutral-800 mb-6 text-center">
                 Our Happy <span className="text-orange-500">Students</span>
               </h3>
-              <p className="text-lg font-normal text-neutral-700 text-center">
+              <p className="text-sm sm:text-lg font-normal text-neutral-700 text-center">
                 Thank you so much for your support and the great service you
                 provide. We are very happy with our new website and we are
                 receiving a lot of compliments!
@@ -25,7 +25,7 @@ const StudentReviews = () => {
 
             <div
               aria-label="student-reviews-card-wrapper"
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4"
             >
               <ReviewsCard />
               <ReviewsCard />
@@ -45,7 +45,7 @@ const ReviewsCard = () => {
     <React.Fragment>
       <div
         aria-label="reviews-card"
-        className="p-5 rounded-2xl border border-neutral-100 max-w-max transition-all ease-in-out duration-300 hover:shadow-3xl"
+        className="p-5 rounded-2xl border border-neutral-100 max-w-max transition-all ease-in-out duration-300 hover:bg-[#F5F5F5]"
       >
         <div className="mb-5">
           <div
@@ -88,7 +88,7 @@ const ReviewsCard = () => {
 
         <p
           aria-label="review-text"
-          className="text-xl font-normal text-neutral-900"
+          className="text-lg sm:text-xl font-normal text-neutral-900"
         >
           “I was looking for a perfect payment my freelance business. i’m using
           primary payment method and everyone who needs a solution.”
