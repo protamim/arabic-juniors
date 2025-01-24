@@ -26,7 +26,7 @@ import {
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, LoaderCircle } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -63,6 +63,7 @@ const formSchema = z.object({
 
 const MultiStepRegistrationForm = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { next, prev, total, current, hasNext, hasPrev, isLast } = useSteps();
 
   // form methods
@@ -101,6 +102,9 @@ const MultiStepRegistrationForm = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
     try {
+      // Now loading
+      setIsLoading(true);
+
       const registerURL = process.env.NEXT_PUBLIC_API_BASE_URL + "/register";
       const { firstName, email } = values;
 
@@ -117,15 +121,16 @@ const MultiStepRegistrationForm = () => {
       }
 
       const serverResponse = await res.json();
+      // finished loading
+      setIsLoading(false);
+
       // toast notification
       toast(serverResponse.message);
-      console.log(serverResponse);
+      // redirect to welcome page after successfull
+      router.push("/welcome");
     } catch (error) {
       console.log("registration failed:", error);
     }
-
-    // redirect to welcome page after successfull
-    router.push("/welcome");
   };
 
   return (
@@ -149,7 +154,10 @@ const MultiStepRegistrationForm = () => {
               <FormField
                 name="firstName"
                 render={({ field }) => (
-                  <FormItem aria-label="form-item" className="space-y-2 col-span-full sm:col-span-1">
+                  <FormItem
+                    aria-label="form-item"
+                    className="space-y-2 col-span-full sm:col-span-1"
+                  >
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
                       <Input
@@ -485,8 +493,15 @@ const MultiStepRegistrationForm = () => {
                   type="submit"
                   variant="default"
                   className="flex-1 rounded-lg"
+                  disabled={isLoading}
                 >
-                  Submit
+                  {isLoading ? (
+                    <>
+                      <LoaderCircle className="animate-spin" /> Please Wait
+                    </>
+                  ) : (
+                    'Submit'
+                  )}
                 </Button>
               )
             )}
