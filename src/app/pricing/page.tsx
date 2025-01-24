@@ -10,7 +10,7 @@ const PricingPlanPage = () => {
         aria-label="pricing-plan"
         className="relative mb-12 z-[1] before:absolute before:h-96 before:w-full before:bg-gradient-to-r before:from-pink-500 before:from-5% before:via-orange-500 before:via-50% before:to-yellow-500 before:to-100% before:-z-[1]"
       >
-        <div className="container pt-10">
+        <div className="container pt-10 lg:pt-20">
           <div
             aria-label="pricing-content-wrapper"
             className="bg-white p-5 rounded-xl lg:pt-12 lg:px-9"
