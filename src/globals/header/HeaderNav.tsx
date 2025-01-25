@@ -1,11 +1,15 @@
+"use client";
 import React from "react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const HeaderNav: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   className,
   ...props
 }) => {
+  const pathname = usePathname();
+
   return (
     <React.Fragment>
       <div
@@ -18,7 +22,11 @@ const HeaderNav: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
             <Link
               aria-label="header-nav-item"
               href={item.url}
-              className="text-neutral-600 text-base font-semibold transition-all ease-in-out duration-300 hover:text-orange-500"
+              className={cn(
+                "text-neutral-600 text-base font-semibold transition-all ease-in-out duration-300 hover:text-orange-500",
+
+                pathname === item.url && "text-orange-500"
+              )}
             >
               {item.label}
             </Link>
