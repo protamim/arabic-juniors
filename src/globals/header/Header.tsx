@@ -14,6 +14,9 @@ const Header = () => {
 
   const [headerHeight, setHeaderHeight] = React.useState("0px");
   const headerRef = React.useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = React.useState<boolean>(true);
+  // Use a ref for the last scroll position to avoid re-renders
+  const lastScrollY = React.useRef<number>(0);
 
   React.useEffect(() => {
     const handleHeaderHeight = () => {
@@ -42,6 +45,29 @@ const Header = () => {
     return () => resizeObserver.disconnect();
   }, [headerHeight]);
 
+
+
+  const handleScroll = React.useCallback((): void => {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
+      setIsVisible(false); // Hide on scroll down
+    } else {
+      setIsVisible(true); // Show on scroll up
+    }
+
+    lastScrollY.current = currentScrollY; // Update the last scroll position
+  }, []);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    // cleanup on unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
+
   return (
     <React.Fragment>
       <style aria-label="react-style-component">
@@ -53,6 +79,9 @@ const Header = () => {
         style={
           { "--juniors-header-height": headerHeight } as React.CSSProperties
         }
+        className={`sticky top-0 left-0 w-full bg-white shadow-md transition-transform ease-in-out duration-300 z-50 ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        }`}
       >
         <div className="container">
           <nav
@@ -60,7 +89,6 @@ const Header = () => {
             className="flex items-center gap-x-6 justify-between h-16 md:h-24 py-2 relative"
           >
             <HeaderLogo />
-
             {isMenuOpen ? (
               <X
                 aria-label="icon-close"
@@ -78,7 +106,7 @@ const Header = () => {
             <MobileHeader
               className={
                 isMenuOpen
-                  ? "h-full opacity-100 visible"
+                  ? "h-screen opacity-100 visible"
                   : "invisible h-0 opacity-0"
               }
             />

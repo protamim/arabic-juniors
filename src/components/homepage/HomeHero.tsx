@@ -19,7 +19,7 @@ const HomeHero = () => {
     <React.Fragment>
       <section
         aria-label="home-hero-section"
-        className="pt-10 pb-10 sm:pb-16 overflow-hidden relative before:absolute before:h-full before:w-[378px] before:bg-[rgba(255,96,168,0.48)] before:blur-[350px] before:top-0 before:-left-32 after:absolute after:h-full after:w-72 after:bg-[rgba(245,174,20,0.48)] after:-right-44 after:top-0 after:blur-[400px]"
+        className="pt-10 pb-10 sm:pb-16 lg:py-20 overflow-hidden relative before:absolute before:h-full before:w-[378px] before:bg-[rgba(255,96,168,0.48)] before:blur-[350px] before:top-0 before:-left-32 after:absolute after:h-full after:w-72 after:bg-[rgba(245,174,20,0.48)] after:-right-44 after:top-0 after:blur-[400px]"
       >
         <div className="container">
           <div
@@ -72,7 +72,7 @@ const HomeHero = () => {
               className="flex items-center justify-center gap-x-5 w-full"
             >
               <Button asChild className="w-full sm:max-w-max">
-                <Link href="/register">
+                <Link href="/register#registration-form-wrapper">
                   Get started
                   <ArrowRightIcon className="text-xl text-white" />
                 </Link>

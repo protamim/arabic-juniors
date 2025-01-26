@@ -74,7 +74,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "2 Classes" },
           { title: "2 Classes" },
         ],
-        actionBtn: { url: "/register", label: "Lets start" },
+        actionBtn: { url: "/register#registration-form-wrapper", label: "Lets start" },
       },
       {
         title: "Intermediate",
@@ -89,7 +89,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "2 Classes" },
           { title: "2 Classes" },
         ],
-        actionBtn: { url: "/register", label: "Lets start" },
+        actionBtn: { url: "/register#registration-form-wrapper", label: "Lets start" },
       },
       {
         title: "Advanced",
@@ -106,7 +106,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "2 Classes" },
           { title: "2 Classes" },
         ],
-        actionBtn: { url: "/register", label: "Lets start" },
+        actionBtn: { url: "/register#registration-form-wrapper", label: "Lets start" },
       },
       {
         title: "Expert",
@@ -125,7 +125,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "2 Classes" },
           { title: "2 Classes" },
         ],
-        actionBtn: { url: "/register", label: "Lets start" },
+        actionBtn: { url: "/register#registration-form-wrapper", label: "Lets start" },
       },
     ],
   },
@@ -145,7 +145,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "2 Classes" },
           { title: "2 Classes" },
         ],
-        actionBtn: { url: "/register", label: "Lets start" },
+        actionBtn: { url: "/register#registration-form-wrapper", label: "Lets start" },
       },
       {
         title: "Group Class 2",
@@ -157,7 +157,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "2 Classes" },
           { title: "2 Classes" },
         ],
-        actionBtn: { url: "/register", label: "Lets start" },
+        actionBtn: { url: "/register#registration-form-wrapper", label: "Lets start" },
       },
       {
         title: "Group Class 3",
@@ -172,7 +172,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "2 Classes" },
           { title: "2 Classes" },
         ],
-        actionBtn: { url: "/register", label: "Lets start" },
+        actionBtn: { url: "/register#registration-form-wrapper", label: "Lets start" },
       },
       {
         title: "Group Class 4",
@@ -185,7 +185,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "2 Classes" },
           { title: "2 Classes" },
         ],
-        actionBtn: { url: "/register", label: "Lets start" },
+        actionBtn: { url: "/register#registration-form-wrapper", label: "Lets start" },
       },
     ],
   },
