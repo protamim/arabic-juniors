@@ -54,7 +54,7 @@ const NAV_ITEMS: NavItemsProps[] = [
     label: "About Us",
   },
   {
-    url: "/blog",
+    url: "/blogs",
     label: "Blog",
   },
   {
