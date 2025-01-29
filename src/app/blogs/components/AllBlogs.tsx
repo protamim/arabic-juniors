@@ -76,7 +76,7 @@ const BLOGS_DATA: AllBlogsDataTypes[] = [
         shortDescription:
           "Embrace the joy of games to enhance your learning experience!",
         action: {
-          link: "#",
+          link: "/blogs/blog-1",
           text: "Read More",
         },
         image: {
@@ -92,7 +92,7 @@ const BLOGS_DATA: AllBlogsDataTypes[] = [
         shortDescription:
           "10 ideas for learning with for your kids to have fun.",
         action: {
-          link: "#",
+          link: "/blogs/blog-2",
           text: "Read More",
         },
         image: {
@@ -108,7 +108,7 @@ const BLOGS_DATA: AllBlogsDataTypes[] = [
         shortDescription:
           "Want to do something outside  home and games laptop? Here are our recomment.",
         action: {
-          link: "#",
+          link: "/blogs/blog-3",
           text: "Read More",
         },
         image: {
@@ -124,7 +124,7 @@ const BLOGS_DATA: AllBlogsDataTypes[] = [
         shortDescription:
           "Want to do something outside  home and games laptop? Here are our recomment.",
         action: {
-          link: "#",
+          link: "/blogs/blog-4",
           text: "Read More",
         },
         image: {
@@ -140,7 +140,7 @@ const BLOGS_DATA: AllBlogsDataTypes[] = [
         shortDescription:
           "Embrace the joy of games to enhance your learning experience!",
         action: {
-          link: "#",
+          link: "/blogs/blog-5",
           text: "Read More",
         },
         image: {
@@ -156,7 +156,7 @@ const BLOGS_DATA: AllBlogsDataTypes[] = [
         shortDescription:
           "10 ideas for learning with for your kids to have fun.",
         action: {
-          link: "#",
+          link: "/blogs/blog-6",
           text: "Read More",
         },
         image: {
@@ -172,7 +172,7 @@ const BLOGS_DATA: AllBlogsDataTypes[] = [
         shortDescription:
           "Want to do something outside  home and games laptop? Here are our recomment.",
         action: {
-          link: "#",
+          link: "/blogs/blog-7",
           text: "Read More",
         },
         image: {
@@ -188,7 +188,7 @@ const BLOGS_DATA: AllBlogsDataTypes[] = [
         shortDescription:
           "Want to do something outside  home and games laptop? Here are our recomment.",
         action: {
-          link: "#",
+          link: "/blogs/blog-8",
           text: "Read More",
         },
         image: {
