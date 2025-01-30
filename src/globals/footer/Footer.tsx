@@ -79,7 +79,7 @@ const Footer = () => {
                 >
                   <li aria-label="footer-nav-item">
                     <Link
-                      href="#"
+                      href="/about-us"
                       className="text-neutral-800 text-lg font-normal transition-all ease-in-out duration-300 hover:text-orange-500"
                     >
                       About
@@ -88,7 +88,7 @@ const Footer = () => {
 
                   <li aria-label="footer-nav-item">
                     <Link
-                      href="#"
+                      href="/pricing"
                       className="text-neutral-800 text-lg font-normal transition-all ease-in-out duration-300 hover:text-orange-500"
                     >
                       Pricing
@@ -97,7 +97,7 @@ const Footer = () => {
 
                   <li aria-label="footer-nav-item">
                     <Link
-                      href="#"
+                      href="/blogs"
                       className="text-neutral-800 text-lg font-normal transition-all ease-in-out duration-300 hover:text-orange-500"
                     >
                       Blog
@@ -115,7 +115,7 @@ const Footer = () => {
 
                   <li aria-label="footer-nav-item">
                     <Link
-                      href="#"
+                      href="/careers"
                       className="text-neutral-800 text-lg font-normal transition-all ease-in-out duration-300 hover:text-orange-500"
                     >
                       Careers

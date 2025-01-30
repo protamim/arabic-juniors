@@ -1,22 +1,31 @@
 import React from "react";
 import { WhyJoinItemsTypes } from "../types/whyJoinItems";
+import { cn } from "@/lib/utils";
 
-interface WhyJoinCardProps {
+interface WhyJoinCardProps extends React.HTMLAttributes<HTMLDivElement> {
   whyJoinData: WhyJoinItemsTypes[];
+  iconWrapperClass?: string;
 }
 
-const WhyJoinCard: React.FC<WhyJoinCardProps> = ({ whyJoinData }) => {
+const WhyJoinCard: React.FC<WhyJoinCardProps> = ({
+  whyJoinData,
+  className,
+  iconWrapperClass,
+}) => {
   return (
     <React.Fragment>
       {whyJoinData?.map((card) => (
         <div
           key={card.key}
           aria-label="why-join-us-card"
-          className="bg-white p-5 rounded-xl w-full"
+          className={cn("bg-white p-5 rounded-xl w-full", className)}
         >
           <span
             aria-label="icon-wrapper"
-            className="bg-[#F5F6F8] rounded-xl p-4 w-20 h-20 flex flex-col items-center justify-center flex-shrink-0 flex-grow-0 basis-auto mb-4"
+            className={cn(
+              "bg-[#F5F6F8] rounded-xl p-4 w-20 h-20 flex flex-col items-center justify-center flex-shrink-0 flex-grow-0 basis-auto mb-4",
+              iconWrapperClass
+            )}
           >
             {card.icon}
           </span>

@@ -1,4 +1,5 @@
 "use client";
+import BlogCard from "@/components/homepage/BlogCard";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -14,19 +15,19 @@ const BlogDetailsPage = () => {
         className="relative z-[1] before:absolute before:w-full before:h-72 before:bg-gradient-to-r before:from-[#FF60A8] before:from-5% before:via-[#FB6238] before:via-50% before:to-[#F5AE14] before:to-100% before:-z-[1]"
       >
         <div className="container">
-          <div aria-label="blog-details-wrapper" className="pt-10">
+          <div aria-label="blog-details-wrapper" className="pt-5 sm:pt-10">
             <div
               onClick={() => router.back()}
               aria-label="back-to-prev"
               className="flex items-center gap-x-2 text-yellow-400 text-lg font-medium hover:text-yellow-300 hover:cursor-pointer"
             >
-              <ArrowLeft />
+              <ArrowLeft className="text-2xl"/>
               <p>Back to Blog</p>
             </div>
 
             <h2
               aria-label="blog-title"
-              className="mt-4 mb-7 text-4xl font-bold text-white"
+              className="mt-4 mb-7 text-3xl sm:text-4xl font-bold text-white"
             >
               Learning with Games? Why n....
             </h2>
@@ -53,7 +54,7 @@ const BlogDetailsPage = () => {
               >
                 <h3
                   aria-label="content-title"
-                  className="text-neutral-800 text-2xl font-semibold mb-4"
+                  className="text-neutral-800 text-lg line-clamp-3 sm:text-2xl font-semibold mb-4"
                 >
                   {content.title}
                 </h3>
@@ -65,7 +66,7 @@ const BlogDetailsPage = () => {
                     <p
                       key={index}
                       aria-label="content-paragraph"
-                      className="text-neutral-600 text-lg font-normal mb-3 last:mb-0"
+                      className="text-neutral-600 text-sm sm:text-lg font-normal mb-3 last:mb-0"
                     >
                       {sentence}
                     </p>
@@ -73,9 +74,20 @@ const BlogDetailsPage = () => {
               </div>
             ))}
 
-            <div aria-label="latest-blog-area" className="mt-16">
-              <h4 aria-label="title" className="text-neutral-800 text-4xl font-bold mb-7">Latest Blog</h4>
-              <p>blog card goes here...</p>
+            <div aria-label="latest-blog-area" className="mt-10 mb-6 sm:mb-14 sm:mt-16">
+              <h4
+                aria-label="title"
+                className="text-neutral-800 text-3xl sm:text-4xl font-bold mb-7"
+              >
+                Latest Blog
+              </h4>
+
+              <div
+                aria-label="latest-blog-card-wrapper"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-8"
+              >
+                <BlogCard CardData={LATEST_BLOGS} />
+              </div>
             </div>
           </div>
         </div>
@@ -116,5 +128,71 @@ const BLOG_CONTENT = [
     key: "conclusion",
     title: "conclusion",
     paragraph: `Our latest study builds on previous findings, showing that Learneer is a reliable tool for enhancing learning outcomes even in the challenging context of a pandemic. While no study is perfect, the evidence strongly suggests that Learneer can play a significant role in boosting academic achievement.`,
+  },
+];
+
+const LATEST_BLOGS = [
+  {
+    key: "blog-1",
+    title: "Learning with Games? Why n",
+    shortDescription:
+      "Embrace the joy of games to enhance your learning experience!",
+    action: {
+      link: "/blogs/blog-1",
+      text: "Read More",
+    },
+    image: {
+      link: "https://res.cloudinary.com/dromjx3rx/image/upload/v1738161090/blog-2_xlvgku.png",
+      width: 1380,
+      height: 920,
+      altText: "learning with game blog",
+    },
+  },
+  {
+    key: "blog-2",
+    title: "10 Learning Game Ideas",
+    shortDescription: "10 ideas for learning with for your kids to have fun.",
+    action: {
+      link: "/blogs/blog-2",
+      text: "Read More",
+    },
+    image: {
+      link: "https://res.cloudinary.com/dromjx3rx/image/upload/v1738161084/blog-4_a7zhja.png",
+      width: 1380,
+      height: 920,
+      altText: "learning with game blog",
+    },
+  },
+  {
+    key: "blog-3",
+    title: "Fun Activities for Kids Games",
+    shortDescription:
+      "Want to do something outside  home and games laptop? Here are our recomment.",
+    action: {
+      link: "/blogs/blog-3",
+      text: "Read More",
+    },
+    image: {
+      link: "https://res.cloudinary.com/dromjx3rx/image/upload/v1738161082/blog-3_oxfubh.png",
+      width: 1380,
+      height: 920,
+      altText: "learning with game blog",
+    },
+  },
+  {
+    key: "blog-4",
+    title: "10 Learning Game Ideas",
+    shortDescription:
+      "Want to do something outside  home and games laptop? Here are our recomment.",
+    action: {
+      link: "/blogs/blog-4",
+      text: "Read More",
+    },
+    image: {
+      link: "https://res.cloudinary.com/dromjx3rx/image/upload/v1738161018/450d30a2e71ff211efe7fc2ef693cd22_txmlzk.png",
+      width: 1380,
+      height: 920,
+      altText: "learning with game blog",
+    },
   },
 ];
