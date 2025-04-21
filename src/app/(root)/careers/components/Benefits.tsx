@@ -1,6 +1,6 @@
-import { IconContinuousLearning, IconCrossDomain, IconGrowing, IconMoneyCharge, IconSchoolBuilding, IconTechStack } from "@/app/welcome/components/svgIcons";
-import WhyJoinCard from "@/app/welcome/components/WhyJoinCard";
-import { WhyJoinItemsTypes } from "@/app/welcome/types/whyJoinItems";
+import { IconContinuousLearning, IconCrossDomain, IconGrowing, IconMoneyCharge, IconSchoolBuilding, IconTechStack } from "@/app/(root)/welcome/components/svgIcons";
+import WhyJoinCard from "@/app/(root)/welcome/components/WhyJoinCard";
+import { WhyJoinItemsTypes } from "@/app/(root)/welcome/types/whyJoinItems";
 import React from "react";
 
 

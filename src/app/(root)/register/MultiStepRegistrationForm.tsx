@@ -135,7 +135,7 @@ const MultiStepRegistrationForm = () => {
 
   return (
     <React.Fragment>
-      <div aria-label="progess-wrapper" className="mb-6">
+      <div aria-label="progress-wrapper" className="mb-6">
         <Progress value={(current / total) * 100} className="w-full" />
       </div>
 
