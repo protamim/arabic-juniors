@@ -1,4 +1,5 @@
 import { getSessionAdminUser } from "@/lib/auth";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -13,7 +14,17 @@ const AdminDashboardPage = async () => {
 
   return (
     <div aria-label="admin-dashboard-page">
-      <h5>Admin Dashboard</h5>
+      <div className="container">
+        <div aria-describedby="main-wrapper">
+          <div aria-describedby="admin-sidebar">
+            <ul>
+              <li>
+                <Link href={"/admin"}>Overview</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
