@@ -115,7 +115,7 @@ const AdminLoginForm = () => {
                 className="flex items-center gap-1 text-sm text-gray-700 font-normal"
               >
                 <p>Don't have an account? </p>{" "}
-                <Link href={"/admin/sign-up"} className="text-indigo-500">
+                <Link href={"/sign-up"} className="text-indigo-500">
                   Sign Up
                 </Link>
               </div>

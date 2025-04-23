@@ -118,7 +118,7 @@ const AdminSignUpForm = () => {
 
               <div aria-describedby="form-footer" className="flex items-center gap-1 text-sm text-gray-700 font-normal">
                 <p>Already have an account? </p>{" "}
-                <Link href={"/admin/login"} className="text-indigo-500">Login</Link>
+                <Link href={"/login"} className="text-indigo-500">Login</Link>
               </div>
             </form>
           </Form>
