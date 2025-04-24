@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -52,16 +53,25 @@ const AdminSignUpForm = () => {
 
       if (!res.ok) {
         const error = await res.json();
-        console.log(error.message);
+        // notify user
+        toast.error(error.message);
+        form.reset();
         return;
       }
 
       const data = await res.json();
       console.log(data);
+
+      // notify user
+      toast("Signed Up Successfully");
+      form.reset();
       // redirect to login page
-      push("/admin/login");
+      push("/login");
     } catch (error) {
       console.error("Sign-Up page", error);
+      // notify user
+      toast.error("Something wrong!");
+      form.reset();
     }
   }
 
@@ -116,9 +126,14 @@ const AdminSignUpForm = () => {
               />
               <Button type="submit">Sign Up</Button>
 
-              <div aria-describedby="form-footer" className="flex items-center gap-1 text-sm text-gray-700 font-normal">
+              <div
+                aria-describedby="form-footer"
+                className="flex items-center gap-1 text-sm text-gray-700 font-normal"
+              >
                 <p>Already have an account? </p>{" "}
-                <Link href={"/login"} className="text-indigo-500">Login</Link>
+                <Link href={"/login"} className="text-indigo-500">
+                  Login
+                </Link>
               </div>
             </form>
           </Form>

@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -46,12 +47,15 @@ const AdminLoginForm = () => {
       });
 
       if (!res.ok) {
-        console.log("Login error!");
+        // notify user
+        toast("Incorrect password and email");
+        form.reset();
+        return;
       }
 
       const data = await res.json();
-      console.log(data.message);
-
+      // notify user
+      toast("Logged in Successfully!");
       // redirect to admin dashboard
       router.push("/admin");
     } catch (error) {
