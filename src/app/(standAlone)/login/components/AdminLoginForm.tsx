@@ -39,7 +39,7 @@ const AdminLoginForm = () => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const res = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/login", {
+      const res = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/login", { // returns jwt token
         credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -54,6 +54,8 @@ const AdminLoginForm = () => {
       }
 
       const data = await res.json();
+      localStorage.setItem('token', data.token);
+      
       // notify user
       toast("Logged in Successfully!");
       // redirect to admin dashboard
