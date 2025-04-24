@@ -1,12 +1,12 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { OurValuesTypes } from "@/app/about-us/types";
+import { OurValuesTypes } from "@/app/(root)/about-us/types";
 import {
   IconBoard,
   IconCustomizedLearning,
   IconEmbracing,
   IconOpenBook,
-} from "@/app/about-us/svgIcons";
+} from "@/app/(root)/about-us/svgIcons";
 
 const EnvisionEmpower = () => {
   const colors = ["#FB6238", "#A6CF4A", "#FF60A8", "#F5AE14"];

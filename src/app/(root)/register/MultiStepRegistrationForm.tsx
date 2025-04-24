@@ -106,14 +106,14 @@ const MultiStepRegistrationForm = () => {
       setIsLoading(true);
 
       const registerURL = process.env.NEXT_PUBLIC_API_BASE_URL + "/register";
-      const { firstName, email } = values;
+      const { firstName, lastName, email } = values;
 
       const res = await fetch(registerURL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ firstName, email }),
+        body: JSON.stringify({ firstName, lastName, email }),
       });
 
       if (!res.ok) {
@@ -135,7 +135,7 @@ const MultiStepRegistrationForm = () => {
 
   return (
     <React.Fragment>
-      <div aria-label="progess-wrapper" className="mb-6">
+      <div aria-label="progress-wrapper" className="mb-6">
         <Progress value={(current / total) * 100} className="w-full" />
       </div>
 
