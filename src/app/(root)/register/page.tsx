@@ -1,7 +1,7 @@
-"use client";
+// "use client";
 import React from "react";
 import MultiStepRegistrationForm from "./MultiStepRegistrationForm";
-import { StepsProvider } from "react-step-builder";
+import MultiStepProvider from "./MultiStepProvider";
 
 const UserRegistrationPage = () => {
   return (
@@ -24,9 +24,7 @@ const UserRegistrationPage = () => {
               aria-label="registration-form-wrapper"
               className="max-w-screen-md py-14 px-5 sm:px-12 bg-[#FAF8F8] rounded-2xl scroll-mt-[calc(var(--juniors-header-height)+5rem)]"
             >
-              <StepsProvider>
-                <MultiStepRegistrationForm />
-              </StepsProvider>
+              <MultiStepProvider />
             </div>
           </div>
         </div>

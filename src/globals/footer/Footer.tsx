@@ -16,6 +16,7 @@ import {
   WhatsAppIcon,
   YouTubeIcon,
 } from "./SvgIcons";
+import { images } from "@/constants/images";
 
 const Footer = () => {
   return (
@@ -42,7 +43,10 @@ const Footer = () => {
                 Modern Standard Arabic.
               </p>
 
-              <div aria-label="social-connect-wrapper" className="hidden lg:block">
+              <div
+                aria-label="social-connect-wrapper"
+                className="hidden lg:block"
+              >
                 <h4 className="text-lg font-bold text-neutral-800 mb-4">
                   Connect with us
                 </h4>
@@ -65,10 +69,13 @@ const Footer = () => {
             </div>
 
             <div
-              aria-label="importand-links-column"
+              aria-label="important-links-column"
               className="flex items-center justify-start flex-col"
             >
-              <div aria-label="footer-links-wrapper" className="w-full lg:max-w-max">
+              <div
+                aria-label="footer-links-wrapper"
+                className="w-full lg:max-w-max"
+              >
                 <h4 className="text-neutral-800 text-3xl font-bold mb-6">
                   DISCOVER
                 </h4>
@@ -135,10 +142,19 @@ const Footer = () => {
             </div>
 
             <div aria-label="help-center-column">
-              <h4 className="flex items-center gap-x-2 text-2xl font-extrabold text-neutral-900 mb-7">
-                <WhatsAppIcon className="text-[#29A71A] text-4xl" />
-                +456 1544 5651
-              </h4>
+              <Link
+                href={"tel:+456 1544 5651"}
+                aria-describedby="whatsapp-image"
+                className="w-full flex justify-center items-center scale-95 transition-transform ease-in-out duration-300 hover:scale-105"
+              >
+                <Image
+                  src={images.imgWhatsAppNumber}
+                  width={4096}
+                  height={1215}
+                  alt="arabic juniors whatsapp number"
+                  priority
+                />
+              </Link>
 
               <div
                 aria-label="help-center-wrapper"

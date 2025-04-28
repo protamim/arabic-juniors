@@ -39,8 +39,8 @@ const ArabicCurriculumn = () => {
               </h3>
 
               <p className="text-neutral-700 font-normal text-sm sm:text-lg mb-6">
-                At Brilliant Tuition, we pride ourselves on transforming
-                learning into a personalized and engaging journey.{" "}
+                We take pride in turning learning into a fun, personalized, and
+                truly engaging experience
               </p>
 
               <ul
@@ -56,11 +56,12 @@ const ArabicCurriculumn = () => {
                   </span>
                   <div className="flex flex-col gap-y-3">
                     <h4 className="text-neutral-800 font-bold text-lg sm:text-2xl">
-                      Native Arabic Teachers
+                      Alignment with MOE Standards
                     </h4>
                     <p className="text-neutral-700 font-normal text-sm sm:text-base">
-                      All 3 students will be taught the same concept by your
-                      personal mentor.
+                      We specialize in teaching Arabic in alignment with the UAE
+                      MOE curriculum, ensuring students meet educational
+                      standards.
                     </p>
                   </div>
                 </li>
@@ -74,11 +75,11 @@ const ArabicCurriculumn = () => {
                   </span>
                   <div className="flex flex-col gap-y-3">
                     <h4 className="text-neutral-800 font-bold text-lg sm:text-2xl">
-                      Specially for Non-Arabs Students
+                      Comprehensive Language Skills
                     </h4>
                     <p className="text-neutral-700 font-normal text-sm sm:text-base">
-                      Our best online tutors ensure that they have built a
-                      strong rapport with every student.
+                      Building fluency through reading, writing, speaking, and
+                      listening.
                     </p>
                   </div>
                 </li>
@@ -92,11 +93,11 @@ const ArabicCurriculumn = () => {
                   </span>
                   <div className="flex flex-col gap-y-3">
                     <h4 className="text-neutral-800 font-bold text-lg sm:text-2xl">
-                      From Class KG1 to 10 Grade
+                      Exam Preparation and Assessment
                     </h4>
                     <p className="text-neutral-700 font-normal text-sm sm:text-base">
-                      With only three students in  class, the tutor can give
-                      each student individual attention.
+                      Prep for exams, boost performance, and unlock your child’s
+                      potential.
                     </p>
                   </div>
                 </li>

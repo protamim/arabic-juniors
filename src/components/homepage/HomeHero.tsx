@@ -63,8 +63,8 @@ const HomeHero = () => {
             </h1>
 
             <p className="text-neutral-700 text-base sm:text-lg md:text-2xl font-normal max-w-screen-md mx-auto text-center mb-12">
-              Discover thousands of fun and interactive learning activities to
-              support your child’s growth and learning process.{" "}
+              Arabic Made Easy with Online Tuition Fun and interactive lessons
+              to support your child's learning journey!
             </p>
 
             <div

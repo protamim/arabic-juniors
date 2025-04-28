@@ -1,6 +1,6 @@
+import Newsletter from "@/globals/Newsletter";
 import "../globals.css";
 import { Footer, Header } from "@/globals";
-import { Newsletter } from "@/components/homepage";
 
 export default function RootLayout({
   children,

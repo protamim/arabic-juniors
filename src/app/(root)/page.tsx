@@ -1,5 +1,14 @@
-import { ArabicCurriculumn, BlogSection, DeliverResult, FaqSection, HomeHero, Newsletter, StudentReviews, StudentStrugglingBanner, TeachersSlider } from '@/components/homepage';
-import React from 'react';
+import {
+  ArabicCurriculumn,
+  BlogSection,
+  DeliverResult,
+  FaqSection,
+  HomeHero,
+  StudentReviews,
+  StudentStrugglingBanner,
+  TeachersSlider,
+} from "@/components/homepage";
+import React from "react";
 
 const HomePage = () => {
   return (
