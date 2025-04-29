@@ -5,6 +5,7 @@ export interface PlanActions {
 
 export interface PlanFeatures {
   title: string;
+  included: boolean;
 }
 
 export interface PlanChildren {

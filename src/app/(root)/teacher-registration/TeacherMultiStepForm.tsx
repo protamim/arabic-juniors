@@ -40,6 +40,9 @@ import { Progress } from "@/components/ui/progress";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useCountryCode } from "@/hooks/useCountry";
+import { Separator } from "@/components/ui/separator";
+import { getNames } from "country-list";
+import { Textarea } from "@/components/ui/textarea";
 
 const TIME_SLOTS = {
   timeFormat: "12-hour",
@@ -145,8 +148,9 @@ const formSchema = z.object({
   howFindUs: z.string(),
 });
 
-const MultiStepRegistrationForm = () => {
+const TeacherMultiStepForm = () => {
   const { countryCode, error, loading } = useCountryCode();
+
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { next, prev, total, current, hasNext, hasPrev, isLast } = useSteps();
@@ -169,66 +173,39 @@ const MultiStepRegistrationForm = () => {
     },
   });
 
-  const validateStep = async () => {
-    const isValid = await methods.trigger([
-      "email",
-      "phoneNumber",
-      "firstName",
-      "lastName",
-      "grade",
-    ]); // Validate specific fields
-    if (isValid) {
-      next(); // Move to the next step if valid
-    } else {
-      console.log("Validation failed:", methods.formState.errors);
-    }
-  };
+  //   const validateStep = async () => {
+  //     const isValid = await methods.trigger([
+  //       "email",
+  //       "phoneNumber",
+  //       "firstName",
+  //       "lastName",
+  //       "grade",
+  //     ]); // Validate specific fields
+  //     if (isValid) {
+  //       next(); // Move to the next step if valid
+  //     } else {
+  //       console.log("Validation failed:", methods.formState.errors);
+  //     }
+  //   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // console.log(values);
-    try {
-      // Now loading
-      setIsLoading(true);
-
-      const registerURL = process.env.NEXT_PUBLIC_API_BASE_URL + "/register";
-      const { firstName, lastName, email } = values;
-
-      const res = await fetch(registerURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ firstName, lastName, email }),
-      });
-
-      if (!res.ok) {
-        throw new Error(`Registration response error: ${res.status}`);
-      }
-
-      const serverResponse = await res.json();
-      // finished loading
-      setIsLoading(false);
-
-      // toast notification
-      toast(serverResponse.message);
-      // redirect to welcome page after successfull
-      router.push("/welcome");
-    } catch (error) {
-      console.log("registration failed:", error);
-    }
+    console.log(values);
   };
 
   return (
     <React.Fragment>
       <React.Suspense fallback={"Loading"}>
-        <div aria-label="progress-wrapper" className="mb-6">
-          <Progress value={(current / total) * 100} className="w-full" />
+        <div aria-label="progress-wrapper" className="mb-12">
+          <Progress
+            value={Math.floor((current / total) * 100)}
+            className="w-full"
+          />
         </div>
 
         <Form {...methods}>
           <form
             onSubmit={methods.handleSubmit(onSubmit)}
-            className="registration-form"
+            className="teacher-registration-form"
           >
             <Steps>
               {/* FIRST STEP START */}
@@ -236,6 +213,13 @@ const MultiStepRegistrationForm = () => {
                 aria-label="first-step"
                 className="grid grid-cols-1 sm:grid-cols-2 gap-x-7 gap-y-5"
               >
+                <div aria-describedby="form-title" className="col-span-full">
+                  <h5 className="text-3xl font-medium text-neutral-800">
+                    Fill your application
+                  </h5>
+                </div>
+                <Separator className="my-3 col-span-full" />
+
                 {/* First Name */}
                 <FormField
                   name="firstName"
@@ -275,6 +259,38 @@ const MultiStepRegistrationForm = () => {
                   )}
                 />
 
+                {/* Grade */}
+                <FormField
+                  name="grade"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>Gender</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={(value) =>
+                            field.onChange(Number(value))
+                          }
+                        >
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                            <SelectValue placeholder="Select gender" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {["Male", "Female", "Custom"].map((item, i) => (
+                              <SelectItem
+                                key={i + 1}
+                                value={(i + 1).toString()}
+                              >
+                                {item}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 {/* Email */}
                 <FormField
                   name="email"
@@ -299,7 +315,7 @@ const MultiStepRegistrationForm = () => {
                   name="phoneNumber"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
-                      <FormLabel>Phone Number</FormLabel>
+                      <FormLabel>Mobile</FormLabel>
                       <FormControl>
                         <PhoneInput
                           defaultCountry={
@@ -320,12 +336,12 @@ const MultiStepRegistrationForm = () => {
                   )}
                 />
 
-                {/* Grade */}
+                {/* Country */}
                 <FormField
                   name="grade"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
-                      <FormLabel>Class Grade</FormLabel>
+                      <FormLabel>Country</FormLabel>
                       <FormControl>
                         <Select
                           onValueChange={(value) =>
@@ -333,15 +349,12 @@ const MultiStepRegistrationForm = () => {
                           }
                         >
                           <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
-                            <SelectValue placeholder="Select grade" />
+                            <SelectValue placeholder="Choose your country" />
                           </SelectTrigger>
                           <SelectContent>
-                            {[...Array(12)].map((_, i) => (
-                              <SelectItem
-                                key={i + 1}
-                                value={(i + 1).toString()}
-                              >
-                                {i + 1 + " - Grade"}
+                            {getNames().map((country, index) => (
+                              <SelectItem key={index} value={country}>
+                                {country}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -351,10 +364,385 @@ const MultiStepRegistrationForm = () => {
                     </FormItem>
                   )}
                 />
+
+                <div
+                  aria-describedby="form-title"
+                  className="mt-4 col-span-full"
+                >
+                  <h5 className="text-3xl font-medium text-neutral-800">
+                    Personal Information
+                  </h5>
+                </div>
+                <Separator className="my-1 col-span-full" />
+
+                {/* date of birth */}
+                <FormField
+                  name="dob"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col col-span-full">
+                      <FormLabel>Date of birth</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant={"ghost"}
+                              className={cn(
+                                "bg-white rounded-lg",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={(date) =>
+                              date > new Date() || date < new Date("1900-01-01")
+                            }
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* First Name */}
+                <FormField
+                  name="firstName"
+                  render={({ field }) => (
+                    <FormItem
+                      aria-label="form-item"
+                      className="space-y-2 col-span-full sm:col-span-1"
+                    >
+                      <FormLabel>First Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Enter your first name"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Last Name */}
+                <FormField
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                      <FormLabel>Last Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Enter your last name"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Materials status */}
+                <FormField
+                  name="grade"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>Materials status</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={(value) =>
+                            field.onChange(Number(value))
+                          }
+                        >
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                            <SelectValue placeholder="Choose your country" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {["Married", "Unmarried"].map((item, index) => (
+                              <SelectItem key={index} value={item}>
+                                {item}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Country */}
+                <FormField
+                  name="grade"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>Country</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={(value) =>
+                            field.onChange(Number(value))
+                          }
+                        >
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                            <SelectValue placeholder="Choose your country" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {getNames().map((country, index) => (
+                              <SelectItem key={index} value={country}>
+                                {country}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* About me */}
+                <FormField
+                  name=""
+                  render={({ field }) => (
+                    <FormItem className="col-span-full">
+                      <FormLabel>About me</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Write yourself...."
+                          className="resize-none bg-white"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Facebook */}
+                <FormField
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>Facebook</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Facebook ID"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Upload */}
+                <FormField
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-1">
+                      <FormControl>
+                        <Input
+                          type="file"
+                          {...field}
+                          placeholder="Facebook ID"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
               {/* FIRST STEP END */}
 
               {/* SECOND STEP START */}
+              <div
+                aria-label="second-step"
+                className="grid grid-cols-2 gap-x-7 gap-y-10"
+              >
+                <div className="col-span-full space-y-3">
+                  <h4 className="text-3xl font-bold text-neutral-800">Academic & Professional Information</h4>
+                  <p className="text-xl font-medium text-neutral-700">
+                    Please tell us about your education, Occupation, and
+                    Experience
+                  </p>
+                </div>
+
+                <Separator className="my-3 col-span-full" />
+
+                {/* Preferred Teacher */}
+                <FormField
+                  name="preferredTeacher"
+                  render={({ field }) => (
+                    <FormItem className="col-span-full">
+                      <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
+                        Preferred Teacher
+                      </FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          value={field.value}
+                          onValueChange={field.onChange}
+                          className="flex items-center gap-y-5 gap-x-4 sm:gap-x-10"
+                        >
+                          {["Male", "Female", "Others"].map((option) => (
+                            <FormItem
+                              key={option}
+                              className="radio-item-wrapper w-28 sm:h-28 py-2 px-3 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
+                            >
+                              <FormControl>
+                                <RadioGroupItem
+                                  value={option}
+                                  id={`teacher-${option}`}
+                                  className="absolute top-0 left-0 w-full h-full opacity-0"
+                                />
+                              </FormControl>
+                              <FormLabel
+                                htmlFor={`teacher-${option}`}
+                                className="text-base sm:text-lg font-normal sm:font-semibold text-neutral-800"
+                              >
+                                {option}
+                              </FormLabel>
+                            </FormItem>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div
+                  aria-label="class-date"
+                  className="col-span-full grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-6 items-center justify-center"
+                >
+                  <h4 className="text-neutral-800 font-semibold text-lg sm:text-2xl col-span-full">
+                    When do you want to start the classes
+                  </h4>
+                  {/* class start date */}
+                  <FormField
+                    control={methods.control}
+                    name="classStartDate"
+                    render={({ field }) => (
+                      <FormItem className="space-y-2 h-full">
+                        <FormLabel>Select a date and time</FormLabel>
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          initialFocus
+                          className="bg-white border border-gray-200 rounded-md max-w-max p-6"
+                        />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Class Start Time */}
+                  <FormField
+                    name="classStartTime"
+                    render={({ field }) => (
+                      <FormItem className="space-y-2 h-full">
+                        <FormLabel>Available Time</FormLabel>
+                        <FormControl>
+                          <RadioGroup
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            defaultValue={TIME_SLOTS.availableTimes[0].time}
+                            className="grid grid-cols-3 gap-2 w-full max-h-[23rem] overflow-x-hidden overflow-y-auto"
+                          >
+                            {TIME_SLOTS.availableTimes.map((slot, index) => (
+                              <div
+                                key={index}
+                                aria-describedby="ratio-item"
+                                className="flex items-center"
+                              >
+                                <RadioGroupItem
+                                  className="h-11 bg-neutral-100 border border-neutral-200 shadow-sm w-full rounded-md text-xs font-semibold text-neutral-900 transition-colors ease-in-out duration-300 hover:bg-orange-500 hover:border-orange-500 aria-checked:border-orange-500 hover:text-white aria-checked:text-white aria-checked:bg-orange-500"
+                                  value={slot.time}
+                                  id="r2"
+                                >
+                                  {slot.time}
+                                </RadioGroupItem>
+                              </div>
+                            ))}
+                          </RadioGroup>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* How Find US Teacher */}
+                <FormField
+                  name="howFindUs"
+                  render={({ field }) => (
+                    <FormItem className="col-span-full">
+                      <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
+                        How did your find us?
+                      </FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          value={field.value}
+                          defaultValue="Friends"
+                          onValueChange={field.onChange}
+                          className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-5 gap-x-4 sm:gap-x-9"
+                        >
+                          {[
+                            "Friends",
+                            "Social Media",
+                            "Email",
+                            "Google",
+                            "Other",
+                          ].map((option) => {
+                            const parseValue = option
+                              .replace(" ", "-")
+                              .toLocaleLowerCase();
+                            return (
+                              <FormItem
+                                key={parseValue}
+                                className="radio-item-wrapper space-y-0 flex px-4 py-2 items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
+                              >
+                                <FormControl>
+                                  <RadioGroupItem
+                                    value={parseValue}
+                                    className="absolute top-0 left-0 w-full h-full opacity-0"
+                                  />
+                                </FormControl>
+                                <FormLabel
+                                  htmlFor={`find-${parseValue}`}
+                                  className="text-lg text-center font-semibold text-neutral-800"
+                                >
+                                  {option}
+                                </FormLabel>
+                              </FormItem>
+                            );
+                          })}
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              {/* SECOND STEP END */}
+
+              {/* THIRD STEP START */}
               <div
                 aria-label="second-step"
                 className="grid grid-cols-2 gap-x-7 gap-y-10"
@@ -554,7 +942,7 @@ const MultiStepRegistrationForm = () => {
                   )}
                 />
               </div>
-              {/* SECOND STEP END */}
+              {/* THIRD STEP END */}
             </Steps>
 
             <div className="navigation mt-14 flex items-center gap-x-4 max-w-screen-sm ml-auto">
@@ -572,7 +960,7 @@ const MultiStepRegistrationForm = () => {
               {hasNext ? (
                 <Button
                   type="button"
-                  onClick={validateStep}
+                  onClick={() => next()}
                   className="rounded-lg flex-1"
                 >
                   Next
@@ -603,4 +991,4 @@ const MultiStepRegistrationForm = () => {
   );
 };
 
-export default MultiStepRegistrationForm;
+export default TeacherMultiStepForm;

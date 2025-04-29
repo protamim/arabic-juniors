@@ -1,6 +1,5 @@
 // "use client";
 import React from "react";
-import MultiStepRegistrationForm from "./MultiStepRegistrationForm";
 import MultiStepProvider from "./MultiStepProvider";
 
 const UserRegistrationPage = () => {
