@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PlanChildren } from "../types/pricingPlanTypes";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { images } from "@/constants/images";
 
 interface PricingCardProps {
   pricingCardData: PlanChildren[];
@@ -78,13 +80,32 @@ const PricingCard: React.FC<PricingCardProps> = ({ pricingCardData }) => {
             <div aria-label="card-body" className="flex flex-col w-full">
               <ul
                 aria-label="feature-list"
-                className="flex items-center justify-center mx-auto max-w-max gap-y-4 flex-col mb-10"
+                className="flex items-start justify-normal mx-auto max-w-max gap-y-4 flex-col mb-10"
               >
                 {planCard.features?.map((feature, index) => (
                   <React.Fragment key={index}>
                     <li className="flex items-center gap-x-2">
-                      <IconCheckmarkCircleFill className="text-xl text-orange-500" />
-                      <span className="text-lg font-semibold text-neutral-800">
+                      {feature.included ? (
+                        <Image
+                          src={images.imgCorrect}
+                          alt="arabic juniors correct photo"
+                          width={60}
+                          height={60}
+                          priority
+                          className="flex w-5 flex-shrink-0 flex-grow-0 basis-auto"
+                        />
+                      ) : (
+                        <Image
+                          src={images.imgCross}
+                          alt="arabic juniors cross photo"
+                          width={60}
+                          height={60}
+                          priority
+                          className="flex w-5 flex-shrink-0 flex-grow-0 basis-auto"
+                        />
+                      )}
+
+                      <span className="text-base font-medium text-neutral-800">
                         {feature.title}
                       </span>
                     </li>

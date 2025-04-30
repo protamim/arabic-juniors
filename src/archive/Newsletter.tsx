@@ -2,7 +2,7 @@ import { NewsletterImage } from "@/assets";
 import Image from "next/image";
 import React from "react";
 import { NewsletterForm } from "./NewsletterForm";
-import { NewsletterBgVectorIcon, UnionShapeBgIcon } from "./svgIcons";
+import { NewsletterBgVectorIcon, UnionShapeBgIcon } from "../components/homepage/svgIcons";
 
 const Newsletter = () => {
   return (

@@ -1,10 +1,11 @@
-import {
-  PriceOnly,
-  StudentStruggling,
-  StudentStrugglingVectorDot,
-} from "@/assets";
+// import {
+//   PriceOnly,
+//   StudentStruggling,
+//   StudentStrugglingVectorDot,
+// } from "@/assets";
 import Image from "next/image";
 import React from "react";
+import { images } from "@/constants/images";
 
 const StudentStrugglingBanner = () => {
   return (
@@ -14,7 +15,18 @@ const StudentStrugglingBanner = () => {
         className="py-10 sm:py-14"
       >
         <div className="container">
-          <div
+          <div aria-describedby="image-wrapper" className="flex items-center justify-center">
+            <Image
+              src={images.imgArabicStudies}
+              alt="arabic juniors"
+              width={1640}
+              height={624}
+              priority
+              className="rounded-2xl"
+            />
+          </div>
+
+          {/* <div
             aria-label="student-struggling-banner-wrapper"
             className="bg-yellow-500 lg:pt-8 pt-0 md:pb-3 rounded-2xl relative z-10 overflow-hidden flex flex-col gap-y-4 lg:block"
           >
@@ -53,7 +65,7 @@ const StudentStrugglingBanner = () => {
               />
             </div>
 
-            {/* floating elements */}
+            
             <div aria-label="floating-wrapper" className="static order-3 self-end lg:absolute right-0 bottom-0 -z-10 max-w-52">
               <span
                 aria-label="price-only"
@@ -81,7 +93,7 @@ const StudentStrugglingBanner = () => {
                 />
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </React.Fragment>

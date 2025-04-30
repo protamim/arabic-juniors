@@ -9,8 +9,13 @@ import {
 } from "../ui/accordion";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { FaqTypes } from "@/types";
 
-const FaqSection = () => {
+interface FaqSectionProps {
+  faqData: FaqTypes[]
+}
+
+const FaqSection: React.FC<FaqSectionProps> = ({faqData}) => {
   return (
     <React.Fragment>
       <section aria-label="faq-section-home" className="pt-10 md:pt-28 pb-11">
@@ -56,9 +61,9 @@ const FaqSection = () => {
               </div>
             </div>
 
-            <div aria-label="faq-column-right" className="w-full h-full">
+            <div aria-label="faq-column-right" className="w-full h-full flex flex-col justify-center items-center">
               <Accordion type="single" collapsible className="w-full mb-12">
-                {FAQ_DATA?.map((faq) => (
+                {faqData?.map((faq) => (
                   <AccordionItem key={faq.key} value={faq.key}>
                     <AccordionTrigger>{faq.question}</AccordionTrigger>
                     <AccordionContent>{faq.answer}</AccordionContent>
@@ -79,40 +84,4 @@ const FaqSection = () => {
 
 export default FaqSection;
 
-const FAQ_DATA = [
-  {
-    key: "first-faq",
-    question: "What is the tutor curriculum?",
-    answer: `A tutor curriculum is a structured plan with lessons, methods, and goals tailored to a student's needs. It includes assessments, topics, teaching strategies, feedback, and customization for effective learning.`,
-  },
-  {
-    key: "second-faq",
-    question: "Do you have female educators for female students?",
-    answer: `Yes, many platforms provide female educators for female students, ensuring comfort, cultural alignment, and personalized learning. Check with the specific institution or tutoring service for availability.`,
-  },
-  {
-    key: "third-faq",
-    question: "How do you keep children safe?",
-    answer: `Child safety is ensured through background checks for educators, secure online platforms, parental monitoring features, safe physical environments, and adherence to child protection policies and guidelines.`,
-  },
-  {
-    key: "fourth-faq",
-    question: "Do you have special teachers for female students?",
-    answer: `Yes, many institutions offer special female teachers for female students to ensure comfort, cultural alignment, and a supportive learning environment. Availability depends on the specific institution or platform.`,
-  },
-  {
-    key: "fifth-faq",
-    question: "Do you offer courses for adults?",
-    answer: `Yes, many platforms offer courses for adults, covering a wide range of subjects such as professional development, personal growth, language learning, and technical skills. Availability depends on the platform or institution.`,
-  },
-  {
-    key: "sixth-faq",
-    question: "Could you elucidate the fee structure?",
-    answer: `The fee structure typically includes per-course fees, subscription models, tiered pricing, or payment plans. Discounts may be available for early registration or bundles, varying by platform or institution.`,
-  },
-  {
-    key: "seventh-faq",
-    question: "How many classes shall there per month?",
-    answer: `The number of classes per month varies depending on the course or program. Typically, it can range from 4 to 12 classes per month, depending on the course frequency (weekly or bi-weekly).`,
-  },
-];
+

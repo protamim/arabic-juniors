@@ -18,7 +18,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 const TEACHERS_LIST = [
   {
-    name: "Kristin Watson",
+    name: "Rafat Sayed",
     profession: "Arabic Teacher",
     image: {
       link: FirstTeacherHome,
@@ -27,7 +27,7 @@ const TEACHERS_LIST = [
     },
   },
   {
-    name: "Jenny Wilson",
+    name: "Abdullah Soliman",
     profession: "Arabic Teacher",
     image: {
       link: SecondTeacherHome,
@@ -36,7 +36,7 @@ const TEACHERS_LIST = [
     },
   },
   {
-    name: "Jacob Jones",
+    name: "Hassan Ibrahim",
     profession: "Arabic Teacher",
     image: {
       link: ThirdTeacherHome,
@@ -45,7 +45,7 @@ const TEACHERS_LIST = [
     },
   },
   {
-    name: "Savannah Nguyen",
+    name: "Eptehal Elgendy",
     profession: "Arabic Teacher",
     image: {
       link: FourthTeacherHome,

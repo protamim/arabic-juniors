@@ -16,17 +16,17 @@ const PROGRAMS_LIST = [
   },
   {
     title: "100% Personalized Learning",
-    short_description: "Technology that adapts every learner's needs",
+    short_description: "Tailored lessons to fit each student’s needs",
     icon: <PersonalizeLearningIcon className="text-3xl text-[#EE2A52]" />,
   },
   {
     title: "Multilingual Teachers",
-    short_description: "Proven pedagogy, designed by experts",
+    short_description: "Learn in multiple languages for better clarity",
     icon: <MultilingualTeachersIcon className="text-3xl text-yellow-500" />,
   },
   {
-    title: "Complete Conceptual Clarity",
-    short_description: "Expert teachers, engaging videos & interactive ",
+    title: "Proven Success Strategies",
+    short_description: "Proven methods for measurable progress",
     icon: <ConceptualClarityIcon className="text-3xl text-pink-500" />,
   },
 ];

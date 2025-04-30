@@ -86,7 +86,7 @@ const Header = () => {
         <div className="container">
           <nav
             aria-label="header-nav-wrapper"
-            className="flex items-center gap-x-6 justify-between h-16 md:h-24 py-2 relative"
+            className="flex items-center gap-x-8 justify-between h-16 md:h-24 py-2 relative"
           >
             <HeaderLogo />
             {isMenuOpen ? (
