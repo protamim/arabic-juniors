@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,7 +17,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
-  username: z.string().min(2).max(50),
+  your_name: z.string().min(2).max(50),
+  email: z.string().email(),
+  user_message: z.string().min(10).max(255)
 });
 
 const FaqForm = () => {
@@ -26,7 +27,9 @@ const FaqForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      your_name: "",
+      email: '',
+      user_message: '',
     },
   });
 

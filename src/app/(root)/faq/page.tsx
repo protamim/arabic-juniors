@@ -1,4 +1,3 @@
-import { FaqSection } from "@/components/homepage";
 import {
   Accordion,
   AccordionContent,
@@ -10,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React from "react";
 import FaqForm from "./components/FaqForm";
+import { FaqTypes } from "@/types";
 
 const FAQ_DATA: FaqTypes[] = [
   {
@@ -59,7 +59,9 @@ const FaqPage = () => {
               aria-describedby="content-wrapper"
               className="flex items-center justify-center flex-col gap-y-5 max-w-screen-lg mx-auto"
             >
-              <h1 className="text-4xl sm:text-6xl font-bold text-white">FAQs</h1>
+              <h1 className="text-4xl sm:text-6xl font-bold text-white">
+                FAQs
+              </h1>
               <p className="text-lg sm:text-xl font-normal text-white text-center">
                 Find quick answers to common questions about enrollment,
                 courses, and support, everything you need to start your Qurani
@@ -69,7 +71,10 @@ const FaqPage = () => {
           </div>
         </section>
 
-        <section aria-describedby="faq-main" className="bg-[#EBEFF3] py-9 sm:py-16">
+        <section
+          aria-describedby="faq-main"
+          className="bg-[#EBEFF3] py-9 sm:py-16"
+        >
           <div className="container">
             <div aria-describedby="main-wrapper">
               <div
@@ -129,11 +134,7 @@ const FaqPage = () => {
                   </TabsList>
 
                   <TabsContent value="about">
-                    <Accordion
-                      type="single"
-                      collapsible
-                      className="w-full"
-                    >
+                    <Accordion type="single" collapsible className="w-full">
                       {FAQ_DATA?.map((faq) => (
                         <AccordionItem key={faq.key} value={faq.key}>
                           <AccordionTrigger>{faq.question}</AccordionTrigger>

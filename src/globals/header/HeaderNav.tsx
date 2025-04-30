@@ -94,7 +94,7 @@ export const HEADER_NAV_ITEMS: NavItemsProps[] = [
       },
       {
         label: "Testimonials",
-        url: "/testimonials",
+        url: "#",
       },
       {
         label: "Careers",
