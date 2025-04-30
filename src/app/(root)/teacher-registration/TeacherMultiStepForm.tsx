@@ -469,7 +469,7 @@ const TeacherMultiStepForm = () => {
                           }
                         >
                           <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
-                            <SelectValue placeholder="Choose your country" />
+                            <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent>
                             {["Married", "Unmarried"].map((item, index) => (
@@ -573,167 +573,130 @@ const TeacherMultiStepForm = () => {
               {/* SECOND STEP START */}
               <div
                 aria-label="second-step"
-                className="grid grid-cols-2 gap-x-7 gap-y-10"
+                className="grid grid-cols-2 gap-x-5 gap-y-6"
               >
                 <div className="col-span-full space-y-3">
-                  <h4 className="text-3xl font-bold text-neutral-800">Academic & Professional Information</h4>
+                  <h4 className="text-3xl font-bold text-neutral-800">
+                    Academic & Professional Information
+                  </h4>
                   <p className="text-xl font-medium text-neutral-700">
                     Please tell us about your education, Occupation, and
                     Experience
                   </p>
                 </div>
 
-                <Separator className="my-3 col-span-full" />
+                <Separator className="col-span-full" />
 
-                {/* Preferred Teacher */}
+                {/* Education */}
+
                 <FormField
-                  name="preferredTeacher"
+                  name=""
                   render={({ field }) => (
-                    <FormItem className="col-span-full">
-                      <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
-                        Preferred Teacher
-                      </FormLabel>
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>Education</FormLabel>
                       <FormControl>
-                        <RadioGroup
-                          value={field.value}
-                          onValueChange={field.onChange}
-                          className="flex items-center gap-y-5 gap-x-4 sm:gap-x-10"
-                        >
-                          {["Male", "Female", "Others"].map((option) => (
-                            <FormItem
-                              key={option}
-                              className="radio-item-wrapper w-28 sm:h-28 py-2 px-3 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
-                            >
-                              <FormControl>
-                                <RadioGroupItem
-                                  value={option}
-                                  id={`teacher-${option}`}
-                                  className="absolute top-0 left-0 w-full h-full opacity-0"
-                                />
-                              </FormControl>
-                              <FormLabel
-                                htmlFor={`teacher-${option}`}
-                                className="text-base sm:text-lg font-normal sm:font-semibold text-neutral-800"
-                              >
-                                {option}
-                              </FormLabel>
-                            </FormItem>
-                          ))}
-                        </RadioGroup>
+                        <Input
+                          {...field}
+                          type="text"
+                          placeholder="Masters in Commerce"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                <div
-                  aria-label="class-date"
-                  className="col-span-full grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-6 items-center justify-center"
-                >
-                  <h4 className="text-neutral-800 font-semibold text-lg sm:text-2xl col-span-full">
-                    When do you want to start the classes
-                  </h4>
-                  {/* class start date */}
-                  <FormField
-                    control={methods.control}
-                    name="classStartDate"
-                    render={({ field }) => (
-                      <FormItem className="space-y-2 h-full">
-                        <FormLabel>Select a date and time</FormLabel>
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          initialFocus
-                          className="bg-white border border-gray-200 rounded-md max-w-max p-6"
-                        />
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Class Start Time */}
-                  <FormField
-                    name="classStartTime"
-                    render={({ field }) => (
-                      <FormItem className="space-y-2 h-full">
-                        <FormLabel>Available Time</FormLabel>
-                        <FormControl>
-                          <RadioGroup
-                            onValueChange={field.onChange}
-                            value={field.value}
-                            defaultValue={TIME_SLOTS.availableTimes[0].time}
-                            className="grid grid-cols-3 gap-2 w-full max-h-[23rem] overflow-x-hidden overflow-y-auto"
-                          >
-                            {TIME_SLOTS.availableTimes.map((slot, index) => (
-                              <div
-                                key={index}
-                                aria-describedby="ratio-item"
-                                className="flex items-center"
-                              >
-                                <RadioGroupItem
-                                  className="h-11 bg-neutral-100 border border-neutral-200 shadow-sm w-full rounded-md text-xs font-semibold text-neutral-900 transition-colors ease-in-out duration-300 hover:bg-orange-500 hover:border-orange-500 aria-checked:border-orange-500 hover:text-white aria-checked:text-white aria-checked:bg-orange-500"
-                                  value={slot.time}
-                                  id="r2"
-                                >
-                                  {slot.time}
-                                </RadioGroupItem>
-                              </div>
-                            ))}
-                          </RadioGroup>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                {/* How Find US Teacher */}
+                {/* Year */}
                 <FormField
-                  name="howFindUs"
+                  name=""
                   render={({ field }) => (
-                    <FormItem className="col-span-full">
-                      <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
-                        How did your find us?
-                      </FormLabel>
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>Year</FormLabel>
                       <FormControl>
-                        <RadioGroup
-                          value={field.value}
-                          defaultValue="Friends"
-                          onValueChange={field.onChange}
-                          className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-5 gap-x-4 sm:gap-x-9"
+                        <Input
+                          {...field}
+                          type="text"
+                          placeholder="5 years"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Mother Language */}
+                <FormField
+                  name=""
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>Mother Language</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={(value) =>
+                            field.onChange(Number(value))
+                          }
                         >
-                          {[
-                            "Friends",
-                            "Social Media",
-                            "Email",
-                            "Google",
-                            "Other",
-                          ].map((option) => {
-                            const parseValue = option
-                              .replace(" ", "-")
-                              .toLocaleLowerCase();
-                            return (
-                              <FormItem
-                                key={parseValue}
-                                className="radio-item-wrapper space-y-0 flex px-4 py-2 items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
-                              >
-                                <FormControl>
-                                  <RadioGroupItem
-                                    value={parseValue}
-                                    className="absolute top-0 left-0 w-full h-full opacity-0"
-                                  />
-                                </FormControl>
-                                <FormLabel
-                                  htmlFor={`find-${parseValue}`}
-                                  className="text-lg text-center font-semibold text-neutral-800"
-                                >
-                                  {option}
-                                </FormLabel>
-                              </FormItem>
-                            );
-                          })}
-                        </RadioGroup>
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {Array.from({ length: 20 }).map((_, index) => (
+                              <SelectItem key={index} value={index + "1"}>
+                                Language {index + 1}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Other Language */}
+                <FormField
+                  name=""
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>Other Language</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={(value) =>
+                            field.onChange(Number(value))
+                          }
+                        >
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {Array.from({ length: 20 }).map((_, index) => (
+                              <SelectItem key={index} value={index + "1"}>
+                                Language {index + 1}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Upload */}
+                <FormField
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-1">
+                      <FormLabel>Upload your CV</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="file"
+                          {...field}
+                          placeholder="Upload you CV"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -745,197 +708,65 @@ const TeacherMultiStepForm = () => {
               {/* THIRD STEP START */}
               <div
                 aria-label="second-step"
-                className="grid grid-cols-2 gap-x-7 gap-y-10"
+                className="flex items-start flex-col gap-y-4"
               >
-                {/* How Many Joining */}
-                <FormField
-                  name="howManyJoin"
-                  render={({ field }) => (
-                    <FormItem className="col-span-full">
-                      <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
-                        How many students will join?
-                      </FormLabel>
-                      <FormControl>
-                        <RadioGroup
-                          value={field.value}
-                          onValueChange={field.onChange}
-                          className="grid grid-cols-5 gap-y-5 gap-x-3 place-items-center sm:gap-x-10"
-                        >
-                          {["1", "2", "3", "4", "5"].map((option) => (
-                            <FormItem
-                              key={option}
-                              className="radio-item-wrapper w-10 h-10 sm:w-20 sm:h-20 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-full overflow-hidden"
-                            >
-                              <FormControl>
-                                <RadioGroupItem
-                                  value={option}
-                                  className="absolute top-0 left-0 w-full h-full opacity-0"
-                                />
-                              </FormControl>
-                              <FormLabel
-                                htmlFor={`join-${option}`}
-                                className="text-lg sm:text-3xl font-semibold text-neutral-800"
-                              >
-                                {option}
-                              </FormLabel>
-                            </FormItem>
-                          ))}
-                        </RadioGroup>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                {/* Preferred Teacher */}
-                <FormField
-                  name="preferredTeacher"
-                  render={({ field }) => (
-                    <FormItem className="col-span-full">
-                      <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
-                        Preferred Teacher
-                      </FormLabel>
-                      <FormControl>
-                        <RadioGroup
-                          value={field.value}
-                          onValueChange={field.onChange}
-                          className="flex items-center gap-y-5 gap-x-4 sm:gap-x-10"
-                        >
-                          {["Male", "Female", "Others"].map((option) => (
-                            <FormItem
-                              key={option}
-                              className="radio-item-wrapper w-28 sm:h-28 py-2 px-3 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
-                            >
-                              <FormControl>
-                                <RadioGroupItem
-                                  value={option}
-                                  id={`teacher-${option}`}
-                                  className="absolute top-0 left-0 w-full h-full opacity-0"
-                                />
-                              </FormControl>
-                              <FormLabel
-                                htmlFor={`teacher-${option}`}
-                                className="text-base sm:text-lg font-normal sm:font-semibold text-neutral-800"
-                              >
-                                {option}
-                              </FormLabel>
-                            </FormItem>
-                          ))}
-                        </RadioGroup>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <div
-                  aria-label="class-date"
-                  className="col-span-full grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-6 items-center justify-center"
-                >
-                  <h4 className="text-neutral-800 font-semibold text-lg sm:text-2xl col-span-full">
-                    When do you want to start the classes
-                  </h4>
-                  {/* class start date */}
-                  <FormField
-                    control={methods.control}
-                    name="classStartDate"
-                    render={({ field }) => (
-                      <FormItem className="space-y-2 h-full">
-                        <FormLabel>Select a date and time</FormLabel>
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          initialFocus
-                          className="bg-white border border-gray-200 rounded-md max-w-max p-6"
-                        />
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Class Start Time */}
-                  <FormField
-                    name="classStartTime"
-                    render={({ field }) => (
-                      <FormItem className="space-y-2 h-full">
-                        <FormLabel>Available Time</FormLabel>
-                        <FormControl>
-                          <RadioGroup
-                            onValueChange={field.onChange}
-                            value={field.value}
-                            defaultValue={TIME_SLOTS.availableTimes[0].time}
-                            className="grid grid-cols-3 gap-2 w-full max-h-[23rem] overflow-x-hidden overflow-y-auto"
-                          >
-                            {TIME_SLOTS.availableTimes.map((slot, index) => (
-                              <div
-                                key={index}
-                                aria-describedby="ratio-item"
-                                className="flex items-center"
-                              >
-                                <RadioGroupItem
-                                  className="h-11 bg-neutral-100 border border-neutral-200 shadow-sm w-full rounded-md text-xs font-semibold text-neutral-900 transition-colors ease-in-out duration-300 hover:bg-orange-500 hover:border-orange-500 aria-checked:border-orange-500 hover:text-white aria-checked:text-white aria-checked:bg-orange-500"
-                                  value={slot.time}
-                                  id="r2"
-                                >
-                                  {slot.time}
-                                </RadioGroupItem>
-                              </div>
-                            ))}
-                          </RadioGroup>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                <div className="space-y-4">
+                  <h3 className="text-4xl text-neutral-800 font-bold">Reading & Reciting</h3>
+                  <p className="text-2xl font-normal text-neutral-700">Please read & recite the below and upload an audio file</p>
                 </div>
 
-                {/* How Find US Teacher */}
+                <Separator />
+
+                <div>
+                  <p className="text-base font-normal text-neutral-600">
+                    The Birth of the Prophet Muhammad, son of Abdullah, son of
+                    Abdul Muttallb, and member of the Quraysh tribe, was born in
+                    Makkah 53 years before the Hijrah. His father died before he
+                    was born, and he was raised by his grandfather, Abdul
+                    Muttalib, and then by his uncle, Abu Talib, after his
+                    grandfather died. He traveled to Syria as a young boy with
+                    his uncle in a merchants' caravan, and later made the same
+                    journey in the service of a wealthy widow named Khadijah. He
+                    handled the widow's business so faithfully, and the report
+                    of his behavior from her old servant who had accompanied him
+                    was so good, that she married her young agent soon after;
+                    and the marriage proved to be a very happy one, despite the
+                    fact that she was fifteen years older than he was.
+                  </p>
+                </div>
+
+                {/* Upload */}
                 <FormField
-                  name="howFindUs"
+                  name=""
                   render={({ field }) => (
-                    <FormItem className="col-span-full">
-                      <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
-                        How did your find us?
-                      </FormLabel>
+                    <FormItem className="space-y-2 col-span-1">
+                      <FormLabel>Read the above paragraph and upload audio file.</FormLabel>
                       <FormControl>
-                        <RadioGroup
-                          value={field.value}
-                          defaultValue="Friends"
-                          onValueChange={field.onChange}
-                          className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-5 gap-x-4 sm:gap-x-9"
-                        >
-                          {[
-                            "Friends",
-                            "Social Media",
-                            "Email",
-                            "Google",
-                            "Other",
-                          ].map((option) => {
-                            const parseValue = option
-                              .replace(" ", "-")
-                              .toLocaleLowerCase();
-                            return (
-                              <FormItem
-                                key={parseValue}
-                                className="radio-item-wrapper space-y-0 flex px-4 py-2 items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
-                              >
-                                <FormControl>
-                                  <RadioGroupItem
-                                    value={parseValue}
-                                    className="absolute top-0 left-0 w-full h-full opacity-0"
-                                  />
-                                </FormControl>
-                                <FormLabel
-                                  htmlFor={`find-${parseValue}`}
-                                  className="text-lg text-center font-semibold text-neutral-800"
-                                >
-                                  {option}
-                                </FormLabel>
-                              </FormItem>
-                            );
-                          })}
-                        </RadioGroup>
+                        <Input
+                          type="file"
+                          // {...field}
+                          placeholder="Upload you CV"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Upload */}
+                <FormField
+                  name=""
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-1">
+                      <FormLabel>Please recite the first 10 Ayah of Surah An-Naba and upload audio file</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="file"
+                          // {...field}
+                          placeholder="Upload you CV"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -953,7 +784,7 @@ const TeacherMultiStepForm = () => {
                   variant={"outline"}
                   className=" w-auto flex-1"
                 >
-                  Back
+                  Previous
                 </Button>
               )}
 

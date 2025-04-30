@@ -14,38 +14,38 @@ import React from "react";
 const FAQ_DATA: FaqTypes[] = [
   {
     key: "first-faq",
-    question: "What is the tutor curriculum?",
-    answer: `A tutor curriculum is a structured plan with lessons, methods, and goals tailored to a student's needs. It includes assessments, topics, teaching strategies, feedback, and customization for effective learning.`,
+    question: "Do you follow the UAE school curriculum?",
+    answer: `Yes, we align our lessons with the UAE Ministry of Education standards to support students' school performance.`,
   },
   {
     key: "second-faq",
-    question: "Do you have female educators for female students?",
-    answer: `Yes, many platforms provide female educators for female students, ensuring comfort, cultural alignment, and personalized learning. Check with the specific institution or tutoring service for availability.`,
+    question: "Are these classes for native or non-native Arabic speakers?",
+    answer: `We offer tailored programs for both native and non-native Arabic speakers.`,
   },
   {
     key: "third-faq",
-    question: "How do you keep children safe?",
-    answer: `Child safety is ensured through background checks for educators, secure online platforms, parental monitoring features, safe physical environments, and adherence to child protection policies and guidelines.`,
+    question: "Are the sessions one-on-one or group-based?",
+    answer: `We provide both one-on-one and small group sessions to suit your child’s learning style.`,
   },
   {
     key: "fourth-faq",
-    question: "Do you have special teachers for female students?",
-    answer: `Yes, many institutions offer special female teachers for female students to ensure comfort, cultural alignment, and a supportive learning environment. Availability depends on the specific institution or platform.`,
+    question: "What is the class schedule and duration?",
+    answer: `Flexible scheduling is available, with sessions lasting 60 minutes, up to 5 times a week.`,
   },
   {
     key: "fifth-faq",
-    question: "Do you offer courses for adults?",
-    answer: `Yes, many platforms offer courses for adults, covering a wide range of subjects such as professional development, personal growth, language learning, and technical skills. Availability depends on the platform or institution.`,
+    question: "Do you offer a free trial?",
+    answer: `Yes! You can book a free trial session to experience our teaching approach before enrolling.`,
   },
   {
     key: "sixth-faq",
-    question: "Could you elucidate the fee structure?",
-    answer: `The fee structure typically includes per-course fees, subscription models, tiered pricing, or payment plans. Discounts may be available for early registration or bundles, varying by platform or institution.`,
+    question: "How do I enroll my child?",
+    answer: `Simply fill out our online registration form, and we’ll contact you to get started.`,
   },
   {
     key: "seventh-faq",
-    question: "How many classes shall there per month?",
-    answer: `The number of classes per month varies depending on the course or program. Typically, it can range from 4 to 12 classes per month, depending on the course frequency (weekly or bi-weekly).`,
+    question: "Who can join these Arabic classes?",
+    answer: `Our Arabic tuition is open to all students in UAE schools, from Grade 1 to Grade 10, across MOE, British, American, and IB curricula`,
   },
 ];
 

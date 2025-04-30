@@ -90,7 +90,7 @@ export const HEADER_NAV_ITEMS: NavItemsProps[] = [
       },
       {
         label: "Blog",
-        url: "/blog",
+        url: "/blogs",
       },
       {
         label: "Testimonials",

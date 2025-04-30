@@ -131,7 +131,7 @@ const Footer = () => {
 
                   <li aria-label="footer-nav-item">
                     <Link
-                      href="#"
+                      href="/faq"
                       className="text-neutral-800 text-lg font-normal transition-all ease-in-out duration-300 hover:text-orange-500"
                     >
                       FAQs

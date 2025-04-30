@@ -181,7 +181,7 @@ const TeachersPage = () => {
               className="mb-12 flex items-center justify-center"
             >
               <h3 className=" text-neutral-800 text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl lg:font-bold">
-                Meet our dynamic team ot tutors
+                Meet our dynamic team or tutors
               </h3>
             </div>
 
