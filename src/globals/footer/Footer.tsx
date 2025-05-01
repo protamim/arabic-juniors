@@ -142,7 +142,7 @@ const Footer = () => {
             </div>
 
             <div aria-label="help-center-column">
-              <Link
+              {/* <Link
                 href={"tel:+456 1544 5651"}
                 aria-describedby="whatsapp-image"
                 className="w-full flex justify-center items-center scale-95 transition-transform ease-in-out duration-300 hover:scale-105"
@@ -154,7 +154,7 @@ const Footer = () => {
                   alt="arabic juniors whatsapp number"
                   priority
                 />
-              </Link>
+              </Link> */}
 
               <div
                 aria-label="help-center-wrapper"

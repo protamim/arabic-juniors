@@ -35,12 +35,12 @@ const ContactInfo = () => {
         </ul>
 
         <div aria-label="additional-info" className="space-y-6">
-          <p className="text-lg font-semibold text-neutral-800 flex gap-x-1">
+          {/* <p className="text-lg font-semibold text-neutral-800 flex gap-x-1">
             <span>Contact 👉</span>
             <Link href="#" className="text-[#0062FC]">
               AL Faruk Academy
             </Link>
-          </p>
+          </p> */}
 
           <div className="flex items-start gap-x-3 w-full">
             <span className="flex flex-grow-0 flex-shrink-0 basis-auto">
