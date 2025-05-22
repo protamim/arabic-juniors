@@ -113,16 +113,6 @@ const AdminLoginForm = () => {
                 )}
               />
               <Button type="submit">Login</Button>
-
-              <div
-                aria-describedby="form-footer"
-                className="flex items-center gap-1 text-sm text-gray-700 font-normal"
-              >
-                <p>Don't have an account? </p>{" "}
-                <Link href={"/sign-up"} className="text-indigo-500">
-                  Sign Up
-                </Link>
-              </div>
             </form>
           </Form>
         </div>

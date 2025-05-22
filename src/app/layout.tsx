@@ -23,7 +23,7 @@ export default async function RootLayout({
     <html lang="en" aria-describedby="root">
       <body className={`${interSans.variable} antialiased`}>
         <main>{children}</main>
-        <Toaster />
+        <Toaster duration={10000} />
       </body>
     </html>
   );
