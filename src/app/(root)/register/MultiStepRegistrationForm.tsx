@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
+import { format, isBefore, startOfDay } from "date-fns";
 import { CalendarIcon, LoaderCircle } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -134,7 +134,12 @@ const formSchema = z.object({
     message: "Invalid phone number",
   }),
   grade: z.number().min(1),
-  howManyJoin: z.string(),
+  howManyJoin: z
+    .string({ required_error: "Please specify how many will be join!" })
+    .transform((val) => Number(val))
+    .refine((val) => !isNaN(val), {
+      message: "Please specify a valid number",
+    }),
   preferredTeacher: z.string(),
   classStartDate: z.date().refine((date) => date > new Date(), {
     message: "Start date must be in the future",
@@ -146,7 +151,7 @@ const formSchema = z.object({
 });
 
 const MultiStepRegistrationForm = () => {
-  const { countryCode, error, loading } = useCountryCode();
+  const { countryCode } = useCountryCode();
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { next, prev, total, current, hasNext, hasPrev, isLast } = useSteps();
@@ -156,16 +161,16 @@ const MultiStepRegistrationForm = () => {
     resolver: zodResolver(formSchema),
     mode: "onChange",
     defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phoneNumber: "",
-      grade: 0,
-      howManyJoin: "0",
-      preferredTeacher: "",
+      firstName: undefined,
+      lastName: undefined,
+      email: undefined,
+      phoneNumber: undefined,
+      grade: undefined,
+      howManyJoin: undefined,
+      preferredTeacher: undefined,
       classStartDate: undefined,
-      classStartTime: TIME_SLOTS.availableTimes[0].time,
-      howFindUs: "",
+      classStartTime: undefined,
+      howFindUs: undefined,
     },
   });
 
@@ -185,20 +190,20 @@ const MultiStepRegistrationForm = () => {
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // console.log(values);
+    console.log(values);
     try {
       // Now loading
       setIsLoading(true);
 
       const registerURL = process.env.NEXT_PUBLIC_API_BASE_URL + "/register";
-      const { firstName, lastName, email } = values;
+      // const { firstName, lastName, email } = values;
 
       const res = await fetch(registerURL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ firstName, lastName, email }),
+        body: JSON.stringify(values),
       });
 
       if (!res.ok) {
@@ -210,10 +215,24 @@ const MultiStepRegistrationForm = () => {
       setIsLoading(false);
 
       // toast notification
-      toast(serverResponse.message);
+      toast.success(serverResponse.message, {
+        cancel: {
+          label: "Cancel",
+          onClick: () => {},
+        },
+      });
       // redirect to welcome page after successfull
       router.push("/welcome");
     } catch (error) {
+      // toast notification
+      toast.error("Something went wrong! Sorry for that.", {
+        cancel: {
+          label: "Cancel",
+          onClick: () => {},
+        },
+      });
+      methods.reset();
+      window.location.reload();
       console.log("registration failed:", error);
     }
   };
@@ -373,22 +392,22 @@ const MultiStepRegistrationForm = () => {
                           onValueChange={field.onChange}
                           className="grid grid-cols-5 gap-y-5 gap-x-3 place-items-center sm:gap-x-10"
                         >
-                          {["1", "2", "3", "4", "5"].map((option) => (
+                          {Array.from({ length: 5 }).map((_, index) => (
                             <FormItem
-                              key={option}
+                              key={index}
                               className="radio-item-wrapper w-10 h-10 sm:w-20 sm:h-20 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-full overflow-hidden"
                             >
                               <FormControl>
                                 <RadioGroupItem
-                                  value={option}
+                                  value={String(index + 1)}
                                   className="absolute top-0 left-0 w-full h-full opacity-0"
                                 />
                               </FormControl>
                               <FormLabel
-                                htmlFor={`join-${option}`}
+                                htmlFor={`join-${index + 1}`}
                                 className="text-lg sm:text-3xl font-semibold text-neutral-800"
                               >
-                                {option}
+                                {index + 1}
                               </FormLabel>
                             </FormItem>
                           ))}
@@ -456,6 +475,9 @@ const MultiStepRegistrationForm = () => {
                         <FormLabel>Select a date and time</FormLabel>
                         <Calendar
                           mode="single"
+                          disabled={(date) =>
+                            isBefore(date, startOfDay(new Date()))
+                          }
                           selected={field.value}
                           onSelect={field.onChange}
                           initialFocus
@@ -488,7 +510,6 @@ const MultiStepRegistrationForm = () => {
                                 <RadioGroupItem
                                   className="h-11 bg-neutral-100 border border-neutral-200 shadow-sm w-full rounded-md text-xs font-semibold text-neutral-900 transition-colors ease-in-out duration-300 hover:bg-orange-500 hover:border-orange-500 aria-checked:border-orange-500 hover:text-white aria-checked:text-white aria-checked:bg-orange-500"
                                   value={slot.time}
-                                  id="r2"
                                 >
                                   {slot.time}
                                 </RadioGroupItem>
@@ -523,30 +544,25 @@ const MultiStepRegistrationForm = () => {
                             "Email",
                             "Google",
                             "Other",
-                          ].map((option) => {
-                            const parseValue = option
-                              .replace(" ", "-")
-                              .toLocaleLowerCase();
-                            return (
-                              <FormItem
-                                key={parseValue}
-                                className="radio-item-wrapper space-y-0 flex px-4 py-2 items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
+                          ].map((option, index) => (
+                            <FormItem
+                              key={index}
+                              className="radio-item-wrapper space-y-0 flex px-4 py-2 items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
+                            >
+                              <FormControl>
+                                <RadioGroupItem
+                                  value={option}
+                                  className="absolute top-0 left-0 w-full h-full opacity-0"
+                                />
+                              </FormControl>
+                              <FormLabel
+                                htmlFor={`find-${option}`}
+                                className="text-lg text-center font-semibold text-neutral-800"
                               >
-                                <FormControl>
-                                  <RadioGroupItem
-                                    value={parseValue}
-                                    className="absolute top-0 left-0 w-full h-full opacity-0"
-                                  />
-                                </FormControl>
-                                <FormLabel
-                                  htmlFor={`find-${parseValue}`}
-                                  className="text-lg text-center font-semibold text-neutral-800"
-                                >
-                                  {option}
-                                </FormLabel>
-                              </FormItem>
-                            );
-                          })}
+                                {option}
+                              </FormLabel>
+                            </FormItem>
+                          ))}
                         </RadioGroup>
                       </FormControl>
                       <FormMessage />

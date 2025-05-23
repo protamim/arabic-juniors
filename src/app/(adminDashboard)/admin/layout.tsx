@@ -20,7 +20,7 @@ const AdminDashboardLayout = async ({
     <div aria-describedby="admin-layout">
       <AdminHeader />
 
-      <div className="container">
+      <div className="container-fluid">
         <div
           aria-describedby="wrapper"
           className="flex items-start gap-x-5 pt-6"
@@ -28,7 +28,7 @@ const AdminDashboardLayout = async ({
           <AdminSidebar />
           <div
             aria-describedby="page-parent"
-            className="bg-gray-50 border border-b-0 border-gray-200 rounded-t-lg flex-1 h-[calc(100vh-80px)] p-3"
+            className="bg-gray-50 overflow-hidden border border-b-0 border-gray-200 rounded-t-lg flex-1 h-[calc(100vh-80px)] p-3"
           >
             {children}
           </div>
