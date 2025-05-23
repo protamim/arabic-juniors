@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import React from "react";
 import { JobCardDataTypes } from "../types";
+import Link from "next/link";
 
 interface JobCardProps {
   jobCardData?: JobCardDataTypes[];
@@ -12,7 +13,8 @@ const JobCard: React.FC<JobCardProps> = ({ jobCardData = JOB_CARD_DATA }) => {
   return (
     <React.Fragment>
       {jobCardData.map((job, index) => (
-        <div key={index}
+        <div
+          key={index}
           aria-label="job-card"
           className="bg-[#F5F6F8] w-full p-7 pb-3 rounded-xl min-h-72 flex h-full items-start justify-between flex-col transition-colors ease-in-out duration-300 group hover:cursor-pointer hover:bg-gradient-to-r hover:from-[#FF60A8] hover:from-5% hover:via-[#FB6238] hover:via-50% hover:to-[#F5AE14] hover:to-100%"
         >
@@ -53,7 +55,7 @@ const JobCard: React.FC<JobCardProps> = ({ jobCardData = JOB_CARD_DATA }) => {
               />
               <span
                 aria-label="job-type"
-                className="text-base font-semibold text-neutral-500 group-hover:text-neutral-100 transition-colors ease-in-out duration-300"
+                className="text-base line-clamp-1 font-semibold text-neutral-500 group-hover:text-neutral-100 transition-colors ease-in-out duration-300"
               >
                 {job.jobType}
               </span>
@@ -61,9 +63,10 @@ const JobCard: React.FC<JobCardProps> = ({ jobCardData = JOB_CARD_DATA }) => {
 
             <Button
               variant={"outline"}
+              asChild
               className="w-full rounded-xl bg-transparent group-hover:bg-white group-hover:border-white group-hover:text-neutral-800"
             >
-              {job.action.btnText}
+              <Link href={job.action.url}>{job.action.btnText}</Link>
             </Button>
           </div>
         </div>
@@ -78,24 +81,24 @@ export default JobCard;
 const JOB_CARD_DATA: JobCardDataTypes[] = [
   {
     department: "Management",
-    jobTitle: " Computer Vision Engineer",
+    jobTitle: "Academic Support Assistant",
     jobLocation: "Location",
     employmentType: "Permanent",
-    jobType: "Onsite",
+    jobType: "3 years exp.",
     action: {
       btnText: "Apply Now",
-      url: "",
+      url: "/careers/academic",
     },
   },
   {
     department: "Management",
-    jobTitle: "HR Manager",
+    jobTitle: "Academic Head",
     jobLocation: "Location",
     employmentType: "Permanent",
-    jobType: "Onsite",
+    jobType: "2-4 Years Exp.",
     action: {
       btnText: "Apply Now",
-      url: "",
+      url: "/careers/head",
     },
   },
   {
@@ -103,10 +106,10 @@ const JOB_CARD_DATA: JobCardDataTypes[] = [
     jobTitle: "Arabic Teacher",
     jobLocation: "Location",
     employmentType: "Permanent",
-    jobType: "Onsite",
+    jobType: "2-3 Years UAE Exp.",
     action: {
       btnText: "Apply Now",
-      url: "",
+      url: "/careers/arabic-teacher",
     },
   },
 ];

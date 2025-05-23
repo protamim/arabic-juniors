@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -6,12 +7,16 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const OurTeacher = () => {
   return (
     <React.Fragment>
-      <section aria-label="our-teacher-section" className="bg-white py-5 sm:py-16">
+      <section
+        aria-label="our-teacher-section"
+        className="bg-white py-5 sm:py-16"
+      >
         <div className="container">
           <div aria-label="our-teacher-wrapper">
             <div
@@ -34,11 +39,11 @@ const OurTeacher = () => {
                 aria-label="description"
                 className="text-sm text-center sm:text-base font-medium text-neutral-500"
               >
-                Choose from hundreds of courses from specialist organizations
+                Let our expert mentors guide you to Arabic success!
               </p>
             </div>
 
-            <div aria-label="our-teacher-carousel">
+            <div aria-label="our-teacher-carousel" className="mb-10">
               <Carousel className="w-full">
                 <CarouselContent>
                   {OUR_TEACHERS.map((teacher) => (
@@ -79,6 +84,17 @@ const OurTeacher = () => {
                 <CarouselNext className="bg-orange-500 text-white hover:bg-orange-600" />
               </Carousel>
             </div>
+
+            <div
+              aria-describedby="btn"
+              className="flex items-center justify-center"
+            >
+              <Button asChild>
+                <Link href={"/our-teachers"}>
+                  Connect with your Mentor now!
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
@@ -91,41 +107,41 @@ export default OurTeacher;
 const OUR_TEACHERS = [
   {
     key: "josh-knight",
-    name: "Josh Knight",
+    name: "Eptehal Elgendy",
     image: {
       width: 921,
       height: 953,
       url: "https://res.cloudinary.com/dromjx3rx/image/upload/v1737991303/our-teacher-3_opctfy.png",
     },
     shortDescription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Specializes in Ancient Civilizations and World Wars.",
+      "Experienced Arabic teacher helping students speak, read, and write confidently—aligned with UAE standards.",
   },
   {
     key: "noah-pierre",
-    name: "Noah Pierre",
+    name: "Abdullah Soliman",
     image: {
-      width: 921,
-      height: 953,
-      url: "https://res.cloudinary.com/dromjx3rx/image/upload/v1737991306/our-teacher-1_zp1qar.png",
+      width: 784,
+      height: 918,
+      url: "/noah-pierr.png",
     },
     shortDescription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Making science fun and accessible for curious minds",
+      "Experienced Arabic tutor helping students excel in speaking, writing, and reading with personalized lessons.",
   },
   {
     key: "koray-ikumus",
-    name: "Koray Ikumus",
+    name: "Rafat Sayed",
     image: {
-      width: 921,
-      height: 953,
-      url: "https://res.cloudinary.com/dromjx3rx/image/upload/v1737991313/our-teacher-2_u6str8.png",
+      width: 699,
+      height: 897,
+      url: "/female-teacher.png",
     },
     shortDescription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Expert in Advanced Calculus and SAT Math Prep.",
+      "Skilled Arabic teacher dedicated to developing students’ language skills, aligned with UAE school standards.",
   },
 
   {
     key: "Sarah-Johnson",
-    name: "Sarah Johnson",
+    name: "Hassan Ibrahim",
     image: {
       width: 921,
       height: 953,
@@ -133,16 +149,5 @@ const OUR_TEACHERS = [
     },
     shortDescription:
       "Building strong mathematical foundations with care and precision. Focuses on Physics, Chemistry, and hands-on experiments.",
-  },
-  {
-    key: "Michael-Carter",
-    name: "Michael Carter",
-    image: {
-      width: 921,
-      height: 953,
-      url: "https://res.cloudinary.com/dromjx3rx/image/upload/v1737991313/our-teacher-2_u6str8.png",
-    },
-    shortDescription:
-      "Inspiring creativity and critical thinking through the power of words. Building strong mathematical foundations with care and precision",
   },
 ];

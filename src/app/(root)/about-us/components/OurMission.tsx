@@ -13,13 +13,13 @@ const OurMission = () => {
               <React.Fragment key={mv.key}>
                 <div
                   aria-label="our-mission-wrapper"
-                  className={cn('flex items-center gap-x-10 justify-between overflow-hidden rounded-3xl flex-col lg:flex-row', 
+                  className={cn(
+                    "flex items-center gap-x-10 justify-between overflow-hidden rounded-3xl flex-col lg:flex-row",
 
                     // card bg
-                    mv.key === 'our-mission' && 'bg-yellow-500',
-                    mv.key === 'our-vision' && 'bg-pink-500'
+                    mv.key === "our-mission" && "bg-yellow-500",
+                    mv.key === "our-vision" && "bg-pink-500"
                   )}
-                  
                 >
                   <div
                     aria-label="column-left"
@@ -37,10 +37,11 @@ const OurMission = () => {
 
                   <div
                     aria-label="column-right"
-                    className={cn('p-4 md:px-8 md:py-10 rounded-2xl flex-1 m-5 md:m-10 lg:ml-0 max-w-[39rem] order-1 lg:order-2',
-                        // bg 
-                        mv.key === 'our-mission' && 'bg-yellow-300',
-                        mv.key === 'our-vision' && 'bg-pink-300'
+                    className={cn(
+                      "p-4 md:px-8 md:py-10 rounded-2xl flex-1 m-5 md:m-10 lg:ml-0 max-w-[39rem] order-1 lg:order-2",
+                      // bg
+                      mv.key === "our-mission" && "bg-yellow-300",
+                      mv.key === "our-vision" && "bg-pink-300"
                     )}
                   >
                     <div
@@ -65,7 +66,7 @@ const OurMission = () => {
                       aria-label="mission-description"
                       className="text-neutral-800 font-normal text-base sm:text-xl"
                     >
-                     {mv.description}
+                      {mv.description}
                     </p>
                   </div>
                 </div>
@@ -84,11 +85,7 @@ const MISSION_DATA = [
   {
     key: "our-mission",
     title: { text: "Our Mission", icon: <IconMission /> },
-    description: `To design and provide digital educational programs and curricula
-                inspired by Islamic values, fostering and guiding students from
-                primary to high school. Our goal is to integrate modern
-                educational strategies and innovative technologies while staying
-                true to the teachings and principles of Islam.`,
+    description: `We design and offer digital educational programs and curricula, guiding students from primary to high school. Our goal is to integrate modern teaching strategies and innovative technologies, while staying true to core educational principles and fostering overall student development.`,
     image: {
       width: 1132,
       height: 952,
@@ -99,7 +96,7 @@ const MISSION_DATA = [
   {
     key: "our-vision",
     title: { text: "Our Vision", icon: <IconMission /> },
-    description: `We aspire to redefine tuition by combining innovative teaching methods, technology-driven solutions, and a commitment to nurturing academic excellence. Our goal is to break barriers, foster lifelong learning, and inspire confidence in students, equipping them with the knowledge and skills to succeed in an ever-evolving world. Together, we envision a future where education knows no limits and every learner thrives.`,
+    description: `At Arabic Juniors, our mission is to provide high-quality, one-on-one Arabic tutoring, helping students master grammar, literature, and comprehension. We create a supportive environment where learners gain the skills, confidence, and knowledge to succeed academically and beyond.`,
     image: {
       width: 1132,
       height: 952,

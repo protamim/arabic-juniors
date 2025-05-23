@@ -30,14 +30,14 @@ const OurValues = () => {
                 aria-label="section-title"
                 className="text-3xl text-center sm:text-5xl sm:leading-tight font-bold text-neutral-900 mb-4"
               >
-                Discover our professional mentors
+               Built on Belief, Driven by Purpose
               </h3>
 
               <p
                 aria-label="short-description"
                 className="text-neutral-400 text-sm sm:text-base text-center font-medium"
               >
-                Choose from hundreds of courses from specialist organizations
+                These values lead us forward - with clarity, sincerity, and unwavering purpose
               </p>
             </div>
 
@@ -94,7 +94,7 @@ export default OurValues;
 const OUR_VALUES: OurValuesTypes[] = [
   {
     key: "customized-arabic-learning",
-    title: "Customized Arabic Learning",
+    title: "Highly Qualified Experts",
     description:
       "We believe every learner is unique, so we tailor lessons to meet individual needs for effective Arabic mastery.",
     icon: <IconCustomizedLearning />,
@@ -103,21 +103,21 @@ const OUR_VALUES: OurValuesTypes[] = [
     key: "embracing-arabic-essence",
     title: "Embracing Arabic Essence",
     description:
-      "We believe every learner is unique, so we tailor lessons to meet individual needs for effective Arabic mastery.",
+      "Our mentors embody the essence of Arabic, providing expert guidance to help students master the language with confidence and skill.",
     icon: <IconEmbracing />,
   },
   {
     key: "expert-career-strategist",
-    title: "Expert Career Strategist",
+    title: "Customized Arabic Learning",
     description:
-      "With over 10 years of experience in career counseling, our mentors specialize in helping you design the perfect path to achieve your professional goals.",
+      "Customized Arabic learning experiences tailored to each student’s needs, ensuring effective and personalized progress.",
     icon: <IconOpenBook />,
   },
   {
     key: "creative-business-consultant",
-    title: "Creative Business Consultant",
+    title: "Experienced in School Curricula",
     description:
-      "From startups to scaling, our mentors provide creative insights and business strategies to grow your vision into a successful enterprise.",
+      "Our mentors are experienced in various school curricula, providing tailored Arabic lessons that align with academic standards.",
     icon: <IconBoard />,
   },
 ];

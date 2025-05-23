@@ -1,4 +1,3 @@
-import { SiteLogo } from "@/assets";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -16,7 +15,6 @@ import {
   WhatsAppIcon,
   YouTubeIcon,
 } from "./SvgIcons";
-import { images } from "@/constants/images";
 
 const Footer = () => {
   return (
@@ -30,7 +28,7 @@ const Footer = () => {
             <div aria-label="site-details-column">
               <Link href="/" className="mb-3 flex">
                 <Image
-                  src={SiteLogo}
+                  src={'/arabic-logo-new.png'}
                   width={138}
                   height={56}
                   alt="arabic juniors logo"

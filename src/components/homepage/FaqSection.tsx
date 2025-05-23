@@ -54,7 +54,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({faqData}) => {
                     Shafiullah |{" "}
                     <span className="text-lg font-normal">
                       {" "}
-                      Arabic student class 1
+                      Student Grade 4
                     </span>
                   </h6>
                 </div>

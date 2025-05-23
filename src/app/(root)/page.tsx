@@ -9,6 +9,7 @@ import {
   TeachersSlider,
 } from "@/components/homepage";
 import { FaqTypes } from "@/types";
+import Link from "next/link";
 import React from "react";
 
 const FAQ_DATA: FaqTypes[] = [
@@ -35,12 +36,26 @@ const FAQ_DATA: FaqTypes[] = [
   {
     key: "fifth-faq",
     question: "Do you offer a free trial?",
-    answer: `Yes! You can book a free trial session to experience our teaching approach before enrolling.`,
+    answer: (
+      <>
+        Yes! You can book a{" "}
+        <Link href={"/register"} className="text-blue-600 font-medium">
+          free trial session
+        </Link>{" "}
+        to experience our teaching approach before enrolling.
+      </>
+    ),
   },
   {
     key: "sixth-faq",
     question: "How do I enroll my child?",
-    answer: `Simply fill out our online registration form, and we’ll contact you to get started.`,
+    answer: (
+      <>
+        Simply fill out our online{" "}
+        <Link href={"/register"} className="text-blue-600 font-medium">Registration Form</Link>, and we’ll contact you
+        to get started.
+      </>
+    ),
   },
   {
     key: "seventh-faq",

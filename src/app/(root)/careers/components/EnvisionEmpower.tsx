@@ -40,7 +40,7 @@ const EnvisionEmpower = () => {
                 aria-label="short-description"
                 className="text-neutral-400 text-sm sm:text-base text-center font-medium"
               >
-                Choose from hundreds of courses from specialist organizations
+                Inspire growth through guided learning paths
               </p>
             </div>
 
@@ -97,30 +97,30 @@ export default EnvisionEmpower;
 const OUR_VALUES: OurValuesTypes[] = [
   {
     key: "customized-arabic-learning",
-    title: "Learners First",
+    title: "Build Strong Connections",
     description:
-      "We believe every learner is unique, so we tailor lessons to meet individual needs for effective Arabic mastery.",
+      "We value meaningful relationships between teachers, students, and parents.",
     icon: <IconCustomizedLearning />,
   },
   {
     key: "embracing-arabic-essence",
-    title: "Embracing Arabic Essence",
+    title: " Inspire Innovation",
     description:
-      "We believe every learner is unique, so we tailor lessons to meet individual needs for effective Arabic mastery.",
+      "We embrace smart solutions that make online learning simple, engaging, and effective.",
     icon: <IconEmbracing />,
   },
   {
     key: "expert-career-strategist",
-    title: "Expert Career Strategist",
+    title: "Stay Purpose-Driven",
     description:
-      "With over 10 years of experience in career counseling, our mentors specialize in helping you design the perfect path to achieve your professional goals.",
+      "Every lesson we teach is rooted in a clear mission to impact lives for the better.",
     icon: <IconOpenBook />,
   },
   {
     key: "creative-business-consultant",
-    title: "Creative Business Consultant",
+    title: "Celebrate Growth",
     description:
-      "From startups to scaling, our mentors provide creative insights and business strategies to grow your vision into a successful enterprise.",
+      "We believe in progress, not perfection — and we cheer for every step forward.",
     icon: <IconBoard />,
   },
 ];
