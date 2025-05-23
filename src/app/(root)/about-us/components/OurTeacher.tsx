@@ -85,9 +85,14 @@ const OurTeacher = () => {
               </Carousel>
             </div>
 
-            <div aria-describedby="btn" className="flex items-center justify-center">
+            <div
+              aria-describedby="btn"
+              className="flex items-center justify-center"
+            >
               <Button asChild>
-                <Link href={'/our-teachers'}>Connect with your Mentor now!</Link>
+                <Link href={"/our-teachers"}>
+                  Connect with your Mentor now!
+                </Link>
               </Button>
             </div>
           </div>
@@ -124,7 +129,7 @@ const OUR_TEACHERS = [
   },
   {
     key: "koray-ikumus",
-    name: "Koray Ikumus",
+    name: "Rafat Sayed",
     image: {
       width: 699,
       height: 897,
@@ -136,7 +141,7 @@ const OUR_TEACHERS = [
 
   {
     key: "Sarah-Johnson",
-    name: "Sarah Johnson",
+    name: "Hassan Ibrahim",
     image: {
       width: 921,
       height: 953,
@@ -144,16 +149,5 @@ const OUR_TEACHERS = [
     },
     shortDescription:
       "Building strong mathematical foundations with care and precision. Focuses on Physics, Chemistry, and hands-on experiments.",
-  },
-  {
-    key: "Michael-Carter",
-    name: "Michael Carter",
-    image: {
-      width: 784,
-      height: 918,
-      url: "/noah-pierr.png",
-    },
-    shortDescription:
-      "Inspiring creativity and critical thinking through the power of words. Building strong mathematical foundations with care and precision",
   },
 ];
