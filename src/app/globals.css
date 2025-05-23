@@ -16,6 +16,12 @@ body {
   }
 }
 
+@layer components {
+  .container-fluid {
+    @apply max-w-[159.375rem] mx-auto px-4;
+  }
+}
+
 /* phone input component start */
 .PhoneInputInput {
   @apply border-none outline-none pl-2;

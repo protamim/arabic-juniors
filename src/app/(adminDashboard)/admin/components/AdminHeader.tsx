@@ -45,7 +45,7 @@ const AdminHeader = () => {
   return (
     <React.Fragment>
       <div aria-describedby="admin-header" className="bg-gray-200 py-4">
-        <div className="container">
+        <div className="container-fluid">
           <div aria-describedby="main-wrapper">
             <nav className="flex items-center justify-between">
               <span>Logo</span>

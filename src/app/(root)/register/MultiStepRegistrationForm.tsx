@@ -544,30 +544,25 @@ const MultiStepRegistrationForm = () => {
                             "Email",
                             "Google",
                             "Other",
-                          ].map((option) => {
-                            const parseValue = option
-                              .replace(" ", "-")
-                              .toLocaleLowerCase();
-                            return (
-                              <FormItem
-                                key={parseValue}
-                                className="radio-item-wrapper space-y-0 flex px-4 py-2 items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
+                          ].map((option, index) => (
+                            <FormItem
+                              key={index}
+                              className="radio-item-wrapper space-y-0 flex px-4 py-2 items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
+                            >
+                              <FormControl>
+                                <RadioGroupItem
+                                  value={option}
+                                  className="absolute top-0 left-0 w-full h-full opacity-0"
+                                />
+                              </FormControl>
+                              <FormLabel
+                                htmlFor={`find-${option}`}
+                                className="text-lg text-center font-semibold text-neutral-800"
                               >
-                                <FormControl>
-                                  <RadioGroupItem
-                                    value={parseValue}
-                                    className="absolute top-0 left-0 w-full h-full opacity-0"
-                                  />
-                                </FormControl>
-                                <FormLabel
-                                  htmlFor={`find-${parseValue}`}
-                                  className="text-lg text-center font-semibold text-neutral-800"
-                                >
-                                  {option}
-                                </FormLabel>
-                              </FormItem>
-                            );
-                          })}
+                                {option}
+                              </FormLabel>
+                            </FormItem>
+                          ))}
                         </RadioGroup>
                       </FormControl>
                       <FormMessage />
