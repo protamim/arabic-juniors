@@ -8,7 +8,10 @@ const CareersHero = () => {
         className="relative bg-gradient-to-r from-[#FF60A8] from-5% via-[#FB6238] via-50% to-[#F5AE14] to-100%"
       >
         <div className="container">
-          <div aria-label="career-hero-wrapper" className="py-5 sm:py-10 md:py-20">
+          <div
+            aria-label="career-hero-wrapper"
+            className="py-5 sm:py-10 md:py-20"
+          >
             <h5
               aria-label="subtitle"
               className="text-lg font-medium text-[#FFDA62] mb-3"
@@ -26,9 +29,9 @@ const CareersHero = () => {
               aria-label="description"
               className="text-sm sm:text-2xl text-white font-normal max-w-screen-lg leading-tight"
             >
-              Explore a career with ARABIC JUNIORS. Write to us
-              at globalcareers@arabicjuniors.com 
-              and ukcareers@arabicjuniors.com
+              Be a Part of Something Greater ! It is more than just a job - it’s
+              a chance to grow, lead with purpose, and contribute to something
+              truly meaningful.
             </p>
           </div>
         </div>

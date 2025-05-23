@@ -67,8 +67,8 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "Multilingual Teacher", included: true },
           { title: "E-Syllabus access", included: true },
           { title: "Weekly Test", included: true },
-          { title: "Lesson Cancellations", included: false },
           { title: "Reschedule 2 Class", included: true },
+          { title: "Lesson Cancellations", included: false },
           { title: "Family Discount", included: false },
         ],
         actionBtn: {
@@ -155,8 +155,8 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "Multilingual Teacher", included: true },
           { title: "E-Syllabus access", included: true },
           { title: "Weekly Test", included: true },
-          { title: "Lesson Cancellations", included: false },
           { title: "Reschedule 2 Class", included: true },
+          { title: "Lesson Cancellations", included: false },
           { title: "Family Discount", included: false },
         ],
         actionBtn: {

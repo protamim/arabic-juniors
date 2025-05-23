@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import NewsletterForm from "./NewsletterForm";
 
 const Newsletter = () => {
   return (
@@ -30,14 +31,16 @@ const Newsletter = () => {
                     Fuel Your Day with Inspiring Emails!
                   </p>
 
-                  <div aria-describedby="btn-wrapper" className="flex items-center justify-center md:justify-start md:items-start">
+                  {/* <div aria-describedby="btn-wrapper" className="flex items-center justify-center md:justify-start md:items-start">
                     <Button asChild className="text-sm md:text-sm lg:text-sm">
                       <Link href="#">
                         Get started Now
                         <ArrowUpRight className="w-4 h-4" />
                       </Link>
                     </Button>
-                  </div>
+                  </div> */}
+
+                  <NewsletterForm />
                 </div>
               </div>
 
@@ -47,7 +50,7 @@ const Newsletter = () => {
               >
                 <div
                   aria-describedby="image-wrapper"
-                  className="max-w-56 flex items-center w-full"
+                  className="max-w-72 flex items-center w-full"
                 >
                   <Image
                     src={images.imgFemaleTeacher}
