@@ -12,6 +12,8 @@ const AdminDashboardLayout = async ({
 }>) => {
   const adminUser = await getSessionAdminUser();
 
+  console.log("Admin User:", adminUser);
+
   if (!adminUser) {
     return redirect("/login");
   }

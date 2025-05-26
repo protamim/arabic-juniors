@@ -10,15 +10,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-// const USERS = [
-//   {
-//     id: "1",
-//     firstName: "Tamim",
-//     lastName: "Talukdar",
-//     email: "contact@protamim.com",
-//   },
-// ];
-
 export interface UserDataTypes {
   firstName: string;
   lastName: string;
@@ -37,8 +28,6 @@ const UsersPage = async () => {
   const data = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users`);
   const users: UserDataTypes[] = await data.json();
 
-  console.log(users);
-
   return (
     <React.Fragment>
       <div aria-describedby="users-page">
@@ -51,18 +40,42 @@ const UsersPage = async () => {
             <TableCaption>A list of your recent users.</TableCaption>
             <TableHeader>
               <TableRow>
-                <TableHead className="whitespace-nowrap text-center">ID</TableHead>
-                <TableHead className="whitespace-nowrap text-center">First Name</TableHead>
-                <TableHead className="whitespace-nowrap text-center">Last Name</TableHead>
-                <TableHead className="whitespace-nowrap text-center">Email</TableHead>
-                <TableHead className="whitespace-nowrap text-center">Phone Number</TableHead>
-                <TableHead className="whitespace-nowrap text-center">Grade</TableHead>
-                <TableHead className="whitespace-nowrap text-center">Total Join</TableHead>
-                <TableHead className="whitespace-nowrap text-center">Preferred Teacher</TableHead>
-                <TableHead className="whitespace-nowrap text-center">Class Start Date</TableHead>
-                <TableHead className="whitespace-nowrap text-center">Class Start Time</TableHead>
-                <TableHead className="whitespace-nowrap text-center">Find From</TableHead>
-                <TableHead className="whitespace-nowrap text-center">IP Address</TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  ID
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  First Name
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  Last Name
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  Email
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  Phone Number
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  Grade
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  Total Join
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  Preferred Teacher
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  Class Start Date
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  Class Start Time
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  Find From
+                </TableHead>
+                <TableHead className="whitespace-nowrap text-center">
+                  IP Address
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -78,20 +91,42 @@ const UsersPage = async () => {
                 <Suspense fallback={"Loading..."}>
                   {users.map((user: UserDataTypes, index: number) => (
                     <TableRow key={index}>
-                      <TableCell className="font-medium text-center">{index + 1}</TableCell>
-                      <TableCell className="text-center">{user.firstName}</TableCell>
-                      <TableCell className="text-center">{user.lastName}</TableCell>
-                      <TableCell className="text-center">{user.email}</TableCell>
-                      <TableCell className="text-center">{user.phoneNumber}</TableCell>
-                      <TableCell className="text-center">{user.grade}</TableCell>
-                      <TableCell className="text-center">{user.howManyJoin}</TableCell>
-                      <TableCell className="text-center">{user.preferredTeacher}</TableCell>
+                      <TableCell className="font-medium text-center">
+                        {index + 1}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {user.firstName}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {user.lastName}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {user.email}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {user.phoneNumber}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {user.grade}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {user.howManyJoin}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {user.preferredTeacher}
+                      </TableCell>
                       <TableCell className="text-center">
                         {new Date(user.classStartDate).toLocaleDateString()}
                       </TableCell>
-                      <TableCell className="text-center">{user.classStartTime}</TableCell>
-                      <TableCell className="text-center">{user.howFindUs}</TableCell>
-                      <TableCell className="text-center">{user.userIP}</TableCell>
+                      <TableCell className="text-center">
+                        {user.classStartTime}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {user.howFindUs}
+                      </TableCell>
+                      <TableCell className="text-center">
+                        {user.userIP}
+                      </TableCell>
                     </TableRow>
                   ))}
                 </Suspense>
