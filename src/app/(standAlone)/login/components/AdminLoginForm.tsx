@@ -54,7 +54,7 @@ const AdminLoginForm = () => {
 
       const data = await res.json();
       // notify user
-      toast("Logged in Successfully!");
+      toast(data?.message || "Login successful!");
       // redirect to admin dashboard
       router.push("/admin");
     } catch (error) {
