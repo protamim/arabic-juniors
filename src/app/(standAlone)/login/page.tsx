@@ -1,14 +1,14 @@
 import React from "react";
 import AdminLoginForm from "./components/AdminLoginForm";
-import { getSessionAdminUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import adminUser from "@/lib/adminUser";
 
 const AdminLoginPage = async () => {
-  const adminUser = await getSessionAdminUser();
+  const admin = await adminUser();
 
-  console.log("Admin User:", adminUser?.email);
+  console.log("Admin User:", admin.success);
 
-  if (adminUser) {
+  if (admin.adminId) {
     return redirect("/admin");
   }
 

@@ -2,19 +2,18 @@ import "../../globals.css";
 import React from "react";
 import AdminHeader from "./components/AdminHeader";
 import AdminSidebar from "./components/AdminSidebar";
-import { getSessionAdminUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import adminUser from "@/lib/adminUser";
 
 const AdminDashboardLayout = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const adminUser = await getSessionAdminUser();
 
-  console.log("Admin User:", adminUser);
+  const admin = await adminUser();
 
-  if (!adminUser) {
+  if (!admin.adminId) {
     return redirect("/login");
   }
 
