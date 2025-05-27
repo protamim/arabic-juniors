@@ -52,8 +52,10 @@ const FAQ_DATA: FaqTypes[] = [
     answer: (
       <>
         Simply fill out our online{" "}
-        <Link href={"/register"} className="text-blue-600 font-medium">Registration Form</Link>, and we’ll contact you
-        to get started.
+        <Link href={"/register"} className="text-blue-600 font-medium">
+          Registration Form
+        </Link>
+        , and we’ll contact you to get started.
       </>
     ),
   },
@@ -64,7 +66,7 @@ const FAQ_DATA: FaqTypes[] = [
   },
 ];
 
-const HomePage = () => {
+const HomePage = async () => {
   return (
     <React.Fragment>
       <HomeHero />

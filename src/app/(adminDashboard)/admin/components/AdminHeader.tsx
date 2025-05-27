@@ -12,35 +12,34 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 const AdminHeader = () => {
     const router = useRouter();
-  const handleLogout = async () => {
-    try {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_BASE_URL + "/logout",
-        {
-          method: "GET",
-          credentials: "include", // crucial for sending cookies
-        }
-      );
+  // const handleLogout = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       process.env.NEXT_PUBLIC_API_BASE_URL + "/logout",
+  //       {
+  //         method: "GET",
+  //         credentials: "include", // crucial for sending cookies
+  //       }
+  //     );
 
-      const result = await response.json();
+  //     const result = await response.json();
 
-      if (!response.ok) {
-        toast(result.message || "Logout failed.");
-        return;
-      }
+  //     if (!response.ok) {
+  //       toast(result.message || "Logout failed.");
+  //       return;
+  //     }
 
-      toast(result.message || "Logged out successfully.");
-      router.push('/');
-    } catch (error) {
-      console.error("Logout error:", error);
-      toast("An unexpected error occurred.");
-    }
-  };
+  //     toast(result.message || "Logged out successfully.");
+  //     router.push('/');
+  //   } catch (error) {
+  //     console.error("Logout error:", error);
+  //     toast("An unexpected error occurred.");
+  //   }
+  // };
 
   return (
     <React.Fragment>
@@ -80,7 +79,7 @@ const AdminHeader = () => {
                       </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={handleLogout}>
+                    <DropdownMenuItem>
                       Log out
                       <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                     </DropdownMenuItem>

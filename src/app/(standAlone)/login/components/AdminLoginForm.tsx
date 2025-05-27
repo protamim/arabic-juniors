@@ -37,13 +37,19 @@ const AdminLoginForm = () => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
     try {
-      const res = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/login", {
-        credentials: "include",
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
+      const res = await fetch(
+        (process.env.NEXT_PUBLIC_API_BASE_URL as string) + "/admin/login",
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
 
       if (!res.ok) {
         // notify user
@@ -53,6 +59,9 @@ const AdminLoginForm = () => {
       }
 
       const data = await res.json();
+      const token = data?.token;
+      console.log(token);
+
       // notify user
       toast(data?.message || "Login successful!");
       // redirect to admin dashboard
