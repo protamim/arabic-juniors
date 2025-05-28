@@ -60,7 +60,7 @@ const AdminLoginForm = () => {
 
       const data = await res.json();
       const token = data?.token;
-      console.log(token);
+      // console.log(token);
 
       // notify user
       toast(data?.message || "Login successful!");

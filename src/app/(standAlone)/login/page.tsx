@@ -8,7 +8,7 @@ const AdminLoginPage = async () => {
 
   console.log("Admin User:", admin.success);
 
-  if (admin.adminId) {
+  if (admin?.adminId) {
     return redirect("/admin");
   }
 

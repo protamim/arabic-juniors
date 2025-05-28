@@ -18,6 +18,7 @@ const adminUser = async () => {
     );
 
     const id = await res.json();
+    // console.log('token at adminUser func:', id);
     return id;
   } catch (error) {
     console.error("Authentication error", error);

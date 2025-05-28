@@ -13,7 +13,7 @@ const AdminDashboardLayout = async ({
 
   const admin = await adminUser();
 
-  if (!admin.adminId) {
+  if (!admin?.adminId) {
     return redirect("/login");
   }
 
