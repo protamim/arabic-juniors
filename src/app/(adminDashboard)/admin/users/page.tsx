@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"; 
+
 import React, { Suspense } from "react";
 import {
   Table,
@@ -9,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
 
 export interface UserDataTypes {
   firstName: string;
@@ -25,7 +28,7 @@ export interface UserDataTypes {
 }
 
 const UsersPage = async () => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users`);
+  const data = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/users");
   const users: UserDataTypes[] = await data.json();
 
   return (

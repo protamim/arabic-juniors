@@ -37,7 +37,7 @@ const useAuthAdmin = () => {
         router.replace("/login");
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [router]);
 
   return { loading, authenticated };
 };
