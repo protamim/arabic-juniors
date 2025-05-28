@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic"; 
+"use client";
 
 import React, { Suspense } from "react";
 import {
@@ -11,7 +11,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
 
 export interface UserDataTypes {
   firstName: string;
@@ -27,9 +26,15 @@ export interface UserDataTypes {
   userIP: string;
 }
 
-const UsersPage = async () => {
-  const data = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/users");
-  const users: UserDataTypes[] = await data.json();
+const UsersPage = () => {
+  const [users, setUsers] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data))
+      .catch(console.error);
+  }, []);
 
   return (
     <React.Fragment>
