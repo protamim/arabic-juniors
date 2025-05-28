@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import React from "react";
 import AdminLoginForm from "./components/AdminLoginForm";
 import { redirect } from "next/navigation";
