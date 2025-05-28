@@ -6,8 +6,6 @@ import adminUser from "@/lib/adminUser";
 const AdminLoginPage = async () => {
   const admin = await adminUser();
 
-  console.log("Admin User:", admin?.success);
-
   if (admin?.adminId) {
     return redirect("/admin");
   }
