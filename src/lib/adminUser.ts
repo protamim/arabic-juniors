@@ -1,27 +1,37 @@
 import { cookies } from "next/headers";
 
 const adminUser = async () => {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("jwtToken")?.value;
-
   try {
-    const res = await fetch(
-      process.env.NEXT_PUBLIC_API_BASE_URL + "/admin/profile",
-      {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const cookieStore = await cookies();
+    const token = cookieStore.get("jwtToken")?.value;
 
-    const id = await res.json();
-    // console.log('token at adminUser func:', id);
-    return id;
-  } catch (error) {
-    console.error("Authentication error", error);
+    if (!token) {
+      console.log("No token found");
+      return null;
+    }
+
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    console.log("Calling:", `${baseUrl}/admin/profile`);
+
+    const res = await fetch(`${baseUrl}/admin/profile`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      console.log("Fetch failed:", res.status);
+      return null;
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error("adminUser error:", err);
+    return null;
   }
 };
+
 export default adminUser;

@@ -13,33 +13,29 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const AdminHeader = () => {
-    const router = useRouter();
-  // const handleLogout = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       process.env.NEXT_PUBLIC_API_BASE_URL + "/logout",
-  //       {
-  //         method: "GET",
-  //         credentials: "include", // crucial for sending cookies
-  //       }
-  //     );
+  const router = useRouter();
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_BASE_URL + "/admin/logout",
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
 
-  //     const result = await response.json();
+      const result = await response.json();
 
-  //     if (!response.ok) {
-  //       toast(result.message || "Logout failed.");
-  //       return;
-  //     }
-
-  //     toast(result.message || "Logged out successfully.");
-  //     router.push('/');
-  //   } catch (error) {
-  //     console.error("Logout error:", error);
-  //     toast("An unexpected error occurred.");
-  //   }
-  // };
+      toast.success(result.message || "Logged out successfully.");
+      router.push("/");
+    } catch (error) {
+      console.error("Logout error:", error);
+      toast.error("Logout failed!");
+    }
+  };
 
   return (
     <React.Fragment>
@@ -79,7 +75,7 @@ const AdminHeader = () => {
                       </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleLogout}>
                       Log out
                       <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                     </DropdownMenuItem>

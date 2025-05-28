@@ -10,7 +10,6 @@ const AdminDashboardLayout = async ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-
   const admin = await adminUser();
 
   if (!admin?.adminId) {
