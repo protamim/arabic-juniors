@@ -1,15 +1,17 @@
-export const dynamic = "force-dynamic";
+"use client";
 
 import React from "react";
 import AdminLoginForm from "./components/AdminLoginForm";
+import useAuthAdmin from "@/hooks/useAuthAdmin";
 import { redirect } from "next/navigation";
-import adminUser from "@/lib/adminUser";
 
-const AdminLoginPage = async () => {
-  const admin = await adminUser();
 
-  if (admin?.adminId) {
-    return redirect("/admin");
+const AdminLoginPage = () => {
+  const { authenticated } = useAuthAdmin();
+
+
+  if (authenticated) {
+    return redirect('/admin')
   }
 
   return (

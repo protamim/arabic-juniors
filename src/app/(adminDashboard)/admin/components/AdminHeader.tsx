@@ -17,25 +17,25 @@ import { toast } from "sonner";
 
 const AdminHeader = () => {
   const router = useRouter();
-  const handleLogout = async () => {
-    try {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_BASE_URL + "/admin/logout",
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
+  // const handleLogout = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       process.env.NEXT_PUBLIC_API_BASE_URL + "/admin/logout",
+  //       {
+  //         method: "GET",
+  //         credentials: "include",
+  //       }
+  //     );
 
-      const result = await response.json();
+  //     const result = await response.json();
 
-      toast.success(result.message || "Logged out successfully.");
-      router.push("/");
-    } catch (error) {
-      console.error("Logout error:", error);
-      toast.error("Logout failed!");
-    }
-  };
+  //     toast.success(result.message || "Logged out successfully.");
+  //     router.push("/");
+  //   } catch (error) {
+  //     console.error("Logout error:", error);
+  //     toast.error("Logout failed!");
+  //   }
+  // };
 
   return (
     <React.Fragment>
@@ -75,7 +75,13 @@ const AdminHeader = () => {
                       </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={handleLogout}>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        localStorage.removeItem("jwtToken");
+                        toast.success("Logged Out!");
+                        router.replace("/");
+                      }}
+                    >
                       Log out
                       <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                     </DropdownMenuItem>

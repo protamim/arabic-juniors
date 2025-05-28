@@ -60,7 +60,11 @@ const AdminLoginForm = () => {
 
       const data = await res.json();
       const token = data?.token;
-      // console.log(token);
+  
+
+      if(typeof window !== undefined) {
+        localStorage.setItem('jwtToken', JSON.stringify(token));
+      }
 
       // notify user
       toast(data?.message || "Login successful!");

@@ -1,7 +1,6 @@
 import React from "react";
 
-const AdminDashboardPage = async () => {
-
+const AdminDashboardPage = () => {
   return (
     <div aria-label="admin-overview">
       <div aria-describedby="main-wrapper">
