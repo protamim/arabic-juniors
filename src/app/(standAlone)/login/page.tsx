@@ -4,13 +4,13 @@ import { redirect } from "next/navigation";
 import adminUser from "@/lib/adminUser";
 
 const AdminLoginPage = async () => {
-  const admin = await adminUser();
+  // const admin = await adminUser();
 
-  console.log("Admin User:", admin.success);
+  // console.log("Admin User:", admin.success);
 
-  if (admin?.adminId) {
-    return redirect("/admin");
-  }
+  // if (admin?.adminId) {
+  //   return redirect("/admin");
+  // }
 
   return (
     <React.Fragment>
