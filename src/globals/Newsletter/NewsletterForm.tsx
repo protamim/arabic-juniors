@@ -53,7 +53,7 @@ const NewsletterForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="rounded-lg">Submit</Button>
+          <Button type="submit" className="rounded-lg h-12 md:h-12">Submit</Button>
         </form>
       </Form>
     </React.Fragment>

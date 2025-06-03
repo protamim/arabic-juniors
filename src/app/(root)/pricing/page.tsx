@@ -250,6 +250,29 @@ const PricingPlanPage = () => {
                 ))}
               </Tabs>
             </div>
+
+            <div aria-describedby="section-bottom" className="mt-8">
+              <ul className="text-neutral-700 font-normal text-base">
+                <li>
+                  * As per the selected plan, any modifications or cancellations
+                  must be communicated to the teacher and admin team at least 4
+                  hours in advance.
+                </li>
+                <li>
+                  ** All rescheduled or cancelled classes must be made up within
+                  the same month as the invoice; they cannot be carried forward.
+                </li>
+                <li>
+                  *** We offer discounts for families enrolling two or more
+                  siblings on the same plan. This does not apply to group
+                  lessons.
+                </li>
+                <li>
+                  **** An invoice will be automatically generated monthly, every
+                  4 weeks from the date of enrollment.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>

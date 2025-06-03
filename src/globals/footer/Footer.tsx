@@ -15,6 +15,7 @@ import {
   WhatsAppIcon,
   YouTubeIcon,
 } from "./SvgIcons";
+import { images } from "@/constants/images";
 
 const Footer = () => {
   return (
@@ -141,7 +142,7 @@ const Footer = () => {
 
             <div aria-label="help-center-column">
               {/* <Link
-                href={"tel:+456 1544 5651"}
+                href={"tel:+971 50 992 1470"}
                 aria-describedby="whatsapp-image"
                 className="w-full flex justify-center items-center scale-95 transition-transform ease-in-out duration-300 hover:scale-105"
               >
@@ -168,11 +169,11 @@ const Footer = () => {
                 >
                   <li aria-label="contact-item">
                     <Link
-                      href="tel:+456 1544 5651"
+                      href="tel:+971 50 992 1470"
                       className="flex items-center gap-x-3 text-lg font-normal text-neutral-800 max-w-max transition-all ease-in-out duration-300 hover:opacity-75"
                     >
                       <CallingIcon className="text-orange-500 text-2xl" />
-                      +456 1544 5651
+                      +971 50 992 1470
                     </Link>
                   </li>
 
