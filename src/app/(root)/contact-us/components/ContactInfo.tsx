@@ -1,6 +1,5 @@
 import React from "react";
 import { IconCalling, IconEmail, IconLocation, IconWhatsApp } from "./svgIcons";
-import Link from "next/link";
 
 const ContactInfo = () => {
   return (
@@ -47,7 +46,7 @@ const ContactInfo = () => {
               <IconWhatsApp className="text-4xl" />
             </span>
             <span className="text-2xl font-bold text-neutral-900">
-              +456 1544 5651
+               +971 50 992 1470
             </span>
           </div>
         </div>
@@ -59,11 +58,11 @@ const ContactInfo = () => {
 export default ContactInfo;
 
 const CONTACT_LISTS = [
-  {
-    key: "phone",
-    icon: <IconCalling className="text-2xl text-orange-500" />,
-    label: "+456 1544 5651",
-  },
+  // {
+  //   key: "phone",
+  //   icon: <IconCalling className="text-2xl text-orange-500" />,
+  //   label: "+971 50 992 1470",
+  // },
   {
     key: "email",
     icon: <IconEmail className="text-2xl text-orange-500" />,
