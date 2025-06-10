@@ -19,8 +19,8 @@ const FAQ_DATA: FaqTypes[] = [
   },
   {
     key: "third-faq",
-    question: "Where are you located and do you serve all Emirates?",
-    answer: `Arabic Juniors Academy is an online platform, so students from all Emirates—including Dubai, Abu Dhabi, Sharjah, and beyond—can join from home. All you need is a device and internet connection.`,
+    question: "Where are you located, and do you serve all Emirates?",
+    answer: `Arabic Juniors Academy is registered under a UAE freezone as an online education platform. We serve students across all Emirates - including Dubai, Abu Dhabi, Al Ain, Sharjah, Ajman and beyond.`,
   },
 ];
 

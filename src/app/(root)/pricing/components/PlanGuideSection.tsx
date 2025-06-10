@@ -25,7 +25,7 @@ const PlanGuideSection = () => {
             className="flex items-center justify-center flex-col mt-8"
           >
             <Button asChild className="md:text-base max-w-max w-full">
-              <Link href="#">
+              <Link href="/register">
                 Create Your Study Plan
                 <ArrowUpRight className="w-4 h-4 flex-shrink-0 flex-grow-0 basis-auto" />
               </Link>

@@ -141,7 +141,7 @@ const Footer = () => {
             </div>
 
             <div aria-label="help-center-column">
-              {/* <Link
+              <Link
                 href={"tel:+971 50 992 1470"}
                 aria-describedby="whatsapp-image"
                 className="w-full flex justify-center items-center scale-95 transition-transform ease-in-out duration-300 hover:scale-105"
@@ -153,7 +153,7 @@ const Footer = () => {
                   alt="arabic juniors whatsapp number"
                   priority
                 />
-              </Link> */}
+              </Link>
 
               <div
                 aria-label="help-center-wrapper"
@@ -183,7 +183,7 @@ const Footer = () => {
                       className="flex items-center gap-x-3 text-lg font-normal text-neutral-800 max-w-max transition-all ease-in-out duration-300 hover:opacity-75"
                     >
                       <EmailIcon className="text-orange-500 text-2xl" />
-                      hello@ArabicJuniors.com
+                      hello@arabicjuniors.com
                     </Link>
                   </li>
 
@@ -225,7 +225,7 @@ const Footer = () => {
             className="pt-4 pb-5 border-t border-t-neutral-200 flex items-center gap-x-4 sm:gap-x-7 justify-between"
           >
             <p className="text-neutral-700 text-xs sm:text-base font-normal">
-              2024 ©All rights reserved.
+              ©{new Date().getFullYear()} <Link href={'/'} className="underline text-blue-500">www.arabicjuniors.com</Link> | All Rights Reserved by The Learning Hub FZE LLC
             </p>
 
             <ul
@@ -285,11 +285,11 @@ const SOCIAL_DATA = [
     icon: <PinterestIcon className="text-[#E60023]" />,
     link: "#",
   },
-  {
-    key: "whatsapp",
-    icon: <WhatsAppIcon className="text-[#25D366]" />,
-    link: "#",
-  },
+  // {
+  //   key: "whatsapp",
+  //   icon: <WhatsAppIcon className="text-[#25D366]" />,
+  //   link: "#",
+  // },
   {
     key: "telegram",
     icon: <TelegramIcon className="text-[#0088CC]" />,
