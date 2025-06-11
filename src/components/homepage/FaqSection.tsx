@@ -72,7 +72,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({faqData}) => {
               </Accordion>
 
               <Button asChild className="w-full">
-                <Link href="/register#registration-form-wrapper">Book your free session now</Link>
+                <Link href="/register">Book your free session now</Link>
               </Button>
             </div>
           </div>

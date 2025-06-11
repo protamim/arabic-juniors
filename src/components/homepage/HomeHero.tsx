@@ -72,7 +72,7 @@ const HomeHero = () => {
               className="flex items-center justify-center gap-x-5 w-full"
             >
               <Button asChild className="w-full sm:max-w-max">
-                <Link href="/register#registration-form-wrapper">
+                <Link href="/register">
                   Get started
                   <ArrowRightIcon className="text-xl text-white" />
                 </Link>

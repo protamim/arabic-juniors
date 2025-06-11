@@ -10,11 +10,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
@@ -23,10 +18,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format, isBefore, startOfDay } from "date-fns";
-import { CalendarIcon, LoaderCircle } from "lucide-react";
+import { addDays} from "date-fns";
+import { LoaderCircle } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -48,73 +42,39 @@ const TIME_SLOTS = {
   endTime: "11:45 PM",
   availableTimes: [
     { time: "07:00 AM" },
-    { time: "07:15 AM" },
     { time: "07:30 AM" },
-    { time: "07:45 AM" },
     { time: "08:00 AM" },
-    { time: "08:15 AM" },
     { time: "08:30 AM" },
-    { time: "08:45 AM" },
     { time: "09:00 AM" },
-    { time: "09:15 AM" },
     { time: "09:30 AM" },
-    { time: "09:45 AM" },
     { time: "10:00 AM" },
-    { time: "10:15 AM" },
     { time: "10:30 AM" },
-    { time: "10:45 AM" },
     { time: "11:00 AM" },
-    { time: "11:15 AM" },
     { time: "11:30 AM" },
-    { time: "11:45 AM" },
     { time: "12:00 PM" },
-    { time: "12:15 PM" },
     { time: "12:30 PM" },
-    { time: "12:45 PM" },
     { time: "01:00 PM" },
-    { time: "01:15 PM" },
     { time: "01:30 PM" },
-    { time: "01:45 PM" },
     { time: "02:00 PM" },
-    { time: "02:15 PM" },
     { time: "02:30 PM" },
-    { time: "02:45 PM" },
     { time: "03:00 PM" },
-    { time: "03:15 PM" },
     { time: "03:30 PM" },
-    { time: "03:45 PM" },
     { time: "04:00 PM" },
-    { time: "04:15 PM" },
     { time: "04:30 PM" },
-    { time: "04:45 PM" },
     { time: "05:00 PM" },
-    { time: "05:15 PM" },
     { time: "05:30 PM" },
-    { time: "05:45 PM" },
     { time: "06:00 PM" },
-    { time: "06:15 PM" },
     { time: "06:30 PM" },
-    { time: "06:45 PM" },
     { time: "07:00 PM" },
-    { time: "07:15 PM" },
     { time: "07:30 PM" },
-    { time: "07:45 PM" },
     { time: "08:00 PM" },
-    { time: "08:15 PM" },
     { time: "08:30 PM" },
-    { time: "08:45 PM" },
     { time: "09:00 PM" },
-    { time: "09:15 PM" },
     { time: "09:30 PM" },
-    { time: "09:45 PM" },
     { time: "10:00 PM" },
-    { time: "10:15 PM" },
     { time: "10:30 PM" },
-    { time: "10:45 PM" },
     { time: "11:00 PM" },
-    { time: "11:15 PM" },
     { time: "11:30 PM" },
-    { time: "11:45 PM" },
   ],
 };
 
@@ -235,6 +195,20 @@ const MultiStepRegistrationForm = () => {
       window.location.reload();
       console.log("registration failed:", error);
     }
+  };
+
+  // Calculate the date 7 days from now
+  const sevenDaysFromNow = addDays(new Date(), 7);
+
+  // Function to determine if a date should be disabled
+  const isDateDisabled = (day: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to compare dates only
+
+    return (
+      day < today || // Disable dates before today
+      day > sevenDaysFromNow // Disable dates more than 7 days from now
+    );
   };
 
   return (
@@ -435,7 +409,7 @@ const MultiStepRegistrationForm = () => {
                           {["Male", "Female", "Others"].map((option) => (
                             <FormItem
                               key={option}
-                              className="radio-item-wrapper w-28 sm:h-28 py-2 px-3 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
+                              className="radio-item-wrapper w-28 sm:h-16 py-2 px-3 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
                             >
                               <FormControl>
                                 <RadioGroupItem
@@ -475,9 +449,7 @@ const MultiStepRegistrationForm = () => {
                         <FormLabel>Select a date and time</FormLabel>
                         <Calendar
                           mode="single"
-                          disabled={(date) =>
-                            isBefore(date, startOfDay(new Date()))
-                          }
+                          disabled={isDateDisabled}
                           selected={field.value}
                           onSelect={field.onChange}
                           initialFocus

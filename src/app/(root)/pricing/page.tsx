@@ -1,3 +1,4 @@
+"use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React from "react";
 import PricingCard from "./components/PricingCard";
@@ -9,23 +10,8 @@ import { FaqTypes } from "@/types";
 const FAQ_DATA: FaqTypes[] = [
   {
     key: "1",
-    question: "What is the cost of the Arabic tuition classes?",
-    answer: `Prices vary by package—based on session frequency and class type (group or one-on-one). Check our pricing plans for details.`,
-  },
-  {
-    key: "2",
     question: "Do you offer any discounts or promotions?",
-    answer: `Yes, we offer sibling discounts, long-term enrollment deals, and seasonal promotions.`,
-  },
-  {
-    key: "3",
-    question: "How can I choose the best pricing plan for my child?",
-    answer: `Choose based on your child’s needs and schedule. Contact us for a free consultation if you need help deciding.`,
-  },
-  {
-    key: "4",
-    question: "What payment methods do you accept?",
-    answer: `We accept credit/debit cards, bank transfers, and PayPal.`,
+    answer: `Yes, we offer sibling discounts and seasonal promotions to help you save while you learn.`,
   },
 ];
 
@@ -51,7 +37,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "Family Discount", included: false },
         ],
         actionBtn: {
-          url: "/register#registration-form-wrapper",
+          url: "/register",
           label: "Lets start",
         },
       },
@@ -72,7 +58,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "Family Discount", included: false },
         ],
         actionBtn: {
-          url: "/register#registration-form-wrapper",
+          url: "/register",
           label: "Lets start",
         },
       },
@@ -93,7 +79,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "Family 5% Discount", included: true },
         ],
         actionBtn: {
-          url: "/register#registration-form-wrapper",
+          url: "/register",
           label: "Lets start",
         },
       },
@@ -114,7 +100,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "Family 10% Discount", included: true },
         ],
         actionBtn: {
-          url: "/register#registration-form-wrapper",
+          url: "/register",
           label: "Lets start",
         },
       },
@@ -140,7 +126,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "Family Discount", included: false },
         ],
         actionBtn: {
-          url: "/register#registration-form-wrapper",
+          url: "/register",
           label: "Lets start",
         },
       },
@@ -160,7 +146,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "Family Discount", included: false },
         ],
         actionBtn: {
-          url: "/register#registration-form-wrapper",
+          url: "/register",
           label: "Lets start",
         },
       },
@@ -179,7 +165,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "Family 5% Discount", included: true },
         ],
         actionBtn: {
-          url: "/register#registration-form-wrapper",
+          url: "/register",
           label: "Lets start",
         },
       },
@@ -199,7 +185,7 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
           { title: "Family 10% Discount", included: true },
         ],
         actionBtn: {
-          url: "/register#registration-form-wrapper",
+          url: "/register",
           label: "Lets start",
         },
       },
@@ -208,6 +194,14 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
 ];
 
 const PricingPlanPage = () => {
+  const [selectedPlan, setSelectedPlan] = React.useState<string>("individual");
+
+  const handleValueChange = (value: string) => {
+    // Handle the value change logic here if needed
+    // console.log("Selected plan:", value);
+    setSelectedPlan(value);
+  };
+
   return (
     <React.Fragment>
       <section
@@ -220,16 +214,23 @@ const PricingPlanPage = () => {
             className="bg-white p-5 rounded-xl lg:pt-12 lg:px-9"
           >
             <h1 className="text-3xl font-bold text-neutral-800 text-center mb-4 lg:text-5xl lg:mb-6">
-              Pricing Plan
+              Your Plan, Your Price
             </h1>
 
-            <p className="text-sm font-normal text-neutral-700 text-center mb-6 lg:text-lg max-w-[477px] mx-auto lg:mb-14">
-              We would love to hear from you Feel free to reach out using the
-              below details.
+            <p className="text-sm font-normal text-neutral-700 text-center mb-6 lg:text-lg max-w-[540px] mx-auto">
+              Our pricing is built to support every learner at every stage.
+              <br />
+              Pick a plan and take the first step toward mastering Arabic.
             </p>
 
+            <h4 className="text-center text-xl font-medium text-sky-500 mb-6">Transform your Arabic skills in just 60 minutes per class.s</h4>
+
             <div aria-label="pricing-tab-wrapper">
-              <Tabs defaultValue="individual" className="w-full">
+              <Tabs
+                onValueChange={handleValueChange}
+                defaultValue="individual"
+                className="w-full"
+              >
                 <TabsList>
                   {PACKAGES_PLAN?.map((plan) => (
                     <React.Fragment key={plan.key}>
@@ -252,26 +253,50 @@ const PricingPlanPage = () => {
             </div>
 
             <div aria-describedby="section-bottom" className="mt-8">
-              <ul className="text-neutral-700 font-normal text-base">
-                <li>
-                  * As per the selected plan, any modifications or cancellations
-                  must be communicated to the teacher and admin team at least 4
-                  hours in advance.
-                </li>
-                <li>
-                  ** All rescheduled or cancelled classes must be made up within
-                  the same month as the invoice; they cannot be carried forward.
-                </li>
-                <li>
-                  *** We offer discounts for families enrolling two or more
-                  siblings on the same plan. This does not apply to group
-                  lessons.
-                </li>
-                <li>
-                  **** An invoice will be automatically generated monthly, every
-                  4 weeks from the date of enrollment.
-                </li>
-              </ul>
+              {selectedPlan === "individual" ? (
+                <ul className="text-neutral-700 font-normal text-base list-disc space-y-1">
+                  <li>
+                    According to your plan, you must inform the teacher and
+                    admin team at least 4 hours in advance to cancel a class.
+                  </li>
+                  <li>
+                    All cancelled or rescheduled classes must be completed
+                    within the same month as the invoice date and cannot be
+                    carried over to the next month.
+                  </li>
+                  <li>
+                    We offer discounts for families enrolling two or more
+                    siblings on the same plan. This does not apply to group
+                    lessons.
+                  </li>
+                  <li>
+                    Once you join, an invoice will be generated
+                    automatically every 4 weeks.
+                  </li>
+                </ul>
+              ) : (
+                <ul className="text-neutral-700 font-normal text-base list-disc space-y-1">
+                  <li>
+                    According to your plan, all the group’s students must inform
+                    the teacher and admin team at least 4 hours in advance to
+                    cancel a class.
+                  </li>
+                  <li>
+                    If any student in the group misses a class, it will still be
+                    marked as completed for him or her.
+                  </li>
+                  <li>
+                    All cancelled or rescheduled group classes must be completed
+                    within the same month as the invoice date and cannot be
+                    carried over to the next month.
+                  </li>
+                  <li>We do not offer any discount in group classes.</li>
+                  <li>
+                    Once you join, an invoice will be generated automatically
+                    every 4 weeks.
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
         </div>

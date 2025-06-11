@@ -53,7 +53,7 @@ const FaqPage = () => {
   return (
     <React.Fragment>
       <div aria-describedby="faq-page">
-        <section aria-describedby="" className="bg-[#053F7A] py-12 sm:py-24">
+        <section aria-describedby="" className=" bg-gradient-to-r from-[-5%] from-[#FF60A8] via-50% via-[#FB6238] to-100% to-[#F5AE14] py-12 sm:py-24">
           <div className="container">
             <div
               aria-describedby="content-wrapper"

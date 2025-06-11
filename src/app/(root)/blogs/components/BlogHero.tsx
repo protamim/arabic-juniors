@@ -25,10 +25,10 @@ const BlogHero = () => {
               aria-label="description"
               className="text-sm sm:text-lg font-normal text-white max-w-screen-md"
             >
-              5 years ago, we opened our doors to help students gain admission
-              to the college of their dreams. Over that time, we have shaped the
-              way people get into college so they can learn and grow from the
-              experience.
+              We believe strong Arabic skills open doors to academic success,
+              cultural connection, and lasting confidence. Mastering Arabic
+              empowers students to excel in their studies and build meaningful
+              connections.
             </p>
           </div>
         </div>

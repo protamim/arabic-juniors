@@ -82,7 +82,7 @@ const JOB_CARD_DATA: JobCardDataTypes[] = [
   {
     department: "Management",
     jobTitle: "Academic Support Assistant",
-    jobLocation: "Location",
+    jobLocation: "Online",
     employmentType: "Permanent",
     jobType: "3 years exp.",
     action: {
@@ -93,7 +93,7 @@ const JOB_CARD_DATA: JobCardDataTypes[] = [
   {
     department: "Management",
     jobTitle: "Academic Head",
-    jobLocation: "Location",
+    jobLocation: "Online",
     employmentType: "Permanent",
     jobType: "2-4 Years Exp.",
     action: {
@@ -104,7 +104,7 @@ const JOB_CARD_DATA: JobCardDataTypes[] = [
   {
     department: "Management",
     jobTitle: "Arabic Teacher",
-    jobLocation: "Location",
+    jobLocation: "Online",
     employmentType: "Permanent",
     jobType: "2-3 Years UAE Exp.",
     action: {

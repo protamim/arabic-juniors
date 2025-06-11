@@ -201,8 +201,8 @@ const BLOGS_DATA: AllBlogsDataTypes[] = [
     ],
   },
   {
-    key: "arabic",
-    category: "Arabic",
+    key: "curriculum",
+    category: "Curriculum",
     children: [
       {
         key: "blog-0",

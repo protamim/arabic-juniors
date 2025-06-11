@@ -90,7 +90,7 @@ const OurTeacher = () => {
               className="flex items-center justify-center"
             >
               <Button asChild>
-                <Link href={"/our-teachers"}>
+                <Link href={"/register"}>
                   Connect with your Mentor now!
                 </Link>
               </Button>

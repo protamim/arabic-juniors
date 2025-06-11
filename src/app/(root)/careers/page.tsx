@@ -21,7 +21,7 @@ const FAQ_DATA: FaqTypes[] = [
   {
     key: "3",
     question: "What are the working hours and schedule like?",
-    answer: `Our online teaching positions offer flexible schedules. You can choose the hours that work best for you, with classes scheduled based on the availability of students in different time zones, primarily aligned with UAE timings.`,
+    answer: `Our online teaching positions offer flexible scheduling. You can select hours that align with your availability, with classes scheduled based on students' UAE time zones.`,
   },
   {
     key: "4",
@@ -32,6 +32,12 @@ const FAQ_DATA: FaqTypes[] = [
     key: "5",
     question: "How can I apply to join your teaching team?",
     answer: `You can fill out the “Apply Now” form on our Careers Page and fill the form. Our team will review your profile and get in touch with you if you’re shortlisted`,
+  },
+  {
+    key: "6",
+    question:
+      "What devices and basic skills are required to teach at Arabic Juniors?",
+    answer: `You’ll need a laptop with high-speed internet and be skilled in Zoom, MS Teams, Word, Excel, and PowerPoint. Online teaching experience and strong communication skills are essential.`,
   },
 ];
 
