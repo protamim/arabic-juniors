@@ -1,7 +1,7 @@
 import React from "react";
 import TeacherCard from "./components/TeacherCard";
 import { FaqTypes, TeachersTypes } from "@/types";
-import { FaqSection } from "@/components/homepage";
+import { FaqSection, TeachersSlider } from "@/components/homepage";
 
 const TEACHERS_DATA: TeachersTypes[] = [
   {
@@ -194,6 +194,8 @@ const TeachersPage = () => {
           </div>
         </div>
       </section>
+
+      <TeachersSlider />
 
       <FaqSection faqData={FAQ_DATA} />
     </React.Fragment>
