@@ -105,7 +105,14 @@ const PricingCard: React.FC<PricingCardProps> = ({ pricingCardData }) => {
                         />
                       )}
 
-                      <span className="text-base font-medium text-neutral-800">
+                      <span
+                        className={cn(
+                          "text-base font-medium ",
+                          feature.included
+                            ? "text-neutral-800"
+                            : "text-neutral-500"
+                        )}
+                      >
                         {feature.title}
                       </span>
                     </li>

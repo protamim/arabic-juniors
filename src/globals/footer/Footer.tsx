@@ -29,7 +29,7 @@ const Footer = () => {
             <div aria-label="site-details-column">
               <Link href="/" className="mb-3 flex">
                 <Image
-                  src={'/arabic-logo-new.png'}
+                  src={"/arabic-logo-new.png"}
                   width={138}
                   height={56}
                   alt="arabic juniors logo"
@@ -142,7 +142,9 @@ const Footer = () => {
 
             <div aria-label="help-center-column">
               <Link
-                href={"tel:+971 50 992 1470"}
+                href={
+                  "https://wa.me/971509921470?text=Hello!%20I'm%20interested%20in%20enrolling%20in%20Arabic%20tuition%20classes.%20Please%20get%20in%20touch%20with%20me."
+                }
                 aria-describedby="whatsapp-image"
                 className="w-full flex justify-center items-center scale-95 transition-transform ease-in-out duration-300 hover:scale-105"
               >
@@ -225,7 +227,11 @@ const Footer = () => {
             className="pt-4 pb-5 border-t border-t-neutral-200 flex items-center gap-x-4 sm:gap-x-7 justify-between"
           >
             <p className="text-neutral-700 text-xs sm:text-base font-normal">
-              ©{new Date().getFullYear()} <Link href={'/'} className="underline text-blue-500">www.arabicjuniors.com</Link> | All Rights Reserved by The Learning Hub FZE LLC
+              ©{new Date().getFullYear()}{" "}
+              <Link href={"/"} className="underline text-blue-500">
+                www.arabicjuniors.com
+              </Link>{" "}
+              | All Rights Reserved by The Learning Hub FZE LLC
             </p>
 
             <ul
@@ -234,16 +240,16 @@ const Footer = () => {
             >
               <li>
                 <Link
-                  href="#"
+                  href="/terms-and-conditions"
                   className="text-neutral-700 text-xs sm:text-base font-normal transition-colors ease-in-out duration-300 hover:text-orange-500"
                 >
-                  Terms of service
-                </Link>
+                  Terms & Conditions
+                </Link> 
               </li>
 
               <li>
                 <Link
-                  href="#"
+                  href="/privacy-policy"
                   className="text-neutral-700 text-xs sm:text-base font-normal transition-colors ease-in-out duration-300 hover:text-orange-500"
                 >
                   Privacy Policy

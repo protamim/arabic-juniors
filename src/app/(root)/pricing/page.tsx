@@ -25,8 +25,8 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
         price: 200,
         currencyType: "aed",
         features: [
-          { title: "1 Class Weekly", included: true },
-          { title: "4 Class Monthly", included: true },
+          { title: "1 Weekly Class", included: true },
+          { title: "4 Hours per Month", included: true },
           { title: "1-1 Live Class", included: true },
           { title: "Exam Preparation", included: true },
           { title: "Multilingual Teacher", included: true },
@@ -46,8 +46,8 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
         price: 300,
         currencyType: "aed",
         features: [
-          { title: "2 Class Weekly", included: true },
-          { title: "8 Class Monthly", included: true },
+          { title: "2 Weekly Classes", included: true },
+          { title: "8 Hours per Month", included: true },
           { title: "1-1 Live class", included: true },
           { title: "Exam Preparation", included: true },
           { title: "Multilingual Teacher", included: true },
@@ -67,8 +67,8 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
         price: 400,
         currencyType: "aed",
         features: [
-          { title: "3 Class Weekly", included: true },
-          { title: "12 Class Monthly", included: true },
+          { title: "3 Weekly Classes", included: true },
+          { title: "12 Hours per Month", included: true },
           { title: "1-1 Live class", included: true },
           { title: "Exam Preparation", included: true },
           { title: "Multilingual Teacher", included: true },
@@ -88,8 +88,8 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
         price: 500,
         currencyType: "aed",
         features: [
-          { title: "4 Class Weekly", included: true },
-          { title: "16 Class Monthly", included: true },
+          { title: "4 Weekly Classes", included: true },
+          { title: "16 Hours per Month", included: true },
           { title: "1-1 Live class", included: true },
           { title: "Exam Preparation", included: true },
           { title: "Multilingual Teacher", included: true },
@@ -115,8 +115,9 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
         price: 150,
         currencyType: "aed",
         features: [
-          { title: "4 Class Weekly", included: true },
-          { title: "2-4 Group Class", included: true },
+          { title: "1 Weekly Class", included: true },
+          { title: "4 Hours per Month", included: true },
+          { title: "Group Classes", included: true },
           { title: "Exam Preparation", included: true },
           { title: "Multilingual Teacher", included: true },
           { title: "E-Syllabus access", included: false },
@@ -135,8 +136,9 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
         price: 250,
         currencyType: "aed",
         features: [
-          { title: "8 Class Weekly", included: true },
-          { title: "2-4 Group Class", included: true },
+          { title: "2 Weekly Classes", included: true },
+          { title: "8 Hours per Month", included: true },
+           { title: "Group Classes", included: true },
           { title: "Exam Preparation", included: true },
           { title: "Multilingual Teacher", included: true },
           { title: "E-Syllabus access", included: true },
@@ -155,8 +157,9 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
         price: 350,
         currencyType: "aed",
         features: [
-          { title: "12 Class Weekly", included: true },
-          { title: "2-4 Group Class", included: true },
+          { title: "3 Weekly Classes", included: true },
+          { title: "12 Hours per Month", included: true },
+          { title: "Group Classes", included: true },
           { title: "Exam Preparation", included: true },
           { title: "Multilingual Teacher", included: true },
           { title: "E-Syllabus access", included: true },
@@ -174,8 +177,9 @@ const PACKAGES_PLAN: PricingPlanTypes[] = [
         price: 450,
         currencyType: "aed",
         features: [
-          { title: "16 Class Weekly", included: true },
-          { title: "2-4 Group Class", included: true },
+          { title: "4 Weekly Classes", included: true },
+          { title: "16 Hours per Month", included: true },
+          { title: "Group Classes", included: true },
           { title: "Exam Preparation", included: true },
           { title: "Multilingual Teacher", included: true },
           { title: "E-Syllabus access", included: true },
@@ -220,10 +224,8 @@ const PricingPlanPage = () => {
             <p className="text-sm font-normal text-neutral-700 text-center mb-6 lg:text-lg max-w-[540px] mx-auto">
               Our pricing is built to support every learner at every stage.
               <br />
-              Pick a plan and take the first step toward mastering Arabic.
+              Transform your Arabic skills in just 60 minutes per class.s
             </p>
-
-            <h4 className="text-center text-xl font-medium text-sky-500 mb-6">Transform your Arabic skills in just 60 minutes per class.s</h4>
 
             <div aria-label="pricing-tab-wrapper">
               <Tabs
@@ -254,7 +256,7 @@ const PricingPlanPage = () => {
 
             <div aria-describedby="section-bottom" className="mt-8">
               {selectedPlan === "individual" ? (
-                <ul className="text-neutral-700 font-normal text-base list-disc space-y-1">
+                <ul className="text-neutral-700 font-normal text-xs list-disc space-y-1">
                   <li>
                     According to your plan, you must inform the teacher and
                     admin team at least 4 hours in advance to cancel a class.
@@ -270,12 +272,12 @@ const PricingPlanPage = () => {
                     lessons.
                   </li>
                   <li>
-                    Once you join, an invoice will be generated
-                    automatically every 4 weeks.
+                    Once you join, an invoice will be generated automatically
+                    every 4 weeks.
                   </li>
                 </ul>
               ) : (
-                <ul className="text-neutral-700 font-normal text-base list-disc space-y-1">
+                <ul className="text-neutral-700 font-normal text-xs list-disc space-y-1">
                   <li>
                     According to your plan, all the group’s students must inform
                     the teacher and admin team at least 4 hours in advance to
