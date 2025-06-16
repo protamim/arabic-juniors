@@ -8,11 +8,6 @@ import {
   InstagramIcon,
   LinkedinIcon,
   LocationIcon,
-  PinterestIcon,
-  TelegramIcon,
-  TikTokIcon,
-  TwitterXIcon,
-  WhatsAppIcon,
   YouTubeIcon,
 } from "./SvgIcons";
 import { images } from "@/constants/images";
@@ -60,7 +55,7 @@ const Footer = () => {
                       aria-label="social-item"
                       className="text-2xl"
                     >
-                      <Link href={social.link}>{social.icon}</Link>
+                      <Link href={social.link} target="_blank">{social.icon}</Link>
                     </li>
                   ))}
                 </ul>
@@ -216,7 +211,9 @@ const Footer = () => {
                   aria-label="social-item"
                   className="text-2xl"
                 >
-                  <Link href={social.link}>{social.icon}</Link>
+                  <Link href={social.link} target="_blank">
+                    {social.icon}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -244,7 +241,7 @@ const Footer = () => {
                   className="text-neutral-700 text-xs sm:text-base font-normal transition-colors ease-in-out duration-300 hover:text-orange-500"
                 >
                   Terms & Conditions
-                </Link> 
+                </Link>
               </li>
 
               <li>
@@ -269,46 +266,46 @@ const SOCIAL_DATA = [
   {
     key: "facebook",
     icon: <FacebookIcon className="text-[#1877F2]" />,
-    link: "#",
+    link: "https://www.facebook.com/arabicjuniors",
   },
   {
     key: "linkedin",
     icon: <LinkedinIcon className="text-[#2867B2]" />,
-    link: "#",
+    link: "https://www.linkedin.com/company/arabicjuniors",
   },
   {
     key: "youtube",
     icon: <YouTubeIcon className="text-[#FF0000]" />,
-    link: "#",
+    link: "https://www.youtube.com/@ArabicJuniors",
   },
   {
     key: "instagram",
     icon: <InstagramIcon className="text-[#F00073]" />,
-    link: "#",
+    link: "https://www.instagram.com/arabicjunior/",
   },
-  {
-    key: "pinterest",
-    icon: <PinterestIcon className="text-[#E60023]" />,
-    link: "#",
-  },
+  // {
+  //   key: "pinterest",
+  //   icon: <PinterestIcon className="text-[#E60023]" />,
+  //   link: "#",
+  // },
   // {
   //   key: "whatsapp",
   //   icon: <WhatsAppIcon className="text-[#25D366]" />,
   //   link: "#",
   // },
-  {
-    key: "telegram",
-    icon: <TelegramIcon className="text-[#0088CC]" />,
-    link: "#",
-  },
-  {
-    key: "twitter-x",
-    icon: <TwitterXIcon className="text-black" />,
-    link: "#",
-  },
-  {
-    key: "tiktok",
-    icon: <TikTokIcon className="text-black" />,
-    link: "#",
-  },
+  // {
+  //   key: "telegram",
+  //   icon: <TelegramIcon className="text-[#0088CC]" />,
+  //   link: "#",
+  // },
+  // {
+  //   key: "twitter-x",
+  //   icon: <TwitterXIcon className="text-black" />,
+  //   link: "#",
+  // },
+  // {
+  //   key: "tiktok",
+  //   icon: <TikTokIcon className="text-black" />,
+  //   link: "#",
+  // },
 ];

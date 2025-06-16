@@ -26,7 +26,7 @@ const TeacherCard: React.FC<TeacherCardProps> = ({ teachersData }) => {
         >
           <div
             aria-describedby="image-wrapper"
-            className="max-w-44 w-full bg-light-green-200 rounded-full"
+            className="max-w-44 w-full rounded-full"
           >
             <Image
               src={teacher.image.link}
@@ -75,7 +75,7 @@ const TeacherCard: React.FC<TeacherCardProps> = ({ teachersData }) => {
                 >
                   <div
                     aria-describedby="image-wrapper"
-                    className="max-w-44 w-full bg-light-green-200 rounded-full "
+                    className="max-w-44 w-full rounded-full "
                   >
                     <Image
                       src={teacher.image.link}
