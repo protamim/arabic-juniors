@@ -22,6 +22,16 @@ const FAQ_DATA: FaqTypes[] = [
     question: "Where are you located, and do you serve all Emirates?",
     answer: `Arabic Juniors Academy is registered under a UAE freezone as an online education platform. We serve students across all Emirates - including Dubai, Abu Dhabi, Al Ain, Sharjah, Ajman and beyond.`,
   },
+  {
+    key: "fourth-faq",
+    question: "Are your classes suitable for beginners?",
+    answer: `Yes, we have courses for beginners, intermediate, and advanced levels. Our teachers adjust the lessons based on each student’s level.`,
+  },
+  {
+    key: "fifth-faq",
+    question: "Can I choose between group and individual classes?",
+    answer: `Yes, you can choose what suits you best. We offer affordable one-to-one sessions as well as small group classes for better interaction.`,
+  },
 ];
 
 const AboutUsPage = () => {

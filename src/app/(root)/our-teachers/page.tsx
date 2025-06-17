@@ -1,121 +1,121 @@
 import React from "react";
 import TeacherCard from "./components/TeacherCard";
 import { FaqTypes, TeachersTypes } from "@/types";
-import { FaqSection, TeachersSlider } from "@/components/homepage";
+import { FaqSection } from "@/components/homepage";
 
 const TEACHERS_DATA: TeachersTypes[] = [
   {
     key: "1",
-    teacherName: "Danial Jack",
-    profession: "Teacher",
+    teacherName: "Rafat Sayed",
+    profession: "Arabic Teacher",
     image: {
-      link: "/teacher-1.png",
-      width: 611,
-      height: 408,
+      link: "/first-teacher.png",
+      width: 256,
+      height: 256,
       alt: "Teacher Photo",
     },
     detail: {
-      grade: "6-10",
+      grade: "1-10",
       experience: "5+ Years exp.",
-      education: "Teacher",
-      subject: "Math",
+      education: "B.Ed., Master’s in Arabic study",
+      subject: "Arabic",
       shortDescription:
-        "Naina is an Engineer by profession & passionate about teaching. She has 5+ years experience is teaching IB, IGCSE, CBSE & ICSE Math. She understands the conceptual as well as application based problems faced by students and helps build a strong foundation to instill confidence.",
+        "Skilled Arabic teacher with over 5 years of experience teaching Grades 1–10 across UAE school curricula. Expert in delivering engaging online lessons in grammar, reading, and writing using interactive tools.",
     },
   },
   {
     key: "2",
-    teacherName: "Danial Jack",
-    profession: "Teacher",
+    teacherName: "Abdullah Soliman",
+    profession: "Arabic Teacher",
     image: {
-      link: "/teacher-2.jpg",
-      width: 611,
-      height: 408,
+      link: "/second-teacher.png",
+      width: 256,
+      height: 256,
       alt: "Teacher Photo",
     },
     detail: {
-      grade: "6-10",
-      experience: "5+ Years exp.",
-      education: "Teacher",
-      subject: "Math",
+      grade: "1-10",
+      experience: "3+ Years exp.",
+      education: "Master’s in Arabic study",
+      subject: "Arabic",
       shortDescription:
-        "Naina is an Engineer by profession & passionate about teaching. She has 5+ years experience is teaching IB, IGCSE, CBSE & ICSE Math. She understands the conceptual as well as application based problems faced by students and helps build a strong foundation to instill confidence.",
+        "Qualified Arabic tutor with deep knowledge of UAE Ministry of Education standards. Successfully teaches students from primary to secondary level through effective and personalized online sessions.",
     },
   },
   {
     key: "3",
-    teacherName: "Danial Jack",
-    profession: "Teacher",
+    teacherName: "Hassan Ibrahim",
+    profession: "Arabic Teacher",
     image: {
-      link: "/teacher-3.jpg",
-      width: 611,
-      height: 408,
+      link: "/third-teacher.png",
+      width: 256,
+      height: 256,
       alt: "Teacher Photo",
     },
     detail: {
-      grade: "6-10",
-      experience: "5+ Years exp.",
-      education: "Teacher",
-      subject: "Math",
+      grade: "1-10",
+      experience: "8+ Years exp.",
+      education: "Bachelor’s in Arabic study, B.Ed.",
+      subject: "Arabic",
       shortDescription:
-        "Naina is an Engineer by profession & passionate about teaching. She has 5+ years experience is teaching IB, IGCSE, CBSE & ICSE Math. She understands the conceptual as well as application based problems faced by students and helps build a strong foundation to instill confidence.",
+        "Experienced in teaching Arabic language to Grades 1–10 students, this teacher focuses on building strong language skills aligned with UAE school requirements. Specializes in one-to-one online support.",
     },
   },
   {
     key: "4",
-    teacherName: "Danial Jack",
-    profession: "Teacher",
+    teacherName: "Samara Youssef",
+    profession: "Arabic Teacher",
     image: {
-      link: "/teacher-1.png",
-      width: 611,
-      height: 408,
+      link: "/fourth-teacher.png",
+      width: 256,
+      height: 256,
       alt: "Teacher Photo",
     },
     detail: {
-      grade: "6-10",
-      experience: "5+ Years exp.",
-      education: "Teacher",
-      subject: "Math",
+      grade: "1-10",
+      experience: "2+ Years exp.",
+      education: "Diploma in Arabic study",
+      subject: "Arabic",
       shortDescription:
-        "Naina is an Engineer by profession & passionate about teaching. She has 5+ years experience is teaching IB, IGCSE, CBSE & ICSE Math. She understands the conceptual as well as application based problems faced by students and helps build a strong foundation to instill confidence.",
+        "Certified Arabic educator with a proven record of helping school-aged learners excel in Arabic. Familiar with UAE curriculum structures and skilled in teaching both native and non-native Arabic students online.",
     },
   },
   {
     key: "5",
-    teacherName: "Danial Jack",
-    profession: "Teacher",
+    teacherName: "Eptehal Elgendy",
+    profession: "Arabic Teacher",
     image: {
-      link: "/teacher-2.jpg",
-      width: 611,
-      height: 408,
+      link: "/first-teacher.png",
+      width: 256,
+      height: 256,
       alt: "Teacher Photo",
     },
     detail: {
-      grade: "6-10",
-      experience: "5+ Years exp.",
-      education: "Teacher",
-      subject: "Math",
+      grade: "1-10",
+      experience: "6+ Years exp.",
+      education: "Master’s in Arabic Study",
+      subject: "Arabic",
       shortDescription:
-        "Naina is an Engineer by profession & passionate about teaching. She has 5+ years experience is teaching IB, IGCSE, CBSE & ICSE Math. She understands the conceptual as well as application based problems faced by students and helps build a strong foundation to instill confidence.",
+        "Dedicated online Arabic teacher with experience teaching across British and MOE curriculum schools in the UAE. Tailors each session to meet the specific level and pace of each student from Grades 1–10.",
     },
   },
   {
     key: "6",
-    teacherName: "Danial Jack",
-    profession: "Teacher",
+    teacherName: "Sarina Abdi",
+    profession: "Arabic Teacher",
     image: {
-      link: "/teacher-3.jpg",
-      width: 611,
-      height: 408,
+      link: "/third-teacher.png",
+      width: 256,
+      height: 256,
       alt: "Teacher Photo",
     },
     detail: {
-      grade: "6-10",
-      experience: "5+ Years exp.",
-      education: "Teacher",
-      subject: "Math",
+      grade: "1-10",
+      experience: "4+ Years exp.",
+      education: "Master’s in Arabic Study",
+      subject: "Arabic",
       shortDescription:
-        "Naina is an Engineer by profession & passionate about teaching. She has 5+ years experience is teaching IB, IGCSE, CBSE & ICSE Math. She understands the conceptual as well as application based problems faced by students and helps build a strong foundation to instill confidence.",
+        "Native Arabic speaker with several years of online tutoring experience for UAE-based students. Focuses on improving academic performance in reading, comprehension, and written expression for all grade levels.",
     },
   },
 ];
@@ -194,8 +194,6 @@ const TeachersPage = () => {
           </div>
         </div>
       </section>
-
-      <TeachersSlider />
 
       <FaqSection faqData={FAQ_DATA} />
     </React.Fragment>

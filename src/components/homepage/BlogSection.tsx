@@ -29,7 +29,7 @@ const BlogSection = () => {
               className="flex items-center justify-center flex-col"
             >
               <Button asChild className="md:text-base max-w-60 w-full">
-                <Link href="#">
+                <Link href="/blogs">
                   See all blog
                   <ArrowUpRight className="w-4 h-4" />
                 </Link>

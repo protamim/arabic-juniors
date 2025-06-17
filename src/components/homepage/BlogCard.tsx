@@ -29,7 +29,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ CardData = BLOG_DATA }) => {
               height={cardItem.image.height}
               alt={cardItem.image.altText}
               priority
-              className="rounded-t-2xl aspect-video object-cover object-top"
+              className="rounded-t-2xl aspect-video object-cover object-center"
             />
           </div>
 
@@ -73,7 +73,7 @@ const BLOG_DATA: BlogCardData[] = [
     shortDescription:
       "Embrace the joy of games to enhance your learning experience!",
     action: {
-      link: "#",
+      link: "/blogs/1",
       text: "Read More",
     },
     image: {
@@ -88,7 +88,7 @@ const BLOG_DATA: BlogCardData[] = [
     title: "10 Learning Game Ideas",
     shortDescription: "10 ideas for learning with for your kids to have fun.",
     action: {
-      link: "#",
+      link: '/blogs/2',
       text: "Read More",
     },
     image: {
@@ -104,7 +104,7 @@ const BLOG_DATA: BlogCardData[] = [
     shortDescription:
       "Want to do something outside home and games laptop? Here are our recomment. something",
     action: {
-      link: "#",
+      link: '/blogs/3',
       text: "Read More",
     },
     image: {
@@ -120,7 +120,7 @@ const BLOG_DATA: BlogCardData[] = [
     shortDescription:
       "Want to do something outside home and games laptop? Here are our recomment.",
     action: {
-      link: "#",
+      link: '/blogs/4',
       text: "Read More",
     },
     image: {

@@ -1,5 +1,6 @@
 import React from "react";
 import { IconCalling, IconEmail, IconLocation, IconWhatsApp } from "./svgIcons";
+import Link from "next/link";
 
 const ContactInfo = () => {
   return (
@@ -41,14 +42,14 @@ const ContactInfo = () => {
             </Link>
           </p> */}
 
-          <div className="flex items-start gap-x-3 w-full">
+          <Link href={'https://wa.me/971509921470?text=Hello!%20I%27m%20interested%20in%20enrolling%20in%20Arabic%20tuition%20classes.%20Please%20get%20in%20touch%20with%20me'} className="flex items-start gap-x-3 w-full">
             <span className="flex flex-grow-0 flex-shrink-0 basis-auto">
               <IconWhatsApp className="text-4xl" />
             </span>
             <span className="text-2xl font-bold text-neutral-900">
                +971 50 992 1470
             </span>
-          </div>
+          </Link>
         </div>
       </div>
     </React.Fragment>

@@ -10,8 +10,23 @@ import { FaqTypes } from "@/types";
 const FAQ_DATA: FaqTypes[] = [
   {
     key: "1",
+    question: "What is the cost of the Arabic tuition classes?",
+    answer: `Prices vary by package—based on session frequency and class type (group or one-on-one). Check our pricing plans for details.`,
+  },
+  {
+    key: "2",
     question: "Do you offer any discounts or promotions?",
-    answer: `Yes, we offer sibling discounts and seasonal promotions to help you save while you learn.`,
+    answer: `Yes, we offer sibling discounts, long-term enrollment deals, and seasonal promotions.`,
+  },
+  {
+    key: "3",
+    question: "How can I choose the best pricing plan for my child?",
+    answer: `Choose based on your child’s needs and schedule. Contact us for a free consultation if you need help deciding.`,
+  },
+  {
+    key: "4",
+    question: "What payment methods do you accept?",
+    answer: `We accept credit/debit cards, bank transfers, and PayPal.`,
   },
 ];
 
@@ -224,7 +239,7 @@ const PricingPlanPage = () => {
             <p className="text-sm font-normal text-neutral-700 text-center mb-6 lg:text-lg max-w-[540px] mx-auto">
               Our pricing is built to support every learner at every stage.
               <br />
-              Transform your Arabic skills in just 60 minutes per class.s
+              Transform your Arabic skills in just 60 minutes per classes
             </p>
 
             <div aria-label="pricing-tab-wrapper">
