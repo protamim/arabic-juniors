@@ -43,6 +43,7 @@ import { useCountryCode } from "@/hooks/useCountry";
 import { Separator } from "@/components/ui/separator";
 import { getNames } from "country-list";
 import { Textarea } from "@/components/ui/textarea";
+import { MultiSelect } from "@/components/ui/multi-select";
 
 const TIME_SLOTS = {
   timeFormat: "12-hour",
@@ -310,8 +311,68 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* Phone Number Field */}
                 <FormField
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>Contact No</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="WhatsApp (If applicable)"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Address"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  name="grade"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormControl>
+                        <Select
+                          onValueChange={(value) =>
+                            field.onChange(Number(value))
+                          }
+                        >
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                            <SelectValue placeholder="Where do live now" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {getNames().map((country, index) => (
+                              <SelectItem key={index} value={country}>
+                                {country}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Phone Number Field */}
+                {/* <FormField
                   name="phoneNumber"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
@@ -334,120 +395,30 @@ const TeacherMultiStepForm = () => {
                       <FormMessage />
                     </FormItem>
                   )}
-                />
-
-                {/* Country */}
-                <FormField
-                  name="grade"
-                  render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
-                      <FormLabel>Country</FormLabel>
-                      <FormControl>
-                        <Select
-                          onValueChange={(value) =>
-                            field.onChange(Number(value))
-                          }
-                        >
-                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
-                            <SelectValue placeholder="Choose your country" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {getNames().map((country, index) => (
-                              <SelectItem key={index} value={country}>
-                                {country}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                /> */}
 
                 <div
                   aria-describedby="form-title"
-                  className="mt-4 col-span-full"
+                  className="mt-4 col-span-full space-y-1"
                 >
                   <h5 className="text-3xl font-medium text-neutral-800">
                     Personal Information
                   </h5>
+                  <p className="text-gray-600 text-sm font-medium">
+                    Please tell us about yourself
+                  </p>
                 </div>
                 <Separator className="my-1 col-span-full" />
 
                 {/* date of birth */}
                 <FormField
-                  name="dob"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col col-span-full">
-                      <FormLabel>Date of birth</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <FormControl>
-                            <Button
-                              variant={"ghost"}
-                              className={cn(
-                                "bg-white rounded-lg",
-                                !field.value && "text-muted-foreground"
-                              )}
-                            >
-                              {field.value ? (
-                                format(field.value, "PPP")
-                              ) : (
-                                <span>Pick a date</span>
-                              )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                            </Button>
-                          </FormControl>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={field.value}
-                            onSelect={field.onChange}
-                            disabled={(date) =>
-                              date > new Date() || date < new Date("1900-01-01")
-                            }
-                            initialFocus
-                          />
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                {/* First Name */}
-                <FormField
-                  name="firstName"
-                  render={({ field }) => (
-                    <FormItem
-                      aria-label="form-item"
-                      className="space-y-2 col-span-full sm:col-span-1"
-                    >
-                      <FormLabel>First Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder="Enter your first name"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                {/* Last Name */}
-                <FormField
                   name="lastName"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
-                      <FormLabel>Last Name</FormLabel>
+                    <FormItem className="space-y-2 col-span-full">
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="Enter your last name"
+                          placeholder="Date of birth"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
@@ -461,7 +432,6 @@ const TeacherMultiStepForm = () => {
                   name="grade"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
-                      <FormLabel>Materials status</FormLabel>
                       <FormControl>
                         <Select
                           onValueChange={(value) =>
@@ -469,7 +439,7 @@ const TeacherMultiStepForm = () => {
                           }
                         >
                           <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
-                            <SelectValue placeholder="Select" />
+                            <SelectValue placeholder="Material status" />
                           </SelectTrigger>
                           <SelectContent>
                             {["Married", "Unmarried"].map((item, index) => (
@@ -485,12 +455,11 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* Country */}
+                {/* Nationality */}
                 <FormField
                   name="grade"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
-                      <FormLabel>Country</FormLabel>
                       <FormControl>
                         <Select
                           onValueChange={(value) =>
@@ -498,7 +467,7 @@ const TeacherMultiStepForm = () => {
                           }
                         >
                           <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
-                            <SelectValue placeholder="Choose your country" />
+                            <SelectValue placeholder="Nationality" />
                           </SelectTrigger>
                           <SelectContent>
                             {getNames().map((country, index) => (
@@ -514,15 +483,30 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* About me */}
+                <FormField
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="Occupation"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* introduce */}
                 <FormField
                   name=""
                   render={({ field }) => (
                     <FormItem className="col-span-full">
-                      <FormLabel>About me</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="Write yourself...."
+                          placeholder="Write a simple text to introduce yourself"
                           className="resize-none bg-white"
                           {...field}
                         />
@@ -537,7 +521,6 @@ const TeacherMultiStepForm = () => {
                   name="lastName"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
-                      <FormLabel>Facebook</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -555,6 +538,7 @@ const TeacherMultiStepForm = () => {
                   name="lastName"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-1">
+                      <FormLabel>Upload Personal Image</FormLabel>
                       <FormControl>
                         <Input
                           type="file"
@@ -579,7 +563,7 @@ const TeacherMultiStepForm = () => {
                   <h4 className="text-3xl font-bold text-neutral-800">
                     Academic & Professional Information
                   </h4>
-                  <p className="text-xl font-medium text-neutral-700">
+                  <p className="text-base font-medium text-neutral-700">
                     Please tell us about your education, Occupation, and
                     Experience
                   </p>
@@ -588,17 +572,15 @@ const TeacherMultiStepForm = () => {
                 <Separator className="col-span-full" />
 
                 {/* Education */}
-
                 <FormField
                   name=""
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
-                      <FormLabel>Education</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           type="text"
-                          placeholder="Masters in Commerce"
+                          placeholder="Education details"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
@@ -607,17 +589,16 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* Year */}
+                {/* teaching experience */}
                 <FormField
                   name=""
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
-                      <FormLabel>Year</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
                           type="text"
-                          placeholder="5 years"
+                          placeholder="Previous Online Teaching Experience"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
@@ -642,9 +623,19 @@ const TeacherMultiStepForm = () => {
                             <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent>
-                            {Array.from({ length: 20 }).map((_, index) => (
-                              <SelectItem key={index} value={index + "1"}>
-                                Language {index + 1}
+                            {[
+                              { label: "English", value: "eng" },
+                              { label: "Urdu", value: "urdu" },
+                              { label: "Hindi", value: "hindi" },
+                              { label: "Malayalam", value: "malayalam" },
+                              { label: "Tamil", value: "tamil" },
+                              { label: "Philippine", value: "philippine" },
+                              { label: "Bengali", value: "bengali" },
+                              { label: "French", value: "french" },
+                              { label: "German", value: "german" },
+                            ].map((lang) => (
+                              <SelectItem key={lang.value} value={lang.value}>
+                                {lang.label}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -662,22 +653,22 @@ const TeacherMultiStepForm = () => {
                     <FormItem className="space-y-2 col-span-full">
                       <FormLabel>Other Language</FormLabel>
                       <FormControl>
-                        <Select
-                          onValueChange={(value) =>
-                            field.onChange(Number(value))
-                          }
-                        >
-                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
-                            <SelectValue placeholder="Select" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {Array.from({ length: 20 }).map((_, index) => (
-                              <SelectItem key={index} value={index + "1"}>
-                                Language {index + 1}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                        <MultiSelect
+                          onValueChange={(value) => field.onChange(value)}
+                          options={[
+                            { label: "English", value: "eng" },
+                            { label: "Urdu", value: "urdu" },
+                            { label: "Hindi", value: "hindi" },
+                            { label: "Malayalam", value: "malayalam" },
+                            { label: "Tamil", value: "tamil" },
+                            { label: "Philippine", value: "philippine" },
+                            { label: "Bengali", value: "bengali" },
+                            { label: "French", value: "french" },
+                            { label: "German", value: "german" },
+                          ]}
+                          placeholder="Select Languages"
+                          className="bg-white hover:bg-white"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -686,10 +677,67 @@ const TeacherMultiStepForm = () => {
 
                 {/* Upload */}
                 <FormField
-                  name="lastName"
+                  name=""
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-1">
-                      <FormLabel>Upload your CV</FormLabel>
+                      <FormLabel>Document (e.g CV)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="file"
+                          {...field}
+                          placeholder="Upload you CV"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Upload */}
+                <FormField
+                  name=""
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-1">
+                      <FormLabel>Document (e.g Training)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="file"
+                          {...field}
+                          placeholder="Upload you CV"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Upload */}
+                <FormField
+                  name=""
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-1">
+                      <FormLabel>Document (e.g M.A or B.Ed)</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="file"
+                          {...field}
+                          placeholder="Upload you CV"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Upload */}
+                <FormField
+                  name=""
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-1">
+                      <FormLabel>Document (e.g Teaching Cert.)</FormLabel>
                       <FormControl>
                         <Input
                           type="file"
@@ -711,8 +759,12 @@ const TeacherMultiStepForm = () => {
                 className="flex items-start flex-col gap-y-4"
               >
                 <div className="space-y-4">
-                  <h3 className="text-4xl text-neutral-800 font-bold">Reading & Reciting</h3>
-                  <p className="text-2xl font-normal text-neutral-700">Please read & recite the below and upload an audio file</p>
+                  <h3 className="text-4xl text-neutral-800 font-bold">
+                    Reading & Reciting
+                  </h3>
+                  <p className="text-2xl font-normal text-neutral-700">
+                    Please read & recite the below and upload an audio file
+                  </p>
                 </div>
 
                 <Separator />
@@ -740,7 +792,9 @@ const TeacherMultiStepForm = () => {
                   name=""
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-1">
-                      <FormLabel>Read the above paragraph and upload audio file.</FormLabel>
+                      <FormLabel>
+                        Read the above paragraph and upload audio file.
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="file"
@@ -759,7 +813,10 @@ const TeacherMultiStepForm = () => {
                   name=""
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-1">
-                      <FormLabel>Please recite the first 10 Ayah of Surah An-Naba and upload audio file</FormLabel>
+                      <FormLabel>
+                        Please recite the first 10 Ayah of Surah An-Naba and
+                        upload audio file
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="file"
