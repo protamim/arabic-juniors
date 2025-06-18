@@ -36,7 +36,221 @@ import { MultiSelect } from "@/components/ui/multi-select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LoaderCircle } from "lucide-react";
 
-const formSchema = z.object({});
+const countries = getNames();
+const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
+
+const langValues = [
+  "eng",
+  "urdu",
+  "hindi",
+  "malayalam",
+  "tamil",
+  "philippine",
+  "bengali",
+  "french",
+  "german",
+] as const;
+
+const formSchema = z.object({
+  firstName: z
+    .string({ message: "First Name is required!" })
+    .min(3, { message: "First Name must be at least 3 characters long" })
+    .max(50, { message: "First Name must be under 50 characters" }),
+  lastName: z
+    .string({ message: "Last Name is required!" })
+    .min(3, { message: "Last Name must be at least 3 characters long" })
+    .max(50, { message: "Last Name must be under 50 characters" }),
+  gender: z.enum(["Male", "Female", "Custom"], {
+    required_error: "Gender is required",
+    invalid_type_error: "Invalid gender option",
+  }),
+  email: z.string().email({ message: "Email is required!" }),
+  "whatsapp-number": z
+    .string()
+    .min(10, { message: "Number must be at least 10 digits" })
+    .max(15, { message: "Number must be at most 15 digits" })
+    .regex(/^\d+$/, { message: "Only numbers are allowed" })
+    .optional(), // Optional since it's "If applicable"
+  address: z
+    .string({ message: "Address is required!" })
+    .min(5, { message: "Address must be at least 5 characters long" })
+    .max(120, { message: "Address must be at least 120 characters long" }),
+  "where-live": z.string().refine((val) => countries.includes(val), {
+    message: "Please select a valid country",
+  }),
+  birth: z
+    .string()
+    .min(1, { message: "Date of birth is required" })
+    .refine((val) => /^\d{4}-\d{2}-\d{2}$/.test(val), {
+      message: "Date must be in YYYY-MM-DD format",
+    }),
+  "materials-status": z.enum(["Married", "Unmarried"], {
+    required_error: "Material status is required",
+    invalid_type_error: "Invalid material status",
+  }),
+  nationality: z.string().refine((val) => countries.includes(val), {
+    message: "Please select a valid country",
+  }),
+  occupation: z
+    .string()
+    .min(2, { message: "Occupation must be at least 2 characters long" })
+    .max(100, { message: "Occupation must be under 100 characters" }),
+  "introduce-yourself": z
+    .string()
+    .min(10, { message: "Please write at least 10 characters" })
+    .max(1000, { message: "Introduction must be under 1000 characters" }),
+  "fb-id": z
+    .string()
+    .min(5, { message: "Facebook ID must be at least 5 characters long" })
+    .max(100, { message: "Facebook ID must be under 100 characters" }),
+  "personal-image": z
+    .custom<File>()
+    .refine((file) => file instanceof File, {
+      message: "Please upload an image",
+    })
+    .refine((file) => file?.size <= MAX_FILE_SIZE, {
+      message: "Image must be less than 2MB",
+    })
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), {
+      message: "Only JPG, PNG or WEBP images are allowed",
+    }),
+  education: z
+    .string()
+    .min(2, { message: "Please enter your education details" })
+    .max(200, { message: "Education details must be under 200 characters" }),
+  "teaching-experience": z
+    .string()
+    .min(5, { message: "Please describe your online teaching experience" })
+    .max(200, { message: "Teaching experience must be under 200 characters" }),
+  "mother-lang": z.enum(langValues, {
+    errorMap: () => ({ message: "Please select a valid mother language" }),
+  }),
+  "other-langs": z
+    .array(z.enum(langValues))
+    .optional()
+    .refine(
+      (arr) => {
+        if (!arr) return true; // if undefined, consider valid (because optional)
+        return new Set(arr).size === arr.length;
+      },
+      {
+        message: "Duplicate languages are not allowed",
+      }
+    ),
+  "doc-1": z
+    .any()
+    .refine((files) => files?.length === 1, {
+      message: "Please upload a document",
+    })
+    .refine(
+      (files) => {
+        if (!files || files.length === 0) return true; // skip if empty to avoid double error
+        const file = files[0];
+        return [
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ].includes(file.type);
+      },
+      {
+        message: "Only PDF or Word documents are allowed",
+      }
+    ),
+  "doc-2": z
+    .any()
+    .refine((files) => files?.length === 1, {
+      message: "Please upload a document",
+    })
+    .refine(
+      (files) => {
+        if (!files || files.length === 0) return true; // skip if empty to avoid double error
+        const file = files[0];
+        return [
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ].includes(file.type);
+      },
+      {
+        message: "Only PDF or Word documents are allowed",
+      }
+    ),
+  "doc-3": z
+    .any()
+    .refine((files) => files?.length === 1, {
+      message: "Please upload a document",
+    })
+    .refine(
+      (files) => {
+        if (!files || files.length === 0) return true; // skip if empty to avoid double error
+        const file = files[0];
+        return [
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ].includes(file.type);
+      },
+      {
+        message: "Only PDF or Word documents are allowed",
+      }
+    ),
+  "doc-4": z
+    .any()
+    .refine((files) => files?.length === 1, {
+      message: "Please upload a document",
+    })
+    .refine(
+      (files) => {
+        if (!files || files.length === 0) return true; // skip if empty to avoid double error
+        const file = files[0];
+        return [
+          "application/pdf",
+          "application/msword",
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ].includes(file.type);
+      },
+      {
+        message: "Only PDF or Word documents are allowed",
+      }
+    ),
+  "preferred-interview-time": z.enum(["morning", "afternoon", "evening"], {
+    required_error: "Please select a preferred interview time",
+  }),
+  "expected-salary": z
+    .string()
+    .min(1, { message: "Expected salary is required" })
+    .transform((val) => Number(val))
+    .refine((val) => !isNaN(val) && val > 0, {
+      message: "Expected salary must be a valid positive number",
+    }),
+  "work-hours": z
+    .string()
+    .min(1, { message: "Work hours are required" })
+    .transform((val) => Number(val))
+    .refine((val) => !isNaN(val) && val > 0, {
+      message: "Please enter a valid number of hours",
+    })
+    .refine((val) => val >= 0.5 && val <= 12, {
+      message: "Work hours must be between 0.5 and 12",
+    }),
+  "employment-desire": z.enum(["full-time", "part-time", "full-part"], {
+    required_error: "Please select an employment type",
+  }),
+  "what-make-ideal": z
+    .string()
+    .min(10, { message: "Please describe in at least 10 characters" })
+    .max(1000, { message: "Please limit your response to 1000 characters" }),
+  "how-find-us": z.enum(
+    ["facebook", "linkedin", "google", "al-furqan", "advertisement", "other"],
+    {
+      required_error: "Please select an option",
+    }
+  ),
+  declaration: z.boolean().refine((val) => val === true, {
+    message: "You must accept the declaration.",
+  }),
+});
 
 const TeacherMultiStepForm = () => {
   const { countryCode, error, loading } = useCountryCode();
@@ -49,7 +263,37 @@ const TeacherMultiStepForm = () => {
   const methods = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
-    defaultValues: {},
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      gender: "Male", // default selected gender
+      email: "",
+      "whatsapp-number": "",
+      address: "",
+      "where-live": "",
+      birth: "",
+      "materials-status": "Unmarried",
+      nationality: "",
+      occupation: "",
+      "introduce-yourself": "",
+      "fb-id": "",
+      "personal-image": undefined as unknown as File, // Cast to satisfy z.custom<File>()
+      education: "",
+      "teaching-experience": "",
+      "mother-lang": "eng",
+      "other-langs": [],
+      "doc-1": undefined,
+      "doc-2": undefined,
+      "doc-3": undefined,
+      "doc-4": undefined,
+      "preferred-interview-time": "morning",
+      "expected-salary": 0, // will be transformed into number
+      "work-hours": 0, // will be transformed into number
+      "employment-desire": "full-time",
+      "what-make-ideal": "",
+      "how-find-us": "facebook",
+      declaration: false,
+    },
   });
 
   //   const validateStep = async () => {
@@ -105,7 +349,7 @@ const TeacherMultiStepForm = () => {
                   render={({ field }) => (
                     <FormItem
                       aria-label="form-item"
-                      className="space-y-2 col-span-full sm:col-span-1"
+                      className="space-y-2 h-full col-span-full sm:col-span-1"
                     >
                       <FormLabel>First Name</FormLabel>
                       <FormControl>
@@ -124,7 +368,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="lastName"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>Last Name</FormLabel>
                       <FormControl>
                         <Input
@@ -138,24 +382,22 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* Grade */}
+                {/* Gender */}
                 <FormField
                   name="gender"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 h-full col-span-full">
                       <FormLabel>Gender</FormLabel>
                       <FormControl>
                         <Select
-                          onValueChange={(value) =>
-                            field.onChange(Number(value))
-                          }
+                          onValueChange={(value) => field.onChange(value)}
                         >
                           <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Select gender" />
                           </SelectTrigger>
                           <SelectContent>
                             {["Male", "Female", "Custom"].map((item, i) => (
-                              <SelectItem key={i + 1} value={item}>
+                              <SelectItem key={i} value={item}>
                                 {item}
                               </SelectItem>
                             ))}
@@ -171,7 +413,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="email"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 h-full col-span-full">
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input
@@ -190,11 +432,11 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="whatsapp-number"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>Contact No</FormLabel>
                       <FormControl>
                         <Input
-                          type="number"
+                          type="text"
                           {...field}
                           placeholder="WhatsApp (If applicable)"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
@@ -209,7 +451,8 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="address"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
+                      <FormLabel className="invisible">invisible</FormLabel>
                       <FormControl>
                         <Input
                           type="text"
@@ -225,15 +468,11 @@ const TeacherMultiStepForm = () => {
 
                 {/* Where do you live now */}
                 <FormField
-                  name="grade"
+                  name="where-live"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormControl>
-                        <Select
-                          onValueChange={(value) =>
-                            field.onChange(Number(value))
-                          }
-                        >
+                        <Select onValueChange={field.onChange}>
                           <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Where do you live now" />
                           </SelectTrigger>
@@ -268,12 +507,12 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="birth"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
                         <Input
                           type="text"
                           {...field}
-                          placeholder="Date of birth"
+                          placeholder="Date of Birth e.g YYYY-MM-DD"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
@@ -286,13 +525,9 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="materials-status"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
-                        <Select
-                          onValueChange={(value) =>
-                            field.onChange(Number(value))
-                          }
-                        >
+                        <Select onValueChange={field.onChange}>
                           <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Material status" />
                           </SelectTrigger>
@@ -314,7 +549,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="nationality"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
                         <Select
                           onValueChange={(value) =>
@@ -342,7 +577,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="occupation"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
                         <Input
                           {...field}
@@ -355,11 +590,11 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* introduce */}
+                {/* Introduce yourself */}
                 <FormField
                   name="introduce-yourself"
                   render={({ field }) => (
-                    <FormItem className="col-span-full">
+                    <FormItem className="col-span-full h-full">
                       <FormControl>
                         <Textarea
                           placeholder="Write a simple text to introduce yourself"
@@ -376,7 +611,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="fb-id"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
                         <Input
                           {...field}
@@ -393,12 +628,13 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="personal-image"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-1">
                       <FormLabel>Upload Personal Image</FormLabel>
                       <FormControl>
                         <Input
                           type="file"
-                          {...field}
+                          accept="image/*"
+                          onChange={(e) => field.onChange(e.target.files?.[0])}
                           placeholder="Facebook ID"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
@@ -431,7 +667,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="education"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
                         <Input
                           {...field}
@@ -449,7 +685,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="teaching-experience"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
                         <Input
                           {...field}
@@ -467,14 +703,10 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="mother-lang"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 h-full col-span-full">
                       <FormLabel>Mother Language</FormLabel>
                       <FormControl>
-                        <Select
-                          onValueChange={(value) =>
-                            field.onChange(Number(value))
-                          }
-                        >
+                        <Select onValueChange={field.onChange}>
                           <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Select" />
                           </SelectTrigger>
@@ -506,11 +738,11 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="other-langs"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 h-full col-span-full">
                       <FormLabel>Other Language</FormLabel>
                       <FormControl>
                         <MultiSelect
-                          onValueChange={(value) => field.onChange(value)}
+                          onValueChange={field.onChange}
                           options={[
                             { label: "English", value: "eng" },
                             { label: "Urdu", value: "urdu" },
@@ -535,7 +767,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="doc-1"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-1">
                       <FormLabel>Document (e.g CV)</FormLabel>
                       <FormControl>
                         <Input
@@ -554,7 +786,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="doc-2"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-1">
                       <FormLabel>Document (e.g Training)</FormLabel>
                       <FormControl>
                         <Input
@@ -573,7 +805,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="doc-3"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-1">
                       <FormLabel>Document (e.g M.A or B.Ed)</FormLabel>
                       <FormControl>
                         <Input
@@ -592,7 +824,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="doc-4"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-1">
                       <FormLabel>Document (e.g Teaching Cert.)</FormLabel>
                       <FormControl>
                         <Input
@@ -618,14 +850,10 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="preferred-interview-time"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>Preferred Interview Time</FormLabel>
                       <FormControl>
-                        <Select
-                          onValueChange={(value) =>
-                            field.onChange(Number(value))
-                          }
-                        >
+                        <Select onValueChange={field.onChange}>
                           <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Select" />
                           </SelectTrigger>
@@ -651,11 +879,11 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="expected-salary"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>Expected Salary (AED per hour)</FormLabel>
                       <FormControl>
                         <Input
-                          type="text"
+                          type="number"
                           {...field}
                           placeholder="AED per hour"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
@@ -670,11 +898,11 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="work-hours"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>How many hours can you work</FormLabel>
                       <FormControl>
                         <Input
-                          type="text"
+                          type="number"
                           {...field}
                           placeholder="e.g 3.5"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
@@ -690,7 +918,7 @@ const TeacherMultiStepForm = () => {
                   // control={form.control}
                   name="employment-desire"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                    <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>Employment Desire</FormLabel>
                       <FormControl>
                         <RadioGroup
@@ -709,6 +937,7 @@ const TeacherMultiStepForm = () => {
                               Full Time
                             </FormLabel>
                           </FormItem>
+
                           <FormItem className="flex items-center gap-3 space-y-0">
                             <FormControl>
                               <RadioGroupItem
@@ -720,6 +949,7 @@ const TeacherMultiStepForm = () => {
                               Part Time
                             </FormLabel>
                           </FormItem>
+
                           <FormItem className="flex items-center gap-3 space-y-0">
                             <FormControl>
                               <RadioGroupItem
@@ -742,7 +972,7 @@ const TeacherMultiStepForm = () => {
                 <FormField
                   name="what-make-ideal"
                   render={({ field }) => (
-                    <FormItem className="col-span-full">
+                    <FormItem className="col-span-full h-full">
                       <FormControl>
                         <Textarea
                           placeholder="What makes you an idea candidate?"
@@ -760,7 +990,7 @@ const TeacherMultiStepForm = () => {
                   // control={form.control}
                   name="how-find-us"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 col-span-full h-full">
                       <FormLabel>How did you find out about us</FormLabel>
                       <FormControl>
                         <RadioGroup
@@ -844,35 +1074,24 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* declaration */}
+                {/* Declaration */}
                 <FormField
-                  // control={form.control}
                   name="declaration"
-                  render={({ field }) => {
-                    return (
-                      <FormItem className="col-span-full flex gap-2 space-y-0">
-                        <FormControl>
-                          <Checkbox
-                          // checked={field.value?.includes(item.id)}
-                          // onCheckedChange={(checked) => {
-                          //   return checked
-                          //     ? field.onChange([...field.value, item.id])
-                          //     : field.onChange(
-                          //         field.value?.filter(
-                          //           (value) => value !== item.id
-                          //         )
-                          //       )
-                          // }}
-                          />
-                        </FormControl>
-                        <FormLabel className="text-sm font-normal">
-                          I declare that the information I have provided in this
-                          registration form is true and accurate to the best of
-                          my knowledge
-                        </FormLabel>
-                      </FormItem>
-                    );
-                  }}
+                  render={({ field }) => (
+                    <FormItem className="col-span-full h-full flex gap-2 space-y-0">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormLabel className="text-sm font-normal">
+                        I declare that the information I have provided in this
+                        registration form is true and accurate to the best of my
+                        knowledge.
+                      </FormLabel>
+                    </FormItem>
+                  )}
                 />
               </div>
               {/* THIRD STEP END */}
