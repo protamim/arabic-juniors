@@ -1,6 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
@@ -10,11 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Select,
@@ -23,131 +18,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
-import { CalendarIcon, LoaderCircle } from "lucide-react";
+
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Steps, useSteps } from "react-step-builder";
 import "react-phone-number-input/style.css";
-import PhoneInput, {
-  Country,
-  isValidPhoneNumber,
-} from "react-phone-number-input";
 import { Progress } from "@/components/ui/progress";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 import { useCountryCode } from "@/hooks/useCountry";
 import { Separator } from "@/components/ui/separator";
 import { getNames } from "country-list";
 import { Textarea } from "@/components/ui/textarea";
 import { MultiSelect } from "@/components/ui/multi-select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { LoaderCircle } from "lucide-react";
 
-const TIME_SLOTS = {
-  timeFormat: "12-hour",
-  intervalMinutes: 15,
-  startTime: "07:00 AM",
-  endTime: "11:45 PM",
-  availableTimes: [
-    { time: "07:00 AM" },
-    { time: "07:15 AM" },
-    { time: "07:30 AM" },
-    { time: "07:45 AM" },
-    { time: "08:00 AM" },
-    { time: "08:15 AM" },
-    { time: "08:30 AM" },
-    { time: "08:45 AM" },
-    { time: "09:00 AM" },
-    { time: "09:15 AM" },
-    { time: "09:30 AM" },
-    { time: "09:45 AM" },
-    { time: "10:00 AM" },
-    { time: "10:15 AM" },
-    { time: "10:30 AM" },
-    { time: "10:45 AM" },
-    { time: "11:00 AM" },
-    { time: "11:15 AM" },
-    { time: "11:30 AM" },
-    { time: "11:45 AM" },
-    { time: "12:00 PM" },
-    { time: "12:15 PM" },
-    { time: "12:30 PM" },
-    { time: "12:45 PM" },
-    { time: "01:00 PM" },
-    { time: "01:15 PM" },
-    { time: "01:30 PM" },
-    { time: "01:45 PM" },
-    { time: "02:00 PM" },
-    { time: "02:15 PM" },
-    { time: "02:30 PM" },
-    { time: "02:45 PM" },
-    { time: "03:00 PM" },
-    { time: "03:15 PM" },
-    { time: "03:30 PM" },
-    { time: "03:45 PM" },
-    { time: "04:00 PM" },
-    { time: "04:15 PM" },
-    { time: "04:30 PM" },
-    { time: "04:45 PM" },
-    { time: "05:00 PM" },
-    { time: "05:15 PM" },
-    { time: "05:30 PM" },
-    { time: "05:45 PM" },
-    { time: "06:00 PM" },
-    { time: "06:15 PM" },
-    { time: "06:30 PM" },
-    { time: "06:45 PM" },
-    { time: "07:00 PM" },
-    { time: "07:15 PM" },
-    { time: "07:30 PM" },
-    { time: "07:45 PM" },
-    { time: "08:00 PM" },
-    { time: "08:15 PM" },
-    { time: "08:30 PM" },
-    { time: "08:45 PM" },
-    { time: "09:00 PM" },
-    { time: "09:15 PM" },
-    { time: "09:30 PM" },
-    { time: "09:45 PM" },
-    { time: "10:00 PM" },
-    { time: "10:15 PM" },
-    { time: "10:30 PM" },
-    { time: "10:45 PM" },
-    { time: "11:00 PM" },
-    { time: "11:15 PM" },
-    { time: "11:30 PM" },
-    { time: "11:45 PM" },
-  ],
-};
-
-const timeOptions = TIME_SLOTS.availableTimes.map((slot) => slot.time) as [
-  string,
-  ...string[]
-]; // Non-empty tuple
-
-const formSchema = z.object({
-  firstName: z
-    .string()
-    .min(2, "First name must be at least 2 characters")
-    .max(50),
-  lastName: z.string().min(2).max(50),
-  email: z.string().email(),
-  phoneNumber: z.string().refine((value) => isValidPhoneNumber(value), {
-    message: "Invalid phone number",
-  }),
-  grade: z.number().min(1),
-  howManyJoin: z.string(),
-  preferredTeacher: z.string(),
-  classStartDate: z.date().refine((date) => date > new Date(), {
-    message: "Start date must be in the future",
-  }),
-  classStartTime: z.enum(timeOptions, {
-    errorMap: () => ({ message: "Please select a valid time." }),
-  }),
-  howFindUs: z.string(),
-});
+const formSchema = z.object({});
 
 const TeacherMultiStepForm = () => {
   const { countryCode, error, loading } = useCountryCode();
@@ -160,18 +49,7 @@ const TeacherMultiStepForm = () => {
   const methods = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phoneNumber: "",
-      grade: 0,
-      howManyJoin: "0",
-      preferredTeacher: "",
-      classStartDate: undefined,
-      classStartTime: TIME_SLOTS.availableTimes[0].time,
-      howFindUs: "",
-    },
+    defaultValues: {},
   });
 
   //   const validateStep = async () => {
@@ -212,7 +90,7 @@ const TeacherMultiStepForm = () => {
               {/* FIRST STEP START */}
               <div
                 aria-label="first-step"
-                className="grid grid-cols-1 sm:grid-cols-2 gap-x-7 gap-y-5"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-x-7 gap-y-5 items-end"
               >
                 <div aria-describedby="form-title" className="col-span-full">
                   <h5 className="text-3xl font-medium text-neutral-800">
@@ -262,7 +140,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Grade */}
                 <FormField
-                  name="grade"
+                  name="gender"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormLabel>Gender</FormLabel>
@@ -277,10 +155,7 @@ const TeacherMultiStepForm = () => {
                           </SelectTrigger>
                           <SelectContent>
                             {["Male", "Female", "Custom"].map((item, i) => (
-                              <SelectItem
-                                key={i + 1}
-                                value={(i + 1).toString()}
-                              >
+                              <SelectItem key={i + 1} value={item}>
                                 {item}
                               </SelectItem>
                             ))}
@@ -311,13 +186,15 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
+                {/* WhatsApp Number */}
                 <FormField
-                  name="lastName"
+                  name="whatsapp-number"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
                       <FormLabel>Contact No</FormLabel>
                       <FormControl>
                         <Input
+                          type="number"
                           {...field}
                           placeholder="WhatsApp (If applicable)"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
@@ -328,12 +205,14 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
+                {/* Address */}
                 <FormField
-                  name="lastName"
+                  name="address"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
                       <FormControl>
                         <Input
+                          type="text"
                           {...field}
                           placeholder="Address"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
@@ -344,10 +223,11 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
+                {/* Where do you live now */}
                 <FormField
                   name="grade"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
+                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
                       <FormControl>
                         <Select
                           onValueChange={(value) =>
@@ -355,7 +235,7 @@ const TeacherMultiStepForm = () => {
                           }
                         >
                           <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
-                            <SelectValue placeholder="Where do live now" />
+                            <SelectValue placeholder="Where do you live now" />
                           </SelectTrigger>
                           <SelectContent>
                             {getNames().map((country, index) => (
@@ -370,32 +250,6 @@ const TeacherMultiStepForm = () => {
                     </FormItem>
                   )}
                 />
-
-                {/* Phone Number Field */}
-                {/* <FormField
-                  name="phoneNumber"
-                  render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-full">
-                      <FormLabel>Mobile</FormLabel>
-                      <FormControl>
-                        <PhoneInput
-                          defaultCountry={
-                            countryCode == "undefined"
-                              ? "AE"
-                              : (countryCode as Country)
-                          }
-                          value={field.value}
-                          onChange={(phone) => {
-                            field.onChange(phone);
-                            console.log(phone);
-                          }}
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                /> */}
 
                 <div
                   aria-describedby="form-title"
@@ -412,11 +266,12 @@ const TeacherMultiStepForm = () => {
 
                 {/* date of birth */}
                 <FormField
-                  name="lastName"
+                  name="birth"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormControl>
                         <Input
+                          type="text"
                           {...field}
                           placeholder="Date of birth"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
@@ -429,7 +284,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Materials status */}
                 <FormField
-                  name="grade"
+                  name="materials-status"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormControl>
@@ -457,7 +312,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Nationality */}
                 <FormField
-                  name="grade"
+                  name="nationality"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormControl>
@@ -483,8 +338,9 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
+                {/* Occupation */}
                 <FormField
-                  name="lastName"
+                  name="occupation"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormControl>
@@ -501,7 +357,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* introduce */}
                 <FormField
-                  name=""
+                  name="introduce-yourself"
                   render={({ field }) => (
                     <FormItem className="col-span-full">
                       <FormControl>
@@ -518,7 +374,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Facebook */}
                 <FormField
-                  name="lastName"
+                  name="fb-id"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormControl>
@@ -533,9 +389,9 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* Upload */}
+                {/* Upload personal image */}
                 <FormField
-                  name="lastName"
+                  name="personal-image"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-1">
                       <FormLabel>Upload Personal Image</FormLabel>
@@ -573,7 +429,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Education */}
                 <FormField
-                  name=""
+                  name="education"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormControl>
@@ -591,7 +447,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* teaching experience */}
                 <FormField
-                  name=""
+                  name="teaching-experience"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormControl>
@@ -609,7 +465,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Mother Language */}
                 <FormField
-                  name=""
+                  name="mother-lang"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormLabel>Mother Language</FormLabel>
@@ -648,7 +504,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Other Language */}
                 <FormField
-                  name=""
+                  name="other-langs"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormLabel>Other Language</FormLabel>
@@ -675,9 +531,9 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* Upload */}
+                {/* Upload - Document 1 */}
                 <FormField
-                  name=""
+                  name="doc-1"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-1">
                       <FormLabel>Document (e.g CV)</FormLabel>
@@ -694,9 +550,9 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* Upload */}
+                {/* Upload - Document 2 */}
                 <FormField
-                  name=""
+                  name="doc-2"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-1">
                       <FormLabel>Document (e.g Training)</FormLabel>
@@ -713,9 +569,9 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* Upload */}
+                {/* Upload - Document 3 */}
                 <FormField
-                  name=""
+                  name="doc-3"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-1">
                       <FormLabel>Document (e.g M.A or B.Ed)</FormLabel>
@@ -732,9 +588,9 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* Upload */}
+                {/* Upload - Document 4 */}
                 <FormField
-                  name=""
+                  name="doc-4"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-1">
                       <FormLabel>Document (e.g Teaching Cert.)</FormLabel>
@@ -755,51 +611,53 @@ const TeacherMultiStepForm = () => {
 
               {/* THIRD STEP START */}
               <div
-                aria-label="second-step"
-                className="flex items-start flex-col gap-y-4"
+                aria-label="third-step"
+                className="grid grid-cols-2 gap-x-5 gap-y-6"
               >
-                <div className="space-y-4">
-                  <h3 className="text-4xl text-neutral-800 font-bold">
-                    Reading & Reciting
-                  </h3>
-                  <p className="text-2xl font-normal text-neutral-700">
-                    Please read & recite the below and upload an audio file
-                  </p>
-                </div>
-
-                <Separator />
-
-                <div>
-                  <p className="text-base font-normal text-neutral-600">
-                    The Birth of the Prophet Muhammad, son of Abdullah, son of
-                    Abdul Muttallb, and member of the Quraysh tribe, was born in
-                    Makkah 53 years before the Hijrah. His father died before he
-                    was born, and he was raised by his grandfather, Abdul
-                    Muttalib, and then by his uncle, Abu Talib, after his
-                    grandfather died. He traveled to Syria as a young boy with
-                    his uncle in a merchants' caravan, and later made the same
-                    journey in the service of a wealthy widow named Khadijah. He
-                    handled the widow's business so faithfully, and the report
-                    of his behavior from her old servant who had accompanied him
-                    was so good, that she married her young agent soon after;
-                    and the marriage proved to be a very happy one, despite the
-                    fact that she was fifteen years older than he was.
-                  </p>
-                </div>
-
-                {/* Upload */}
+                {/* Preferred interview time */}
                 <FormField
-                  name=""
+                  name="preferred-interview-time"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-1">
-                      <FormLabel>
-                        Read the above paragraph and upload audio file.
-                      </FormLabel>
+                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                      <FormLabel>Preferred Interview Time</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={(value) =>
+                            field.onChange(Number(value))
+                          }
+                        >
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {[
+                              { label: "Morning", value: "morning" },
+                              { label: "Afternoon", value: "afternoon" },
+                              { label: "Evening", value: "evening" },
+                            ].map((time) => (
+                              <SelectItem key={time.value} value={time.value}>
+                                {time.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Expected Salary */}
+                <FormField
+                  name="expected-salary"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                      <FormLabel>Expected Salary (AED per hour)</FormLabel>
                       <FormControl>
                         <Input
-                          type="file"
-                          // {...field}
-                          placeholder="Upload you CV"
+                          type="text"
+                          {...field}
+                          placeholder="AED per hour"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
@@ -808,26 +666,213 @@ const TeacherMultiStepForm = () => {
                   )}
                 />
 
-                {/* Upload */}
+                {/* how many hours can you work */}
                 <FormField
-                  name=""
+                  name="work-hours"
                   render={({ field }) => (
-                    <FormItem className="space-y-2 col-span-1">
-                      <FormLabel>
-                        Please recite the first 10 Ayah of Surah An-Naba and
-                        upload audio file
-                      </FormLabel>
+                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                      <FormLabel>How many hours can you work</FormLabel>
                       <FormControl>
                         <Input
-                          type="file"
-                          // {...field}
-                          placeholder="Upload you CV"
+                          type="text"
+                          {...field}
+                          placeholder="e.g 3.5"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
+                />
+
+                {/* Employment desire */}
+                <FormField
+                  // control={form.control}
+                  name="employment-desire"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full sm:col-span-1">
+                      <FormLabel>Employment Desire</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex flex-col"
+                        >
+                          <FormItem className="flex items-center gap-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem
+                                className="border-neutral-200"
+                                value="full-time"
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Full Time
+                            </FormLabel>
+                          </FormItem>
+                          <FormItem className="flex items-center gap-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem
+                                className="border-neutral-200"
+                                value="part-time"
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Part Time
+                            </FormLabel>
+                          </FormItem>
+                          <FormItem className="flex items-center gap-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem
+                                className="border-neutral-200"
+                                value="full-part"
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Full/Part Time
+                            </FormLabel>
+                          </FormItem>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* What's Make you ideal */}
+                <FormField
+                  name="what-make-ideal"
+                  render={({ field }) => (
+                    <FormItem className="col-span-full">
+                      <FormControl>
+                        <Textarea
+                          placeholder="What makes you an idea candidate?"
+                          className="resize-none bg-white"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* How did you find out about us */}
+                <FormField
+                  // control={form.control}
+                  name="how-find-us"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>How did you find out about us</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex flex-col"
+                        >
+                          <FormItem className="flex items-center gap-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem
+                                className="border-neutral-200"
+                                value="facebook"
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Facebook
+                            </FormLabel>
+                          </FormItem>
+
+                          <FormItem className="flex items-center gap-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem
+                                className="border-neutral-200"
+                                value="linkedin"
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              LinkedIn
+                            </FormLabel>
+                          </FormItem>
+
+                          <FormItem className="flex items-center gap-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem
+                                className="border-neutral-200"
+                                value="google"
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Google
+                            </FormLabel>
+                          </FormItem>
+
+                          <FormItem className="flex items-center gap-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem
+                                className="border-neutral-200"
+                                value="al-furqan"
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Al Furqan website
+                            </FormLabel>
+                          </FormItem>
+
+                          <FormItem className="flex items-center gap-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem
+                                className="border-neutral-200"
+                                value="advertisement"
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              Advertisement
+                            </FormLabel>
+                          </FormItem>
+
+                          <FormItem className="flex items-center gap-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem
+                                className="border-neutral-200"
+                                value="other"
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">Other</FormLabel>
+                          </FormItem>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* declaration */}
+                <FormField
+                  // control={form.control}
+                  name="declaration"
+                  render={({ field }) => {
+                    return (
+                      <FormItem className="col-span-full flex gap-2 space-y-0">
+                        <FormControl>
+                          <Checkbox
+                          // checked={field.value?.includes(item.id)}
+                          // onCheckedChange={(checked) => {
+                          //   return checked
+                          //     ? field.onChange([...field.value, item.id])
+                          //     : field.onChange(
+                          //         field.value?.filter(
+                          //           (value) => value !== item.id
+                          //         )
+                          //       )
+                          // }}
+                          />
+                        </FormControl>
+                        <FormLabel className="text-sm font-normal">
+                          I declare that the information I have provided in this
+                          registration form is true and accurate to the best of
+                          my knowledge
+                        </FormLabel>
+                      </FormItem>
+                    );
+                  }}
                 />
               </div>
               {/* THIRD STEP END */}

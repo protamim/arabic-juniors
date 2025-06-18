@@ -18,7 +18,7 @@ const TeacherRegistrationPage = () => {
               <div
                 id="registration-form-wrapper"
                 aria-label="registration-form-wrapper"
-                className="max-w-screen-md py-14 px-5 sm:px-12 bg-[#FAF8F8] rounded-2xl scroll-mt-[calc(var(--juniors-header-height)+5rem)]"
+                className="max-w-screen-md w-full py-14 px-5 sm:px-12 bg-[#FAF8F8] rounded-2xl scroll-mt-[calc(var(--juniors-header-height)+5rem)]"
               >
                 <TeacherStepForm />
               </div>
