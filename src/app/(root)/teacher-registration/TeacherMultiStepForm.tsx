@@ -276,8 +276,8 @@ const TeacherMultiStepForm = () => {
   //   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.table(values);
-    console.log(values.doc_1?.[0])
+    console.log(values);
+    // console.log(values.doc_1?.[0])
   };
 
   return (
