@@ -53,11 +53,11 @@ const langValues = [
 ] as const;
 
 const formSchema = z.object({
-  firstName: z
+  first_name: z
     .string({ message: "First Name is required!" })
     .min(3, { message: "First Name must be at least 3 characters long" })
     .max(50, { message: "First Name must be under 50 characters" }),
-  lastName: z
+  last_name: z
     .string({ message: "Last Name is required!" })
     .min(3, { message: "Last Name must be at least 3 characters long" })
     .max(50, { message: "Last Name must be under 50 characters" }),
@@ -66,7 +66,7 @@ const formSchema = z.object({
     invalid_type_error: "Invalid gender option",
   }),
   email: z.string().email({ message: "Email is required!" }),
-  "whatsapp-number": z
+  whatsapp_number: z
     .string()
     .min(10, { message: "Number must be at least 10 digits" })
     .max(15, { message: "Number must be at most 15 digits" })
@@ -76,7 +76,7 @@ const formSchema = z.object({
     .string({ message: "Address is required!" })
     .min(5, { message: "Address must be at least 5 characters long" })
     .max(120, { message: "Address must be at least 120 characters long" }),
-  "where-live": z.string().refine((val) => countries.includes(val), {
+  where_live: z.string().refine((val) => countries.includes(val), {
     message: "Please select a valid country",
   }),
   birth: z
@@ -85,7 +85,7 @@ const formSchema = z.object({
     .refine((val) => /^\d{4}-\d{2}-\d{2}$/.test(val), {
       message: "Date must be in YYYY-MM-DD format",
     }),
-  "materials-status": z.enum(["Married", "Unmarried"], {
+  materials_status: z.enum(["Married", "Unmarried"], {
     required_error: "Material status is required",
     invalid_type_error: "Invalid material status",
   }),
@@ -96,15 +96,15 @@ const formSchema = z.object({
     .string()
     .min(2, { message: "Occupation must be at least 2 characters long" })
     .max(100, { message: "Occupation must be under 100 characters" }),
-  "introduce-yourself": z
+  introduce_yourself: z
     .string()
     .min(10, { message: "Please write at least 10 characters" })
     .max(1000, { message: "Introduction must be under 1000 characters" }),
-  "fb-id": z
+  fb_id: z
     .string()
     .min(5, { message: "Facebook ID must be at least 5 characters long" })
     .max(100, { message: "Facebook ID must be under 100 characters" }),
-  "personal-image": z
+  personal_image: z
     .custom<File>()
     .refine((file) => file instanceof File, {
       message: "Please upload an image",
@@ -119,14 +119,14 @@ const formSchema = z.object({
     .string()
     .min(2, { message: "Please enter your education details" })
     .max(200, { message: "Education details must be under 200 characters" }),
-  "teaching-experience": z
+  teaching_experience: z
     .string()
     .min(5, { message: "Please describe your online teaching experience" })
     .max(200, { message: "Teaching experience must be under 200 characters" }),
-  "mother-lang": z.enum(langValues, {
+  mother_lang: z.enum(langValues, {
     errorMap: () => ({ message: "Please select a valid mother language" }),
   }),
-  "other-langs": z
+  other_langs: z
     .array(z.enum(langValues))
     .optional()
     .refine(
@@ -138,93 +138,57 @@ const formSchema = z.object({
         message: "Duplicate languages are not allowed",
       }
     ),
-  "doc-1": z
-    .any()
-    .refine((files) => files?.length === 1, {
-      message: "Please upload a document",
-    })
-    .refine(
-      (files) => {
-        if (!files || files.length === 0) return true; // skip if empty to avoid double error
-        const file = files[0];
-        return [
-          "application/pdf",
-          "application/msword",
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        ].includes(file.type);
-      },
-      {
-        message: "Only PDF or Word documents are allowed",
-      }
-    ),
-  "doc-2": z
-    .any()
-    .refine((files) => files?.length === 1, {
-      message: "Please upload a document",
-    })
-    .refine(
-      (files) => {
-        if (!files || files.length === 0) return true; // skip if empty to avoid double error
-        const file = files[0];
-        return [
-          "application/pdf",
-          "application/msword",
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        ].includes(file.type);
-      },
-      {
-        message: "Only PDF or Word documents are allowed",
-      }
-    ),
-  "doc-3": z
-    .any()
-    .refine((files) => files?.length === 1, {
-      message: "Please upload a document",
-    })
-    .refine(
-      (files) => {
-        if (!files || files.length === 0) return true; // skip if empty to avoid double error
-        const file = files[0];
-        return [
-          "application/pdf",
-          "application/msword",
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        ].includes(file.type);
-      },
-      {
-        message: "Only PDF or Word documents are allowed",
-      }
-    ),
-  "doc-4": z
-    .any()
-    .refine((files) => files?.length === 1, {
-      message: "Please upload a document",
-    })
-    .refine(
-      (files) => {
-        if (!files || files.length === 0) return true; // skip if empty to avoid double error
-        const file = files[0];
-        return [
-          "application/pdf",
-          "application/msword",
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        ].includes(file.type);
-      },
-      {
-        message: "Only PDF or Word documents are allowed",
-      }
-    ),
-  "preferred-interview-time": z.enum(["morning", "afternoon", "evening"], {
+  doc_1: z.any().refine(
+    (files) => {
+      if (!files || files.length === 0) return false;
+      const file = files[0];
+      return file.type === "application/pdf";
+    },
+    {
+      message: "Please upload a valid PDF file.",
+    }
+  ),
+  doc_2: z.any().refine(
+    (files) => {
+      if (!files || files.length === 0) return false;
+      const file = files[0];
+      return file.type === "application/pdf";
+    },
+    {
+      message: "Please upload a valid PDF file.",
+    }
+  ),
+  doc_3: z.any().refine(
+    (files) => {
+      if (!files || files.length === 0) return false;
+      const file = files[0];
+      return file.type === "application/pdf";
+    },
+    {
+      message: "Please upload a valid PDF file.",
+    }
+  ),
+  doc_4: z.any().refine(
+    (files) => {
+      if (!files || files.length === 0) return false;
+      const file = files[0];
+      return file.type === "application/pdf";
+    },
+    {
+      message: "Please upload a valid PDF file.",
+    }
+  ),
+  preferred_interview_time: z.enum(["morning", "afternoon", "evening"], {
     required_error: "Please select a preferred interview time",
   }),
-  "expected-salary": z
+  expected_salary: z
     .string()
     .min(1, { message: "Expected salary is required" })
     .transform((val) => Number(val))
     .refine((val) => !isNaN(val) && val > 0, {
       message: "Expected salary must be a valid positive number",
     }),
-  "work-hours": z
+  work_hours: z
     .string()
     .min(1, { message: "Work hours are required" })
     .transform((val) => Number(val))
@@ -234,14 +198,14 @@ const formSchema = z.object({
     .refine((val) => val >= 0.5 && val <= 12, {
       message: "Work hours must be between 0.5 and 12",
     }),
-  "employment-desire": z.enum(["full-time", "part-time", "full-part"], {
+  employment_desire: z.enum(["full-time", "part-time", "full-part"], {
     required_error: "Please select an employment type",
   }),
-  "what-make-ideal": z
+  what_make_ideal: z
     .string()
     .min(10, { message: "Please describe in at least 10 characters" })
     .max(1000, { message: "Please limit your response to 1000 characters" }),
-  "how-find-us": z.enum(
+  how_find_us: z.enum(
     ["facebook", "linkedin", "google", "al-furqan", "advertisement", "other"],
     {
       required_error: "Please select an option",
@@ -264,34 +228,34 @@ const TeacherMultiStepForm = () => {
     resolver: zodResolver(formSchema),
     mode: "onChange",
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       gender: "Male", // default selected gender
       email: "",
-      "whatsapp-number": "",
+      whatsapp_number: "",
       address: "",
-      "where-live": "",
+      where_live: "",
       birth: "",
-      "materials-status": "Unmarried",
+      materials_status: "Unmarried",
       nationality: "",
       occupation: "",
-      "introduce-yourself": "",
-      "fb-id": "",
-      "personal-image": undefined as unknown as File, // Cast to satisfy z.custom<File>()
+      introduce_yourself: "",
+      fb_id: "",
+      personal_image: undefined as unknown as File, // Cast to satisfy z.custom<File>()
       education: "",
-      "teaching-experience": "",
-      "mother-lang": "eng",
-      "other-langs": [],
-      "doc-1": undefined,
-      "doc-2": undefined,
-      "doc-3": undefined,
-      "doc-4": undefined,
-      "preferred-interview-time": "morning",
-      "expected-salary": 0, // will be transformed into number
-      "work-hours": 0, // will be transformed into number
-      "employment-desire": "full-time",
-      "what-make-ideal": "",
-      "how-find-us": "facebook",
+      teaching_experience: "",
+      mother_lang: "eng",
+      other_langs: [],
+      doc_1: undefined,
+      doc_2: undefined,
+      doc_3: undefined,
+      doc_4: undefined,
+      preferred_interview_time: "morning",
+      expected_salary: 0, // will be transformed into number
+      work_hours: 0, // will be transformed into number
+      employment_desire: "full-time",
+      what_make_ideal: "",
+      how_find_us: "facebook",
       declaration: false,
     },
   });
@@ -312,7 +276,8 @@ const TeacherMultiStepForm = () => {
   //   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    console.table(values);
+    console.log(values.doc_1?.[0])
   };
 
   return (
@@ -345,7 +310,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* First Name */}
                 <FormField
-                  name="firstName"
+                  name="first_name"
                   render={({ field }) => (
                     <FormItem
                       aria-label="form-item"
@@ -366,7 +331,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Last Name */}
                 <FormField
-                  name="lastName"
+                  name="last_name"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>Last Name</FormLabel>
@@ -430,7 +395,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* WhatsApp Number */}
                 <FormField
-                  name="whatsapp-number"
+                  name="whatsapp_number"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>Contact No</FormLabel>
@@ -468,7 +433,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Where do you live now */}
                 <FormField
-                  name="where-live"
+                  name="where_live"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormControl>
@@ -523,7 +488,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Materials status */}
                 <FormField
-                  name="materials-status"
+                  name="materials_status"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
@@ -551,11 +516,7 @@ const TeacherMultiStepForm = () => {
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
-                        <Select
-                          onValueChange={(value) =>
-                            field.onChange(Number(value))
-                          }
-                        >
+                        <Select onValueChange={field.onChange}>
                           <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Nationality" />
                           </SelectTrigger>
@@ -592,7 +553,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Introduce yourself */}
                 <FormField
-                  name="introduce-yourself"
+                  name="introduce_yourself"
                   render={({ field }) => (
                     <FormItem className="col-span-full h-full">
                       <FormControl>
@@ -609,7 +570,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Facebook */}
                 <FormField
-                  name="fb-id"
+                  name="fb_id"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
@@ -626,7 +587,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Upload personal image */}
                 <FormField
-                  name="personal-image"
+                  name="personal_image"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-1">
                       <FormLabel>Upload Personal Image</FormLabel>
@@ -683,7 +644,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* teaching experience */}
                 <FormField
-                  name="teaching-experience"
+                  name="teaching_experience"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
@@ -701,7 +662,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Mother Language */}
                 <FormField
-                  name="mother-lang"
+                  name="mother_lang"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormLabel>Mother Language</FormLabel>
@@ -736,7 +697,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Other Language */}
                 <FormField
-                  name="other-langs"
+                  name="other_langs"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormLabel>Other Language</FormLabel>
@@ -765,14 +726,15 @@ const TeacherMultiStepForm = () => {
 
                 {/* Upload - Document 1 */}
                 <FormField
-                  name="doc-1"
+                  name="doc_1"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-1">
                       <FormLabel>Document (e.g CV)</FormLabel>
                       <FormControl>
                         <Input
                           type="file"
-                          {...field}
+                          accept="application/pdf"
+                          onChange={(e) => field.onChange(e.target.files)}
                           placeholder="Upload you CV"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
@@ -784,14 +746,15 @@ const TeacherMultiStepForm = () => {
 
                 {/* Upload - Document 2 */}
                 <FormField
-                  name="doc-2"
+                  name="doc_2"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-1">
                       <FormLabel>Document (e.g Training)</FormLabel>
                       <FormControl>
                         <Input
                           type="file"
-                          {...field}
+                          accept="application/pdf"
+                          onChange={(e) => field.onChange(e.target.files)}
                           placeholder="Upload you CV"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
@@ -803,14 +766,15 @@ const TeacherMultiStepForm = () => {
 
                 {/* Upload - Document 3 */}
                 <FormField
-                  name="doc-3"
+                  name="doc_3"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-1">
                       <FormLabel>Document (e.g M.A or B.Ed)</FormLabel>
                       <FormControl>
                         <Input
                           type="file"
-                          {...field}
+                          accept="application/pdf"
+                          onChange={(e) => field.onChange(e.target.files)}
                           placeholder="Upload you CV"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
@@ -822,14 +786,15 @@ const TeacherMultiStepForm = () => {
 
                 {/* Upload - Document 4 */}
                 <FormField
-                  name="doc-4"
+                  name="doc_4"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-1">
                       <FormLabel>Document (e.g Teaching Cert.)</FormLabel>
                       <FormControl>
                         <Input
                           type="file"
-                          {...field}
+                          accept="application/pdf"
+                          onChange={(e) => field.onChange(e.target.files)}
                           placeholder="Upload you CV"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
@@ -848,7 +813,7 @@ const TeacherMultiStepForm = () => {
               >
                 {/* Preferred interview time */}
                 <FormField
-                  name="preferred-interview-time"
+                  name="preferred_interview_time"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>Preferred Interview Time</FormLabel>
@@ -877,7 +842,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* Expected Salary */}
                 <FormField
-                  name="expected-salary"
+                  name="expected_salary"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>Expected Salary (AED per hour)</FormLabel>
@@ -896,7 +861,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* how many hours can you work */}
                 <FormField
-                  name="work-hours"
+                  name="work_hours"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>How many hours can you work</FormLabel>
@@ -916,7 +881,7 @@ const TeacherMultiStepForm = () => {
                 {/* Employment desire */}
                 <FormField
                   // control={form.control}
-                  name="employment-desire"
+                  name="employment_desire"
                   render={({ field }) => (
                     <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>Employment Desire</FormLabel>
@@ -970,7 +935,7 @@ const TeacherMultiStepForm = () => {
 
                 {/* What's Make you ideal */}
                 <FormField
-                  name="what-make-ideal"
+                  name="what_make_ideal"
                   render={({ field }) => (
                     <FormItem className="col-span-full h-full">
                       <FormControl>
@@ -988,7 +953,7 @@ const TeacherMultiStepForm = () => {
                 {/* How did you find out about us */}
                 <FormField
                   // control={form.control}
-                  name="how-find-us"
+                  name="how_find_us"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full h-full">
                       <FormLabel>How did you find out about us</FormLabel>
