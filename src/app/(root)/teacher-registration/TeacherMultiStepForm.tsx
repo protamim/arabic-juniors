@@ -35,6 +35,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { MultiSelect } from "@/components/ui/multi-select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LoaderCircle } from "lucide-react";
+import { toast } from "sonner";
 
 const countries = getNames();
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2 MB
@@ -126,18 +127,15 @@ const formSchema = z.object({
   mother_lang: z.enum(langValues, {
     errorMap: () => ({ message: "Please select a valid mother language" }),
   }),
-  other_langs: z
-    .array(z.enum(langValues))
-    .optional()
-    .refine(
-      (arr) => {
-        if (!arr) return true; // if undefined, consider valid (because optional)
-        return new Set(arr).size === arr.length;
-      },
-      {
-        message: "Duplicate languages are not allowed",
-      }
-    ),
+  other_langs: z.array(z.enum(langValues)).refine(
+    (arr) => {
+      if (!arr) return true; // if undefined, consider valid (because optional)
+      return new Set(arr).size === arr.length;
+    },
+    {
+      message: "Duplicate languages are not allowed",
+    }
+  ),
   doc_1: z.any().refine(
     (files) => {
       if (!files || files.length === 0) return false;
@@ -260,24 +258,104 @@ const TeacherMultiStepForm = () => {
     },
   });
 
-  //   const validateStep = async () => {
-  //     const isValid = await methods.trigger([
-  //       "email",
-  //       "phoneNumber",
-  //       "firstName",
-  //       "lastName",
-  //       "grade",
-  //     ]); // Validate specific fields
-  //     if (isValid) {
-  //       next(); // Move to the next step if valid
-  //     } else {
-  //       console.log("Validation failed:", methods.formState.errors);
-  //     }
-  //   };
+  const validateStep = async () => {
+    const firstStepValidation = await methods.trigger([
+      "first_name",
+      "last_name",
+      "gender",
+      "email",
+      "whatsapp_number",
+      "address",
+      "where_live",
+      "birth",
+      "materials_status",
+      "nationality",
+      "occupation",
+      "introduce_yourself",
+      "fb_id",
+      "personal_image",
+    ]);
+
+    const secondStepValidation = await methods.trigger([
+      "education",
+      "teaching_experience",
+      "mother_lang",
+      "other_langs",
+      "doc_1",
+      "doc_2",
+      "doc_3",
+      "doc_4",
+    ]);
+
+    if (firstStepValidation && current === 1) {
+      next(); // Move to the 2nd step if valid
+    } else if (secondStepValidation && current === 2) {
+      next(); // Move to the 3rd step if valid
+    } else {
+      console.log("Validation failed:", methods.formState.errors);
+    }
+  };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    // console.log(values.doc_1?.[0])
+    const formData = new FormData();
+    formData.append("first_name", values.first_name);
+    formData.append("last_name", values.last_name);
+    formData.append("email", values.email);
+    formData.append("whatsapp_number", values?.whatsapp_number || "n/a");
+    formData.append("address", values.address);
+    formData.append("where_live", values.where_live);
+    formData.append("birth", values.birth);
+    formData.append("materials_status", values.materials_status);
+    formData.append("nationality", values.nationality);
+    formData.append("occupation", values.occupation);
+    formData.append("introduce_yourself", values.introduce_yourself);
+    formData.append("fb_id", values.fb_id);
+    formData.append("personal_image", values.personal_image);
+    formData.append("education", values.education);
+    formData.append("teaching_experience", values.teaching_experience);
+    formData.append("mother_lang", values.mother_lang);
+    values.other_langs.forEach((lang) => {
+      formData.append("other_langs[]", lang);
+    });
+    if (values.doc_1?.[0]) {
+      formData.append("doc_1", values.doc_1?.[0]);
+    }
+    if (values.doc_2?.[0]) {
+      formData.append("doc_2", values.doc_2?.[0]);
+    }
+    if (values.doc_3?.[0]) {
+      formData.append("doc_3", values.doc_3?.[0]);
+    }
+    if (values.doc_4?.[0]) {
+      formData.append("doc_4", values.doc_4?.[0]);
+    }
+
+    formData.append(
+      "preferred_interview_time",
+      values.preferred_interview_time
+    );
+    formData.append("expected_salary", values.expected_salary.toString());
+    formData.append("work_hours", values.work_hours.toString());
+    formData.append("employment_desire", values.employment_desire);
+    formData.append("what_make_ideal", values.what_make_ideal);
+    formData.append("how_find_us", values.how_find_us);
+    formData.append("declaration", values.declaration ? "true" : "false");
+
+    try {
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_API_BASE_URL + "/teacher-registration",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const info = await res.json();
+      console.log(info);
+      toast.success("Data sent!", info?.message);
+    } catch (error) {
+      console.log("Teacher registration failed", error);
+    }
   };
 
   return (
@@ -292,6 +370,7 @@ const TeacherMultiStepForm = () => {
 
         <Form {...methods}>
           <form
+            encType="multipart/form-data"
             onSubmit={methods.handleSubmit(onSubmit)}
             className="teacher-registration-form"
           >
@@ -1077,7 +1156,7 @@ const TeacherMultiStepForm = () => {
               {hasNext ? (
                 <Button
                   type="button"
-                  onClick={() => next()}
+                  onClick={() => validateStep()}
                   className="rounded-lg flex-1"
                 >
                   Next
