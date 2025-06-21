@@ -28,7 +28,6 @@ import { Steps, useSteps } from "react-step-builder";
 import "react-phone-number-input/style.css";
 import { Progress } from "@/components/ui/progress";
 import { useRouter } from "next/navigation";
-import { useCountryCode } from "@/hooks/useCountry";
 import { Separator } from "@/components/ui/separator";
 import { getNames } from "country-list";
 import { Textarea } from "@/components/ui/textarea";
@@ -355,6 +354,7 @@ const TeacherMultiStepForm = () => {
       console.log(info);
       toast.success(info?.message || "Something wrong!");
       setIsLoading(false);
+      router.push('/');
     } catch (error) {
       console.log("Teacher registration failed", error);
     }
@@ -440,7 +440,7 @@ const TeacherMultiStepForm = () => {
                             <SelectValue placeholder="Select gender" />
                           </SelectTrigger>
                           <SelectContent>
-                            {["Male", "Female", "Custom"].map((item, i) => (
+                            {["Male", "Female"].map((item, i) => (
                               <SelectItem key={i} value={item}>
                                 {item}
                               </SelectItem>

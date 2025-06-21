@@ -44,10 +44,10 @@ const FaqForm = () => {
     <React.Fragment>
       <div
         aria-describedby="faq-form-wrapper"
-        className="bg-[#053F7A] rounded-lg p-5 md:p-12"
+        className="bg-[#FAF8F8] rounded-lg p-5 md:p-12"
       >
         <div aria-describedby="title-wrapper" className="mb-6 md:mb-12">
-          <h4 className="text-2xl sm:text-4xl font-bold text-white text-center">
+          <h4 className="text-2xl sm:text-4xl font-bold text-neutral-800 text-center">
             Any other Question?
           </h4>
         </div>
@@ -62,12 +62,12 @@ const FaqForm = () => {
               name="your_name"
               render={({ field }) => (
                 <FormItem className="col-span-full md:col-span-1">
-                  <FormLabel className="text-white">Your Name</FormLabel>
+                  <FormLabel className="text-neutral-800">Your Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Enter your name"
                       {...field}
-                      className="rounded-lg h-10"
+                      className="rounded-lg h-10 border border-neutral-200"
                     />
                   </FormControl>
 
@@ -81,14 +81,14 @@ const FaqForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem className="col-span-full md:col-span-1">
-                  <FormLabel className="text-white">
+                  <FormLabel className="text-neutral-800">
                     Your email address
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Type your email"
                       {...field}
-                      className="rounded-lg h-10"
+                      className="rounded-lg h-10 border border-neutral-200"
                     />
                   </FormControl>
 
@@ -102,11 +102,11 @@ const FaqForm = () => {
               name="user_message"
               render={({ field }) => (
                 <FormItem className="col-span-full">
-                  <FormLabel className="text-white">Short your personal message</FormLabel>
+                  <FormLabel className="text-neutral-800">Short your personal message</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Type here"
-                      className="resize-none bg-white"
+                      className="resize-none bg-white shadow-none border border-neutral-200 focus-within:border-neutral-200"
                       {...field}
                     />
                   </FormControl>

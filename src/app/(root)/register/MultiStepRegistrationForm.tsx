@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addDays} from "date-fns";
+import { addDays, format } from "date-fns";
 import { LoaderCircle } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -37,9 +37,9 @@ import { useCountryCode } from "@/hooks/useCountry";
 
 const TIME_SLOTS = {
   timeFormat: "12-hour",
-  intervalMinutes: 15,
+  intervalMinutes: 30,
   startTime: "07:00 AM",
-  endTime: "11:45 PM",
+  endTime: "11:30 PM",
   availableTimes: [
     { time: "07:00 AM" },
     { time: "07:30 AM" },
@@ -84,30 +84,38 @@ const timeOptions = TIME_SLOTS.availableTimes.map((slot) => slot.time) as [
 ]; // Non-empty tuple
 
 const formSchema = z.object({
-  firstName: z
+  // Step 1
+  firstName: z.string().min(1, { message: "First name is required" }),
+  lastName: z.string().min(1, { message: "Last name is required" }),
+  email: z
     .string()
-    .min(2, "First name must be at least 2 characters")
-    .max(50),
-  lastName: z.string().min(2).max(50),
-  email: z.string().email(),
+    .min(1, { message: "Email is required" })
+    .email({ message: "Invalid email address" }),
   phoneNumber: z.string().refine((value) => isValidPhoneNumber(value), {
     message: "Invalid phone number",
   }),
-  grade: z.number().min(1),
-  howManyJoin: z
-    .string({ required_error: "Please specify how many will be join!" })
-    .transform((val) => Number(val))
-    .refine((val) => !isNaN(val), {
-      message: "Please specify a valid number",
-    }),
-  preferredTeacher: z.string(),
-  classStartDate: z.date().refine((date) => date > new Date(), {
-    message: "Start date must be in the future",
+  grade: z
+    .number({ invalid_type_error: "Grade is required" })
+    .min(1, { message: "Please select a grade" })
+    .max(12, { message: "Invalid grade selection" }),
+
+  // Step 2
+  howManyJoin: z.enum(["1", "2", "3", "4", "5"], {
+    errorMap: () => ({ message: "Select how many students will join" }),
   }),
-  classStartTime: z.enum(timeOptions, {
-    errorMap: () => ({ message: "Please select a valid time." }),
+  preferredTeacher: z.enum(["Male", "Female", "Others"], {
+    errorMap: () => ({ message: "Please select a preferred teacher" }),
   }),
-  howFindUs: z.string(),
+  classStartDate: z.date({
+    required_error: "Please select a class start date",
+    invalid_type_error: "Invalid date",
+  }),
+  classStartTime: z.enum([...(timeOptions as [string, ...string[]])], {
+    errorMap: () => ({ message: "Please select a valid class time" }),
+  }),
+  howFindUs: z.enum(["Friends", "Social Media", "Email", "Google", "Other"], {
+    errorMap: () => ({ message: "Please select how you found us" }),
+  }),
 });
 
 const MultiStepRegistrationForm = () => {
@@ -121,16 +129,16 @@ const MultiStepRegistrationForm = () => {
     resolver: zodResolver(formSchema),
     mode: "onChange",
     defaultValues: {
-      firstName: undefined,
-      lastName: undefined,
-      email: undefined,
-      phoneNumber: undefined,
-      grade: undefined,
-      howManyJoin: undefined,
-      preferredTeacher: undefined,
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      grade: 0,
+      howManyJoin: "1",
+      preferredTeacher: "Male",
       classStartDate: undefined,
       classStartTime: undefined,
-      howFindUs: undefined,
+      howFindUs: "Friends",
     },
   });
 
@@ -150,14 +158,12 @@ const MultiStepRegistrationForm = () => {
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    // console.log(values);
     try {
       // Now loading
       setIsLoading(true);
 
       const registerURL = process.env.NEXT_PUBLIC_API_BASE_URL + "/register";
-      // const { firstName, lastName, email } = values;
-
       const res = await fetch(registerURL, {
         method: "POST",
         headers: {
@@ -181,7 +187,7 @@ const MultiStepRegistrationForm = () => {
           onClick: () => {},
         },
       });
-      // redirect to welcome page after successfull
+      // redirect to welcome page after successful
       router.push("/welcome");
     } catch (error) {
       // toast notification
@@ -470,7 +476,7 @@ const MultiStepRegistrationForm = () => {
                           <RadioGroup
                             onValueChange={field.onChange}
                             value={field.value}
-                            defaultValue={TIME_SLOTS.availableTimes[0].time}
+                            defaultValue={field.value}
                             className="grid grid-cols-3 gap-2 w-full max-h-[23rem] overflow-x-hidden overflow-y-auto"
                           >
                             {TIME_SLOTS.availableTimes.map((slot, index) => (
@@ -501,12 +507,12 @@ const MultiStepRegistrationForm = () => {
                   render={({ field }) => (
                     <FormItem className="col-span-full">
                       <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
-                        How did your find us?
+                        How did you find us?
                       </FormLabel>
                       <FormControl>
                         <RadioGroup
                           value={field.value}
-                          defaultValue="Friends"
+                          defaultValue={field.value}
                           onValueChange={field.onChange}
                           className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-5 gap-x-4 sm:gap-x-9"
                         >
