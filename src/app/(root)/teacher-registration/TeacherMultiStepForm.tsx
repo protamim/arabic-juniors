@@ -215,8 +215,6 @@ const formSchema = z.object({
 });
 
 const TeacherMultiStepForm = () => {
-  const { countryCode, error, loading } = useCountryCode();
-
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { next, prev, total, current, hasNext, hasPrev, isLast } = useSteps();
@@ -243,7 +241,7 @@ const TeacherMultiStepForm = () => {
       education: "",
       teaching_experience: "",
       mother_lang: "eng",
-      other_langs: [],
+      other_langs: ['eng'],
       doc_1: undefined,
       doc_2: undefined,
       doc_3: undefined,
@@ -297,9 +295,12 @@ const TeacherMultiStepForm = () => {
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+
     const formData = new FormData();
     formData.append("first_name", values.first_name);
     formData.append("last_name", values.last_name);
+    formData.append("gender", values.gender);
     formData.append("email", values.email);
     formData.append("whatsapp_number", values?.whatsapp_number || "n/a");
     formData.append("address", values.address);
@@ -352,7 +353,8 @@ const TeacherMultiStepForm = () => {
 
       const info = await res.json();
       console.log(info);
-      toast.success("Data sent!", info?.message);
+      toast.success(info?.message || "Something wrong!");
+      setIsLoading(false);
     } catch (error) {
       console.log("Teacher registration failed", error);
     }
@@ -400,7 +402,7 @@ const TeacherMultiStepForm = () => {
                         <Input
                           {...field}
                           placeholder="Enter your first name"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border text-neutral-800 border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -418,7 +420,7 @@ const TeacherMultiStepForm = () => {
                         <Input
                           {...field}
                           placeholder="Enter your last name"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -433,10 +435,8 @@ const TeacherMultiStepForm = () => {
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormLabel>Gender</FormLabel>
                       <FormControl>
-                        <Select
-                          onValueChange={(value) => field.onChange(value)}
-                        >
-                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                        <Select onValueChange={field.onChange}>
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Select gender" />
                           </SelectTrigger>
                           <SelectContent>
@@ -464,7 +464,7 @@ const TeacherMultiStepForm = () => {
                           {...field}
                           type="email"
                           placeholder="Enter your email"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -483,7 +483,7 @@ const TeacherMultiStepForm = () => {
                           type="text"
                           {...field}
                           placeholder="WhatsApp (If applicable)"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -502,7 +502,7 @@ const TeacherMultiStepForm = () => {
                           type="text"
                           {...field}
                           placeholder="Address"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -517,7 +517,7 @@ const TeacherMultiStepForm = () => {
                     <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormControl>
                         <Select onValueChange={field.onChange}>
-                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Where do you live now" />
                           </SelectTrigger>
                           <SelectContent>
@@ -557,7 +557,7 @@ const TeacherMultiStepForm = () => {
                           type="text"
                           {...field}
                           placeholder="Date of Birth e.g YYYY-MM-DD"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -572,7 +572,7 @@ const TeacherMultiStepForm = () => {
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
                         <Select onValueChange={field.onChange}>
-                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Material status" />
                           </SelectTrigger>
                           <SelectContent>
@@ -596,7 +596,7 @@ const TeacherMultiStepForm = () => {
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormControl>
                         <Select onValueChange={field.onChange}>
-                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Nationality" />
                           </SelectTrigger>
                           <SelectContent>
@@ -622,7 +622,7 @@ const TeacherMultiStepForm = () => {
                         <Input
                           {...field}
                           placeholder="Occupation"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -638,7 +638,7 @@ const TeacherMultiStepForm = () => {
                       <FormControl>
                         <Textarea
                           placeholder="Write a simple text to introduce yourself"
-                          className="resize-none bg-white"
+                          className="resize-none bg-white text-neutral-800"
                           {...field}
                         />
                       </FormControl>
@@ -656,7 +656,7 @@ const TeacherMultiStepForm = () => {
                         <Input
                           {...field}
                           placeholder="Facebook ID"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -676,7 +676,7 @@ const TeacherMultiStepForm = () => {
                           accept="image/*"
                           onChange={(e) => field.onChange(e.target.files?.[0])}
                           placeholder="Facebook ID"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -713,7 +713,7 @@ const TeacherMultiStepForm = () => {
                           {...field}
                           type="text"
                           placeholder="Education details"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -731,7 +731,7 @@ const TeacherMultiStepForm = () => {
                           {...field}
                           type="text"
                           placeholder="Previous Online Teaching Experience"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -746,8 +746,11 @@ const TeacherMultiStepForm = () => {
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormLabel>Mother Language</FormLabel>
                       <FormControl>
-                        <Select onValueChange={field.onChange}>
-                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                        <Select
+                          defaultValue={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent>
@@ -781,7 +784,7 @@ const TeacherMultiStepForm = () => {
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormLabel>Other Language</FormLabel>
                       <FormControl>
-                        <MultiSelect
+                        <MultiSelect defaultValue={field.value}
                           onValueChange={field.onChange}
                           options={[
                             { label: "English", value: "eng" },
@@ -815,7 +818,7 @@ const TeacherMultiStepForm = () => {
                           accept="application/pdf"
                           onChange={(e) => field.onChange(e.target.files)}
                           placeholder="Upload you CV"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -835,7 +838,7 @@ const TeacherMultiStepForm = () => {
                           accept="application/pdf"
                           onChange={(e) => field.onChange(e.target.files)}
                           placeholder="Upload you CV"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -855,7 +858,7 @@ const TeacherMultiStepForm = () => {
                           accept="application/pdf"
                           onChange={(e) => field.onChange(e.target.files)}
                           placeholder="Upload you CV"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -875,7 +878,7 @@ const TeacherMultiStepForm = () => {
                           accept="application/pdf"
                           onChange={(e) => field.onChange(e.target.files)}
                           placeholder="Upload you CV"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -897,8 +900,11 @@ const TeacherMultiStepForm = () => {
                     <FormItem className="space-y-2 h-full col-span-full sm:col-span-1">
                       <FormLabel>Preferred Interview Time</FormLabel>
                       <FormControl>
-                        <Select onValueChange={field.onChange}>
-                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                        <Select
+                          defaultValue={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
                             <SelectValue placeholder="Select" />
                           </SelectTrigger>
                           <SelectContent>
@@ -930,7 +936,7 @@ const TeacherMultiStepForm = () => {
                           type="number"
                           {...field}
                           placeholder="AED per hour"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -949,7 +955,7 @@ const TeacherMultiStepForm = () => {
                           type="number"
                           {...field}
                           placeholder="e.g 3.5"
-                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
                       <FormMessage />
@@ -1020,7 +1026,7 @@ const TeacherMultiStepForm = () => {
                       <FormControl>
                         <Textarea
                           placeholder="What makes you an idea candidate?"
-                          className="resize-none bg-white"
+                          className="resize-none bg-white text-neutral-800"
                           {...field}
                         />
                       </FormControl>
