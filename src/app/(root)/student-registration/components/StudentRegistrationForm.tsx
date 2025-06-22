@@ -34,6 +34,7 @@ import { Progress } from "@/components/ui/progress";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useCountryCode } from "@/hooks/useCountry";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const TIME_SLOTS = {
   timeFormat: "12-hour",
@@ -83,42 +84,40 @@ const timeOptions = TIME_SLOTS.availableTimes.map((slot) => slot.time) as [
   ...string[]
 ]; // Non-empty tuple
 
-const formSchema = z.object({
-  // Step 1
-  firstName: z.string().min(1, { message: "First name is required" }),
-  lastName: z.string().min(1, { message: "Last name is required" }),
-  email: z
-    .string()
-    .min(1, { message: "Email is required" })
-    .email({ message: "Invalid email address" }),
-  phoneNumber: z.string().refine((value) => isValidPhoneNumber(value), {
-    message: "Invalid phone number",
-  }),
-  grade: z
-    .number({ invalid_type_error: "Grade is required" })
-    .min(1, { message: "Please select a grade" })
-    .max(12, { message: "Invalid grade selection" }),
+const PREFERRED_DAYS = [
+  {
+    id: "mon",
+    label: "Mon",
+  },
+  {
+    id: "tue",
+    label: "Tue",
+  },
+  {
+    id: "wed",
+    label: "Wed",
+  },
+  {
+    id: "thu",
+    label: "Thu",
+  },
+  {
+    id: "fri",
+    label: "Fri",
+  },
+  {
+    id: "sat",
+    label: "Sat",
+  },
+  {
+    id: "sun",
+    label: "Sun",
+  },
+] as const;
 
-  // Step 2
-  howManyJoin: z.enum(["1", "2", "3", "4", "5"], {
-    errorMap: () => ({ message: "Select how many students will join" }),
-  }),
-  preferredTeacher: z.enum(["Male", "Female", "Others"], {
-    errorMap: () => ({ message: "Please select a preferred teacher" }),
-  }),
-  classStartDate: z.date({
-    required_error: "Please select a class start date",
-    invalid_type_error: "Invalid date",
-  }),
-  classStartTime: z.enum([...(timeOptions as [string, ...string[]])], {
-    errorMap: () => ({ message: "Please select a valid class time" }),
-  }),
-  howFindUs: z.enum(["Friends", "Social Media", "Email", "Google", "Other"], {
-    errorMap: () => ({ message: "Please select how you found us" }),
-  }),
-});
+const formSchema = z.object({});
 
-const MultiStepRegistrationForm = () => {
+const StudentRegistrationForm = () => {
   const { countryCode } = useCountryCode();
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -142,65 +141,23 @@ const MultiStepRegistrationForm = () => {
     },
   });
 
-  const validateStep = async () => {
-    const isValid = await methods.trigger([
-      "email",
-      "phoneNumber",
-      "firstName",
-      "lastName",
-      "grade",
-    ]); // Validate specific fields
-    if (isValid) {
-      next(); // Move to the next step if valid
-    } else {
-      console.log("Validation failed:", methods.formState.errors);
-    }
-  };
+  //   const validateStep = async () => {
+  //     const isValid = await methods.trigger([
+  //       "email",
+  //       "phoneNumber",
+  //       "firstName",
+  //       "lastName",
+  //       "grade",
+  //     ]); // Validate specific fields
+  //     if (isValid) {
+  //       next(); // Move to the next step if valid
+  //     } else {
+  //       console.log("Validation failed:", methods.formState.errors);
+  //     }
+  //   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // console.log(values);
-    try {
-      // Now loading
-      setIsLoading(true);
-
-      const registerURL = process.env.NEXT_PUBLIC_API_BASE_URL + "/register";
-      const res = await fetch(registerURL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      if (!res.ok) {
-        throw new Error(`Registration response error: ${res.status}`);
-      }
-
-      const serverResponse = await res.json();
-      // finished loading
-      setIsLoading(false);
-
-      // toast notification
-      toast.success(serverResponse.message, {
-        cancel: {
-          label: "Cancel",
-          onClick: () => {},
-        },
-      });
-      // redirect to welcome page after successful
-      router.push("/welcome");
-    } catch (error) {
-      // toast notification
-      toast.error("Something went wrong! Sorry for that.", {
-        cancel: {
-          label: "Cancel",
-          onClick: () => {},
-        },
-      });
-      methods.reset();
-      window.location.reload();
-      console.log("registration failed:", error);
-    }
+    console.log(values);
   };
 
   // Calculate the date 7 days from now
@@ -258,7 +215,7 @@ const MultiStepRegistrationForm = () => {
 
                 {/* Last Name */}
                 <FormField
-                  name="lastName"
+                  name=""
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full sm:col-span-1">
                       <FormLabel>Last Name</FormLabel>
@@ -321,7 +278,7 @@ const MultiStepRegistrationForm = () => {
 
                 {/* Grade */}
                 <FormField
-                  name="grade"
+                  name=""
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormLabel>Class Grade</FormLabel>
@@ -358,53 +315,31 @@ const MultiStepRegistrationForm = () => {
                 aria-label="second-step"
                 className="grid grid-cols-2 gap-x-7 gap-y-10"
               >
-                {/* How Many Joining */}
+                {/* School Name */}
                 <FormField
-                  name="howManyJoin"
+                  name="lastName"
                   render={({ field }) => (
-                    <FormItem className="col-span-full">
-                      <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
-                        How many students will join?
-                      </FormLabel>
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>School Name</FormLabel>
                       <FormControl>
-                        <RadioGroup
-                          value={field.value}
-                          onValueChange={field.onChange}
-                          className="grid grid-cols-5 gap-y-5 gap-x-3 place-items-center sm:gap-x-10"
-                        >
-                          {Array.from({ length: 5 }).map((_, index) => (
-                            <FormItem
-                              key={index}
-                              className="radio-item-wrapper w-10 h-10 sm:w-20 sm:h-20 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-full overflow-hidden"
-                            >
-                              <FormControl>
-                                <RadioGroupItem
-                                  value={String(index + 1)}
-                                  className="absolute top-0 left-0 w-full h-full opacity-0"
-                                />
-                              </FormControl>
-                              <FormLabel
-                                htmlFor={`join-${index + 1}`}
-                                className="text-lg sm:text-3xl font-semibold text-neutral-800"
-                              >
-                                {index + 1}
-                              </FormLabel>
-                            </FormItem>
-                          ))}
-                        </RadioGroup>
+                        <Input
+                          {...field}
+                          placeholder="Enter your school"
+                          className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
 
-                {/* Preferred Teacher */}
+                {/* Class type */}
                 <FormField
-                  name="preferredTeacher"
+                  name=""
                   render={({ field }) => (
                     <FormItem className="col-span-full">
-                      <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
-                        Preferred Teacher
+                      <FormLabel>
+                        Class Type
                       </FormLabel>
                       <FormControl>
                         <RadioGroup
@@ -412,7 +347,7 @@ const MultiStepRegistrationForm = () => {
                           onValueChange={field.onChange}
                           className="flex items-center gap-y-5 gap-x-4 sm:gap-x-10"
                         >
-                          {["Male", "Female", "Others"].map((option) => (
+                          {["Individual", "Group"].map((option) => (
                             <FormItem
                               key={option}
                               className="radio-item-wrapper w-28 sm:h-16 py-2 px-3 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
@@ -420,12 +355,12 @@ const MultiStepRegistrationForm = () => {
                               <FormControl>
                                 <RadioGroupItem
                                   value={option}
-                                  id={`teacher-${option}`}
+                                  id={`class-${option}`}
                                   className="absolute top-0 left-0 w-full h-full opacity-0"
                                 />
                               </FormControl>
                               <FormLabel
-                                htmlFor={`teacher-${option}`}
+                                htmlFor={`class-${option}`}
                                 className="text-base sm:text-lg font-normal sm:font-semibold text-neutral-800"
                               >
                                 {option}
@@ -439,20 +374,46 @@ const MultiStepRegistrationForm = () => {
                   )}
                 />
 
+                <FormField
+                  name=""
+                  render={({ field }) => (
+                    <FormItem className="space-y-2 col-span-full">
+                      <FormLabel>Pricing Package</FormLabel>
+                      <FormControl>
+                        <Select onValueChange={field.onChange}>
+                          <SelectTrigger className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400 outline-none focus-within:outline-none">
+                            <SelectValue placeholder="Select Pricing package" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {[
+                              "Beginner - AED 200",
+                              "Intermediate - AED 300",
+                              "Advanced - AED 400",
+                              "Expert - AED 500",
+                            ].map((item, i) => (
+                              <SelectItem key={i + 1} value={item}>
+                                {item}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 <div
                   aria-label="class-date"
                   className="col-span-full grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-6 items-center justify-center"
                 >
-                  <h4 className="text-neutral-800 font-semibold text-lg sm:text-2xl col-span-full">
-                    When do you want to start the classes
-                  </h4>
                   {/* class start date */}
                   <FormField
                     control={methods.control}
-                    name="classStartDate"
+                    name=""
                     render={({ field }) => (
                       <FormItem className="space-y-2 h-full">
-                        <FormLabel>Select a date and time</FormLabel>
+                        <FormLabel>Class Start Date</FormLabel>
                         <Calendar
                           mode="single"
                           disabled={isDateDisabled}
@@ -468,10 +429,10 @@ const MultiStepRegistrationForm = () => {
 
                   {/* Class Start Time */}
                   <FormField
-                    name="classStartTime"
+                    name=""
                     render={({ field }) => (
                       <FormItem className="space-y-2 h-full">
-                        <FormLabel>Available Time</FormLabel>
+                        <FormLabel>Preferable Time</FormLabel>
                         <FormControl>
                           <RadioGroup
                             onValueChange={field.onChange}
@@ -501,48 +462,39 @@ const MultiStepRegistrationForm = () => {
                   />
                 </div>
 
-                {/* How Find US Teacher */}
+                {/* Preferred days */}
                 <FormField
-                  name="howFindUs"
-                  render={({ field }) => (
-                    <FormItem className="col-span-full">
-                      <FormLabel className="text-neutral-800 font-semibold text-lg sm:text-2xl">
-                        How did you find us?
-                      </FormLabel>
-                      <FormControl>
-                        <RadioGroup
-                          value={field.value}
-                          defaultValue={field.value}
-                          onValueChange={field.onChange}
-                          className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-5 gap-x-4 sm:gap-x-9"
-                        >
-                          {[
-                            "Friends",
-                            "Social Media",
-                            "Email",
-                            "Google",
-                            "Other",
-                          ].map((option, index) => (
-                            <FormItem
-                              key={index}
-                              className="radio-item-wrapper space-y-0 flex px-4 py-2 items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
-                            >
-                              <FormControl>
-                                <RadioGroupItem
-                                  value={option}
-                                  className="absolute top-0 left-0 w-full h-full opacity-0"
-                                />
-                              </FormControl>
-                              <FormLabel
-                                htmlFor={`find-${option}`}
-                                className="text-lg text-center font-semibold text-neutral-800"
+                  //   control={form.control}
+                  name="items"
+                  render={() => (
+                    <FormItem>
+                      <div className="mb-4">
+                        <FormLabel className="text-base">Preferred days</FormLabel>
+                      </div>
+                      {PREFERRED_DAYS.map((item) => (
+                        <FormField
+                          key={item.id}
+                          //   control={form.control}
+                          name="items"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={item.id}
+                                className="flex flex-row items-center gap-2"
                               >
-                                {option}
-                              </FormLabel>
-                            </FormItem>
-                          ))}
-                        </RadioGroup>
-                      </FormControl>
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(item.id)}
+                                  />
+                                </FormControl>
+                                <FormLabel className="text-sm font-normal">
+                                  {item.label}
+                                </FormLabel>
+                              </FormItem>
+                            );
+                          }}
+                        />
+                      ))}
                       <FormMessage />
                     </FormItem>
                   )}
@@ -566,7 +518,7 @@ const MultiStepRegistrationForm = () => {
               {hasNext ? (
                 <Button
                   type="button"
-                  onClick={validateStep}
+                  onClick={next}
                   className="rounded-lg flex-1"
                 >
                   Next
@@ -597,4 +549,4 @@ const MultiStepRegistrationForm = () => {
   );
 };
 
-export default MultiStepRegistrationForm;
+export default StudentRegistrationForm;
