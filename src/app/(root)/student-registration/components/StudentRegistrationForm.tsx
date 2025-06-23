@@ -115,12 +115,85 @@ const PREFERRED_DAYS = [
   },
 ] as const;
 
-const formSchema = z.object({});
+type ClassType = "individual" | "group";
+
+const PACKAGE_PRICING: Record<
+  ClassType,
+  { label: string; price: string; currency: string }[]
+> = {
+  individual: [
+    { label: "Beginner - AED 200", price: "200", currency: "AED" },
+    { label: "Intermediate - AED 300", price: "300", currency: "AED" },
+    { label: "Advanced - AED 400", price: "400", currency: "AED" },
+    { label: "Expert - AED 500", price: "500", currency: "AED" },
+  ],
+  group: [
+    { label: "Beginner - AED 150", price: "150", currency: "AED" },
+    { label: "Intermediate - AED 250", price: "250", currency: "AED" },
+    { label: "Advanced - AED 350", price: "350", currency: "AED" },
+    { label: "Expert - AED 450", price: "450", currency: "AED" },
+  ],
+};
+
+const validTimes = TIME_SLOTS.availableTimes.map((slot) => slot.time);
+
+const formSchema = z.object({
+  first_name: z
+    .string()
+    .min(1, "First name is required")
+    .max(50, "First name must be less than 50 characters"),
+  last_name: z
+    .string()
+    .trim()
+    .min(1, "Last name is required")
+    .max(50, "Last name must be less than 50 characters"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email is required")
+    .email("Please enter a valid email address"),
+  phone_number: z.string().refine((value) => isValidPhoneNumber(value), {
+    message: "Invalid phone number",
+  }),
+  class_grade: z
+    .number({
+      required_error: "Please select a grade",
+      invalid_type_error: "Grade must be a number",
+    })
+    .min(1, "Minimum grade is 1")
+    .max(12, "Maximum grade is 12"),
+  school_name: z
+    .string()
+    .trim()
+    .min(5, "School name is required")
+    .max(100, "School name must be under 100 characters"),
+  class_type: z.enum(["individual", "group"], {
+    required_error: "Please select a class type",
+  }),
+  pricing_package: z.string({ required_error: "Please select a package" }),
+  class_start_date: z
+    .date({
+      required_error: "Class start date is required",
+      invalid_type_error: "Invalid date",
+    })
+    .refine((date) => date >= new Date(), {
+      message: "Class start date cannot be in the past",
+    }),
+  preferred_time: z
+    .string({
+      required_error: "Please select a preferred time",
+    })
+    .refine((val) => validTimes.includes(val), {
+      message: "Invalid time selected",
+    }),
+  preferred_days: z.array(z.string()).min(1, "Please select at least one day"),
+});
 
 const StudentRegistrationForm = () => {
   const { countryCode } = useCountryCode();
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [classType, setClassType] = React.useState<ClassType>("individual");
   const { next, prev, total, current, hasNext, hasPrev, isLast } = useSteps();
 
   // form methods
@@ -128,50 +201,45 @@ const StudentRegistrationForm = () => {
     resolver: zodResolver(formSchema),
     mode: "onChange",
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       email: "",
-      phoneNumber: "",
-      grade: 0,
-      howManyJoin: "1",
-      preferredTeacher: "Male",
-      classStartDate: undefined,
-      classStartTime: undefined,
-      howFindUs: "Friends",
+      phone_number: "",
+      class_grade: undefined,
+      school_name: "",
+      class_type: "individual",
+      pricing_package: undefined,
+      class_start_date: undefined,
+      preferred_time: "",
+      preferred_days: [],
     },
   });
 
-  //   const validateStep = async () => {
-  //     const isValid = await methods.trigger([
-  //       "email",
-  //       "phoneNumber",
-  //       "firstName",
-  //       "lastName",
-  //       "grade",
-  //     ]); // Validate specific fields
-  //     if (isValid) {
-  //       next(); // Move to the next step if valid
-  //     } else {
-  //       console.log("Validation failed:", methods.formState.errors);
-  //     }
-  //   };
+  const validateStep = async () => {
+    const isValid = await methods.trigger([
+      "first_name",
+      "last_name",
+      "email",
+      "phone_number",
+      "class_grade",
+    ]); // Validate specific fields
+    if (isValid) {
+      next(); // Move to the next step if valid
+    } else {
+      console.log("Validation failed:", methods.formState.errors);
+    }
+  };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
   };
-
-  // Calculate the date 7 days from now
-  const sevenDaysFromNow = addDays(new Date(), 7);
 
   // Function to determine if a date should be disabled
   const isDateDisabled = (day: Date) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Reset time to compare dates only
 
-    return (
-      day < today || // Disable dates before today
-      day > sevenDaysFromNow // Disable dates more than 7 days from now
-    );
+    return day < today;
   };
 
   return (
@@ -194,7 +262,7 @@ const StudentRegistrationForm = () => {
               >
                 {/* First Name */}
                 <FormField
-                  name="firstName"
+                  name="first_name"
                   render={({ field }) => (
                     <FormItem
                       aria-label="form-item"
@@ -215,7 +283,7 @@ const StudentRegistrationForm = () => {
 
                 {/* Last Name */}
                 <FormField
-                  name=""
+                  name="last_name"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full sm:col-span-1">
                       <FormLabel>Last Name</FormLabel>
@@ -252,7 +320,7 @@ const StudentRegistrationForm = () => {
 
                 {/* Phone Number Field */}
                 <FormField
-                  name="phoneNumber"
+                  name="phone_number"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormLabel>Phone Number</FormLabel>
@@ -266,7 +334,6 @@ const StudentRegistrationForm = () => {
                           value={field.value}
                           onChange={(phone) => {
                             field.onChange(phone);
-                            console.log(phone);
                           }}
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
@@ -278,7 +345,7 @@ const StudentRegistrationForm = () => {
 
                 {/* Grade */}
                 <FormField
-                  name=""
+                  name="class_grade"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormLabel>Class Grade</FormLabel>
@@ -313,11 +380,11 @@ const StudentRegistrationForm = () => {
               {/* SECOND STEP START */}
               <div
                 aria-label="second-step"
-                className="grid grid-cols-2 gap-x-7 gap-y-10"
+                className="grid grid-cols-2 gap-x-7 gap-y-5"
               >
                 {/* School Name */}
                 <FormField
-                  name="lastName"
+                  name="school_name"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormLabel>School Name</FormLabel>
@@ -335,19 +402,23 @@ const StudentRegistrationForm = () => {
 
                 {/* Class type */}
                 <FormField
-                  name=""
+                  name="class_type"
                   render={({ field }) => (
                     <FormItem className="col-span-full">
-                      <FormLabel>
-                        Class Type
-                      </FormLabel>
+                      <FormLabel>Class Type</FormLabel>
                       <FormControl>
                         <RadioGroup
+                          defaultChecked={field.value}
                           value={field.value}
-                          onValueChange={field.onChange}
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            const selectedType =
+                              value.toLowerCase() as ClassType;
+                            setClassType(selectedType);
+                          }}
                           className="flex items-center gap-y-5 gap-x-4 sm:gap-x-10"
                         >
-                          {["Individual", "Group"].map((option) => (
+                          {["individual", "group"].map((option) => (
                             <FormItem
                               key={option}
                               className="radio-item-wrapper w-28 sm:h-16 py-2 px-3 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
@@ -361,7 +432,7 @@ const StudentRegistrationForm = () => {
                               </FormControl>
                               <FormLabel
                                 htmlFor={`class-${option}`}
-                                className="text-base sm:text-lg font-normal sm:font-semibold text-neutral-800"
+                                className="text-base font-normal text-neutral-800 capitalize"
                               >
                                 {option}
                               </FormLabel>
@@ -374,8 +445,9 @@ const StudentRegistrationForm = () => {
                   )}
                 />
 
+                {/* Pricing Package */}
                 <FormField
-                  name=""
+                  name="pricing_package"
                   render={({ field }) => (
                     <FormItem className="space-y-2 col-span-full">
                       <FormLabel>Pricing Package</FormLabel>
@@ -385,14 +457,9 @@ const StudentRegistrationForm = () => {
                             <SelectValue placeholder="Select Pricing package" />
                           </SelectTrigger>
                           <SelectContent>
-                            {[
-                              "Beginner - AED 200",
-                              "Intermediate - AED 300",
-                              "Advanced - AED 400",
-                              "Expert - AED 500",
-                            ].map((item, i) => (
-                              <SelectItem key={i + 1} value={item}>
-                                {item}
+                            {PACKAGE_PRICING[classType].map((item, i) => (
+                              <SelectItem key={i} value={item.label}>
+                                {item.label}
                               </SelectItem>
                             ))}
                           </SelectContent>
@@ -410,7 +477,7 @@ const StudentRegistrationForm = () => {
                   {/* class start date */}
                   <FormField
                     control={methods.control}
-                    name=""
+                    name="class_start_date"
                     render={({ field }) => (
                       <FormItem className="space-y-2 h-full">
                         <FormLabel>Class Start Date</FormLabel>
@@ -427,9 +494,9 @@ const StudentRegistrationForm = () => {
                     )}
                   />
 
-                  {/* Class Start Time */}
+                  {/* Class Preferred Time */}
                   <FormField
-                    name=""
+                    name="preferred_time"
                     render={({ field }) => (
                       <FormItem className="space-y-2 h-full">
                         <FormLabel>Preferable Time</FormLabel>
@@ -464,37 +531,54 @@ const StudentRegistrationForm = () => {
 
                 {/* Preferred days */}
                 <FormField
-                  //   control={form.control}
-                  name="items"
-                  render={() => (
-                    <FormItem>
-                      <div className="mb-4">
-                        <FormLabel className="text-base">Preferred days</FormLabel>
+                  name="preferred_days"
+                  render={({ field }) => (
+                    <FormItem className="col-span-full">
+                      <div>
+                        <FormLabel className="text-base">
+                          Preferred Days
+                        </FormLabel>
                       </div>
-                      {PREFERRED_DAYS.map((item) => (
-                        <FormField
-                          key={item.id}
-                          //   control={form.control}
-                          name="items"
-                          render={({ field }) => {
-                            return (
-                              <FormItem
-                                key={item.id}
-                                className="flex flex-row items-center gap-2"
-                              >
-                                <FormControl>
-                                  <Checkbox
-                                    checked={field.value?.includes(item.id)}
-                                  />
-                                </FormControl>
-                                <FormLabel className="text-sm font-normal">
-                                  {item.label}
-                                </FormLabel>
-                              </FormItem>
-                            );
-                          }}
-                        />
-                      ))}
+
+                      <div
+                        aria-describedby="days-wrapper"
+                        className="flex items-center gap-4 flex-wrap"
+                      >
+                        {PREFERRED_DAYS.map((item) => {
+                          const isChecked = field.value?.includes(item.id);
+
+                          const toggleDay = (checked: boolean) => {
+                            if (checked) {
+                              field.onChange([...(field.value || []), item.id]);
+                            } else {
+                              field.onChange(
+                                (field.value || []).filter(
+                                  (v: string) => v !== item.id
+                                )
+                              );
+                            }
+                          };
+
+                          return (
+                            <FormItem
+                              key={item.id}
+                              className="checkbox-item w-28 sm:h-16 py-2 px-3 space-y-0 flex items-center justify-center relative bg-neutral-100 rounded-lg overflow-hidden"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  checked={isChecked}
+                                  onCheckedChange={toggleDay}
+                                  className="opacity-0 absolute top-0 left-0 w-full h-full"
+                                />
+                              </FormControl>
+                              <FormLabel className="text-base font-normal cursor-pointer">
+                                {item.label}
+                              </FormLabel>
+                            </FormItem>
+                          );
+                        })}
+                      </div>
+
                       <FormMessage />
                     </FormItem>
                   )}
@@ -518,7 +602,7 @@ const StudentRegistrationForm = () => {
               {hasNext ? (
                 <Button
                   type="button"
-                  onClick={next}
+                  onClick={validateStep}
                   className="rounded-lg flex-1"
                 >
                   Next

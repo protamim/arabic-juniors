@@ -309,7 +309,6 @@ const MultiStepRegistrationForm = () => {
                           value={field.value}
                           onChange={(phone) => {
                             field.onChange(phone);
-                            console.log(phone);
                           }}
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-500 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
