@@ -79,11 +79,6 @@ const TIME_SLOTS = {
   ],
 };
 
-const timeOptions = TIME_SLOTS.availableTimes.map((slot) => slot.time) as [
-  string,
-  ...string[]
-]; // Non-empty tuple
-
 const PREFERRED_DAYS = [
   {
     id: "mon",
@@ -232,6 +227,26 @@ const StudentRegistrationForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
+
+    try {
+      const api_url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/student-registration`;
+      const res = await fetch(api_url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (!res.ok) {
+        return toast.error("Something went wrong!");
+      }
+
+      const data = await res.json();
+      toast.success(data?.message);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Function to determine if a date should be disabled
@@ -578,7 +593,6 @@ const StudentRegistrationForm = () => {
                           );
                         })}
                       </div>
-
                       <FormMessage />
                     </FormItem>
                   )}
