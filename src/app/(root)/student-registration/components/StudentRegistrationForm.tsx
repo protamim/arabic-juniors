@@ -19,7 +19,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addDays } from "date-fns";
 import { LoaderCircle } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -82,31 +81,31 @@ const TIME_SLOTS = {
 const PREFERRED_DAYS = [
   {
     id: "mon",
-    label: "Mon",
+    label: "Monday",
   },
   {
     id: "tue",
-    label: "Tue",
+    label: "Tuesday",
   },
   {
     id: "wed",
-    label: "Wed",
+    label: "Wednesday",
   },
   {
     id: "thu",
-    label: "Thu",
+    label: "Thursday",
   },
   {
     id: "fri",
-    label: "Fri",
+    label: "Friday",
   },
   {
     id: "sat",
-    label: "Sat",
+    label: "Saturday",
   },
   {
     id: "sun",
-    label: "Sun",
+    label: "Sunday",
   },
 ] as const;
 
@@ -227,6 +226,7 @@ const StudentRegistrationForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     console.log(values);
+    setIsLoading(true);
 
     try {
       const api_url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/student-registration`;
@@ -238,14 +238,19 @@ const StudentRegistrationForm = () => {
         body: JSON.stringify(values),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        return toast.error("Something went wrong!");
+        toast.error(data.message);
+        throw new Error(res.statusText);
       }
 
-      const data = await res.json();
       toast.success(data?.message);
+      setIsLoading(false);
+      router.push("/");
     } catch (error) {
       console.error(error);
+      setIsLoading(false);
     }
   };
 
@@ -560,15 +565,15 @@ const StudentRegistrationForm = () => {
                         className="flex items-center gap-4 flex-wrap"
                       >
                         {PREFERRED_DAYS.map((item) => {
-                          const isChecked = field.value?.includes(item.id);
+                          const isChecked = field.value?.includes(item.label);
 
                           const toggleDay = (checked: boolean) => {
                             if (checked) {
-                              field.onChange([...(field.value || []), item.id]);
+                              field.onChange([...(field.value || []), item.label]);
                             } else {
                               field.onChange(
                                 (field.value || []).filter(
-                                  (v: string) => v !== item.id
+                                  (v: string) => v !== item.label
                                 )
                               );
                             }
@@ -586,8 +591,8 @@ const StudentRegistrationForm = () => {
                                   className="opacity-0 absolute top-0 left-0 w-full h-full"
                                 />
                               </FormControl>
-                              <FormLabel className="text-base font-normal cursor-pointer">
-                                {item.label}
+                              <FormLabel className="text-base font-normal cursor-pointer capitalize">
+                                {item.id}
                               </FormLabel>
                             </FormItem>
                           );
