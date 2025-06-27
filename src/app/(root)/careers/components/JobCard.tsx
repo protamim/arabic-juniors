@@ -87,7 +87,7 @@ const JOB_CARD_DATA: JobCardDataTypes[] = [
     jobType: "3 years exp.",
     action: {
       btnText: "Apply Now",
-      url: "/careers/academic",
+      url: "/careers/academic-support-assistant",
     },
   },
   {
@@ -98,7 +98,7 @@ const JOB_CARD_DATA: JobCardDataTypes[] = [
     jobType: "2-4 Years Exp.",
     action: {
       btnText: "Apply Now",
-      url: "/careers/head",
+      url: "/careers/academic-head",
     },
   },
   {
@@ -109,7 +109,7 @@ const JOB_CARD_DATA: JobCardDataTypes[] = [
     jobType: "2-3 Years UAE Exp.",
     action: {
       btnText: "Apply Now",
-      url: "/careers/arabic-teacher",
+      url: "/careers/academic-teacher",
     },
   },
 ];

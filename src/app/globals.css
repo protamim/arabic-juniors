@@ -41,3 +41,11 @@ body {
 .radio-item-wrapper:has([aria-checked="true"]) label {
   color: #fff;
 }
+
+/* checkbox button */
+.checkbox-item:has([aria-checked="true"]) {
+  background-color: #a6cf4a;
+}
+.checkbox-item:has([aria-checked="true"]) label {
+  color: #fff;
+}
