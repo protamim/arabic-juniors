@@ -23,7 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import React from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { optional, z } from "zod";
 import { Steps, useSteps } from "react-step-builder";
 import "react-phone-number-input/style.css";
 import { Progress } from "@/components/ui/progress";
@@ -82,8 +82,8 @@ const formSchema = z.object({
   birth: z
     .string()
     .min(1, { message: "Date of birth is required" })
-    .refine((val) => /^\d{4}-\d{2}-\d{2}$/.test(val), {
-      message: "Date must be in YYYY-MM-DD format",
+    .refine((val) => /^\d{2}-\d{2}-\d{4}$/.test(val), {
+      message: "Date must be in DD-MM-YYYY format",
     }),
   materials_status: z.enum(["Married", "Unmarried"], {
     required_error: "Material status is required",
@@ -145,36 +145,45 @@ const formSchema = z.object({
       message: "Please upload a valid PDF file.",
     }
   ),
-  doc_2: z.any().refine(
-    (files) => {
-      if (!files || files.length === 0) return false;
-      const file = files[0];
-      return file.type === "application/pdf";
-    },
-    {
-      message: "Please upload a valid PDF file.",
-    }
-  ),
-  doc_3: z.any().refine(
-    (files) => {
-      if (!files || files.length === 0) return false;
-      const file = files[0];
-      return file.type === "application/pdf";
-    },
-    {
-      message: "Please upload a valid PDF file.",
-    }
-  ),
-  doc_4: z.any().refine(
-    (files) => {
-      if (!files || files.length === 0) return false;
-      const file = files[0];
-      return file.type === "application/pdf";
-    },
-    {
-      message: "Please upload a valid PDF file.",
-    }
-  ),
+  doc_2: z
+    .any()
+    .optional()
+    .refine(
+      (files) => {
+        if (!files || files.length === 0) return true; // valid if not provided
+        const file = files[0];
+        return file.type === "application/pdf";
+      },
+      {
+        message: "Please upload a valid PDF file if you are uploading.",
+      }
+    ),
+  doc_3: z
+    .any()
+    .optional()
+    .refine(
+      (files) => {
+        if (!files || files.length === 0) return true; // valid if not provided
+        const file = files[0];
+        return file.type === "application/pdf";
+      },
+      {
+        message: "Please upload a valid PDF file if you are uploading.",
+      }
+    ),
+  doc_4: z
+    .any()
+    .optional()
+    .refine(
+      (files) => {
+        if (!files || files.length === 0) return true; // valid if not provided
+        const file = files[0];
+        return file.type === "application/pdf";
+      },
+      {
+        message: "Please upload a valid PDF file if you are uploading.",
+      }
+    ),
   preferred_interview_time: z.enum(["morning", "afternoon", "evening"], {
     required_error: "Please select a preferred interview time",
   }),
@@ -240,7 +249,7 @@ const TeacherMultiStepForm = () => {
       education: "",
       teaching_experience: "",
       mother_lang: "eng",
-      other_langs: ['eng'],
+      other_langs: ["eng"],
       doc_1: undefined,
       doc_2: undefined,
       doc_3: undefined,
@@ -354,7 +363,7 @@ const TeacherMultiStepForm = () => {
       console.log(info);
       toast.success(info?.message || "Something wrong!");
       setIsLoading(false);
-      router.push('/');
+      router.push("/");
     } catch (error) {
       console.log("Teacher registration failed", error);
     }
@@ -556,7 +565,7 @@ const TeacherMultiStepForm = () => {
                         <Input
                           type="text"
                           {...field}
-                          placeholder="Date of Birth e.g YYYY-MM-DD"
+                          placeholder="Date of Birth e.g DD-MM-YYYY"
                           className="border border-[#DCDCDC] rounded-lg bg-white h-12 py-3 px-4 flex text-base font-normal text-neutral-800 placeholder:text-base transition-all ease-in-out duration-300 focus-within:border-pink-400"
                         />
                       </FormControl>
@@ -784,7 +793,8 @@ const TeacherMultiStepForm = () => {
                     <FormItem className="space-y-2 h-full col-span-full">
                       <FormLabel>Other Language</FormLabel>
                       <FormControl>
-                        <MultiSelect defaultValue={field.value}
+                        <MultiSelect
+                          defaultValue={field.value}
                           onValueChange={field.onChange}
                           options={[
                             { label: "English", value: "eng" },
